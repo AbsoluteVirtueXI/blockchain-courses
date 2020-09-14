@@ -1,6 +1,8 @@
-# VSCode configuration
+# VSCode configuration and usage
 
-## Prerequistes
+The objective of this course is to setup a decentralized web application development environement and learn how to use the installed tools.
+
+## Prerequisites
 
 - **Visual Studio code** is installed.  
   If it is not installed download it from https://code.visualstudio.com/Download
@@ -19,3 +21,5 @@
   ```
 
 ## Install VSCode extensions
+
+Extensions are usefull tools
