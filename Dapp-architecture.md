@@ -1,9 +1,11 @@
 # Dapp architecture
 
-## Network architecture
+## Standard network architecture
 
-![Dapp network architecture](res/Decentralized-web-application-network.png)
+![Standard network architecture](res/standard-network-architecture.png)
 
-A trend for cloud computing!!
+## Cloud network architecture: SaaS, Paas, IaaS
+
+![Cloud network architecture](res/cloud-network-architecture.png)
 
 ## Functional architecture
