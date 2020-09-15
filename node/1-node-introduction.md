@@ -6,4 +6,4 @@
 
 ## configuration: package.json
 
-## usefull yarn command
+## usefull yarn commands
