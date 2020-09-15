@@ -1,6 +1,6 @@
 # VSCode configuration and usage
 
-The objective of this course is to setup a decentralized web application development environement and learn how to use the installed tools.
+The objective of this course is to setup a decentralized web application development environment and learn how to use the installed tools.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ The objective of this course is to setup a decentralized web application develop
   v14.10.1
   ```
 
-- **yarn** is installed and version is >= 1.22.0
+- **yarn** is installed and version is >= **1.22.0**
 
   ```zsh
   % yarn --version
