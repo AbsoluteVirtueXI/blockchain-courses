@@ -8,4 +8,6 @@
 
 ![Cloud network architecture](res/cloud-network-architecture.png)
 
-## Functional architecture
+## Functional architecture of a decentralized web application
+
+![Functional dapp architecture](res/functional-dapp-architecture.png)
