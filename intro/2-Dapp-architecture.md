@@ -35,7 +35,7 @@ A Dapp developer use a wide range of technologies:
   node.js is used for running server side code, project management, dependencies management, testing and much more!!!
 
 - **Dev tools**:  
-  **truffle suite**: Truffle is a framework for smart contracts developement.
+  **truffle suite**: Truffle is a framework for smart contracts developement.  
   **openzepplin sdk**: Another framework for smart contracts development.
 
 - **API**:  
@@ -47,5 +47,5 @@ A Dapp developer use a wide range of technologies:
   **Postgresql**: An SQL-like database. It is used to store persistent data.
 
 - **Version control system**:  
-  **git**: a console client for managing code version.
+  **git**: a console client for managing code version.  
   **github**: host a project initialized with **git**.
