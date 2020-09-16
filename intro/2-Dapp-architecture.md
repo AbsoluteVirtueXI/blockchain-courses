@@ -27,7 +27,7 @@ A Dapp developer use a wide range of technologies:
 - **Librairies**:  
   **react.js**: A library for building user interface. It generates html, css and javascript files for the front-end side.  
   **bootstrap**: A css library  
-  **web3.js**: A library to interact with a local or remote ethereum node using HTTP, IPC or WebSocket. web3.js can be used on front-end and backend side of your dapp.
+  **web3.js**: A library to interact with a local or remote ethereum node using HTTP, IPC or WebSocket. web3.js can be used on front-end and backend side of your dapp.  
   **openzepplin**: A smart contracts library and templates.
 
 - **JS runtime**:  
@@ -44,7 +44,7 @@ A Dapp developer use a wide range of technologies:
   An alternative to INFURA would be to connect directly to an Ethereum node, but it is less scalable.
 
 - **Database**:  
-  **Postgresql**: An SQL-like database. It is used to store persistent data.
+  **Postgresql**: An SQL-like database. It is used for storing persistent data.
 
 - **Version control system**:  
   **git**: a console client for managing code version.  
