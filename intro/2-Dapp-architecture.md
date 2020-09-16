@@ -40,7 +40,7 @@ A Dapp developer use a wide range of technologies:
 
 - **API**:  
   **INFURA**: INFURA is a service for communicating with the Ethereum blockchain.
-  It is the gateway between our javascript code and Ethereum.
+  It is a gateway between our javascript code and Ethereum.
   An alternative to INFURA would be to connect directly to an Ethereum node, but it is less scalable.
 
 - **Database**:  
@@ -49,3 +49,29 @@ A Dapp developer use a wide range of technologies:
 - **Version control system**:  
   **git**: a console client for managing code version.  
   **github**: host a project initialized with **git**.
+
+## 3 parts of a running Dapp
+
+### Front-end
+
+The front-end part is considered as the visible part of the Dapp.
+It contains the HTML, CSS and Javascript files which run in the browser.
+
+### Backend
+
+The backend part is considered as the invisible part of the Dapp.  
+Often users make request to the front-end, and then the front end communicate with the backend.  
+A simple backend contains 2 elements:
+
+- an application server running on a node.js environment.
+- a database where are stored persistent data.  
+  The application server contains **the business logic** of the Dapp.
+  You can consider the backend as the brain of your Dapp: it executes the logic of your application and stores data in the database.
+  In our case, the backend will run on a node.js environment.
+
+### Blockchain
+
+In the blockchain, we store persistent data and deploy our smart contracts.  
+The blockchain layer can communicate with either the front-end or the backend, following the business logic and how we have designed our Dapp.  
+Blockchain technology allows us to write trusted applications without the need of third party verification.  
+So we can write application for a wide range of critical fields: Money/Token creation, finance, value exchange, health care, traceability, electoral system, etc...
