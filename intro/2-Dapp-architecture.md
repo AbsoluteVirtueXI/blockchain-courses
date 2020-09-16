@@ -64,10 +64,11 @@ Often users make request to the front-end, and then the front end communicate wi
 A simple backend contains 2 elements:
 
 - an application server running on a node.js environment.
-- a database where are stored persistent data.  
-  The application server contains **the business logic** of the Dapp.
-  You can consider the backend as the brain of your Dapp: it executes the logic of your application and stores data in the database.
-  In our case, the backend will run on a node.js environment.
+- a database where are stored persistent data.
+
+The application server contains **the business logic** of the Dapp.
+You can consider the backend as the brain of your Dapp: it executes the logic of your application and stores data in the database.
+In our case, the backend will run on a node.js environment.
 
 ### Blockchain
 
