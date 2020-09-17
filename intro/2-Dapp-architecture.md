@@ -56,6 +56,7 @@ A Dapp developer use a wide range of technologies:
 
 The front-end part is considered as the visible part of the Dapp.
 It contains the HTML, CSS and Javascript files which run in the browser.
+These files are stored on a web server.
 
 ### Backend
 

@@ -22,4 +22,4 @@ The objective of this course is to setup a decentralized web application develop
 
 ## Install VSCode extensions
 
-Extensions are usefull tools
+Extensions are usefull tools for making your development process easier.
