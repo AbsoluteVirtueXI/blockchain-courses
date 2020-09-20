@@ -364,10 +364,10 @@ function myFunction(){
 myFunction(); // = undefined
 
 // *ES6:* Les paramètres des fonctions peuvent désormais avoir des valeurs par défaut
-function default(x, y = 2) {
+function defaultFn(x, y = 2) {
     return x + y;
 }
-default(10); // == 12
+defaultFn(10); // == 12
 
 // Les fonctions JavaScript sont des objets de première classe, donc peuvent
 // être réassignées à d'autres variables et passées en tant que paramètres pour
