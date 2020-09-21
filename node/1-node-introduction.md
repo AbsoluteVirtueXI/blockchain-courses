@@ -300,3 +300,24 @@ is equivalent to:
 ```zsh
 % yarn build
 ```
+
+For an exhaustive list of all yarn commands check the official documentation: https://classic.yarnpkg.com/fr/docs/cli
+
+## **npm vs yarn**
+
+`npm install` === `yarn`  
+`npm install taco --save` === `yarn add taco`  
+`npm uninstall taco --save` === `yarn remove taco`  
+`npm install taco --save-dev` === `yarn add taco --dev`  
+`npm update --save` === `yarn upgrade`  
+`npm install taco@latest --save` === `yarn add taco`  
+`npm install taco --global` === `yarn global add tac`  
+`npm init` === `yarn init`  
+`npm link` === `yarn link`  
+`npm outdated` === `yarn outdated`  
+`npm publish` === `yarn publish`  
+`npm run` === `yarn run`  
+`npm cache clean` === `yarn cache clean`  
+`npm login` === `yarn login` (and logout)  
+`npm test` === `yarn test`  
+`npm install --production` === `yarn --production`
