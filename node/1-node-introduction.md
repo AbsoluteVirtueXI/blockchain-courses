@@ -204,12 +204,99 @@ Hello, alyra
   % git push -u origin master
   ```
 
-### create a module package
-
-### create a binary package
-
-## configuration: package.json
+## **configuration: package.json**
 
 https://docs.npmjs.com/files/package.json
 
-## usefull yarn commands
+## **usefull yarn commands**
+
+Initialize a node.js project:
+
+```zsh
+% mkdir my-project
+% cd my-project/
+% yarn init -y
+```
+
+Install a dependency:
+
+```zsh
+% yarn add a-package
+```
+
+Install a global dependency (not recommended):
+
+```zsh
+% yarn global add a-package
+```
+
+Install the dependencies defined in a **_package.json_** file:
+
+```zsh
+% yarn install
+```
+
+Install a dev dependency:
+
+```zsh
+% yarn add a-package --dev
+```
+
+Upgrade all the dependencies to their latest version:
+
+```zsh
+% yarn upgrade
+```
+
+Upgrade only one dependency:
+
+```zsh
+% yarn upgrade a-package
+```
+
+Remove a dependency:
+
+```zsh
+% yarn remove a-package
+```
+
+Publish a package defined by the **_package.json_** in the current directory:
+
+```zsh
+% yarn publish
+```
+
+Run scripts defined in your **_package.json_**:  
+_package.json_:
+
+```json
+{
+  "name": "my-package",
+  "scripts": {
+    "build": "babel src -d lib",
+    "test": "jest"
+  }
+}
+```
+
+```zsh
+% yarn run test
+```
+
+is equivalent to:
+
+```zsh
+% yarn test
+```
+
+<br />
+
+```zsh
+% yarn run build
+```
+
+is equivalent to:
+
+```zsh
+% yarn build
+```
