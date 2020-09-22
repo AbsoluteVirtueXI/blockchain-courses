@@ -262,4 +262,4 @@ let odds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((elem) => {
 console.log(odds)
 ```
 
-Il y en à d'autre: `every`, `find`, `findIndex`
+Il y en a d'autres: `every`, `find`, `findIndex`
