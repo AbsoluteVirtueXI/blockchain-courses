@@ -123,7 +123,7 @@ Ecrivez une fonction `biggest` qui retourne le plus grand élément d'une liste 
 biggest([99, 100, 101, 1]) // returns 101
 ```
 
-## ** ex10.js**:
+## **ex10.js**:
 
 Ecrivez une fonction `sortAscend` qui prend comme paramètre une liste et classe cette list par ordre croissant.
 
@@ -131,7 +131,7 @@ Ecrivez une fonction `sortAscend` qui prend comme paramètre une liste et classe
 sortAscend([99, 100, 101, 1]) // returns [1, 99, 100, 101]
 ```
 
-## ** ex11.js**:
+## **ex11.js**:
 
 Ecrivez une fonction `makeUnique` qui prend comme paramètre une liste et enlève tous les doublons, et retourne cette cette liste classée par ordre croissant.
 
@@ -139,7 +139,7 @@ Ecrivez une fonction `makeUnique` qui prend comme paramètre une liste et enlèv
 makeUnique([1, 2, 1, 3, 2, 4, 5, 7, 5, 1]) //returns [1, 2, 3, 4, 5, 7]
 ```
 
-## ** ex12.js**:
+## **ex12.js**:
 
 un garagiste vous demande de compter le nombre de roues qu'il y a dans son garage.  
 Les roues sont toutes montées sur des véhicules de types:  
