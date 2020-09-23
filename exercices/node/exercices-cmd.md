@@ -89,11 +89,11 @@ Ecrivez un script _calculator.js_ qui effectue en ligne de commane des opératio
 ```zsh
 % node calculator.js + 10 21
 31
-node calculator.js - 10 1
+% node calculator.js - 10 1
 9
-node calculator.js * 5 4
+% node calculator.js * 5 4
 20
-node calculator.js / 10 2
+% node calculator.js / 10 2
 5
 ```
 
