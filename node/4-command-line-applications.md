@@ -164,7 +164,7 @@ Hello, Sofiane
 
 Toujours, toujours, toujours verifier et checker l'input qu'un utilisateur donnerait à notre programme.  
 Mettons en place cette sécurité pour notre programme _sayHello.js_.  
-Ce que nous attendons de l'utilisateur c'est qu'il ne passe qu'une seul argument à notre programme, ni plus ni moins. Pour cela on peut effectuer un test sur le nombre d'élements de `process.argv`:
+Ce que nous attendons de l'utilisateur c'est qu'il ne passe qu'un seul argument à notre programme, ni plus ni moins. Pour cela on peut effectuer un test sur le nombre d'élements de `process.argv`:
 
 ```js
 if (process.argv.length != 3) {
@@ -186,7 +186,7 @@ usage: node sayHello.js name
 usage: node sayHello.js name
 ```
 
-### **interactive stars program**
+### **interactive _stars.js_ program**
 
 Tous les arguments passés à la ligne de commande sont récupérés dans notre tableau `process.argv` comme des strings. Si nous souhaitons récupérer un nombre passé comme arguments il va donc falloir le convertir en nombre.
 Pour cela on utilise la fonction `Number`:
