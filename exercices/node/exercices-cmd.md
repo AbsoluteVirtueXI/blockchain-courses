@@ -23,7 +23,7 @@ Goodbye, React
 Ecrivez un script _showArgs.js_ qui prend en arguments de la ligne de commande plusieures `string` et les affiche dans l'ordre inverse de leur ordre d'entrée:
 
 ```zsh
-% node showArgs 1 2 3 Soleil
+% node showArgs.js 1 2 3 Soleil
 Soleil
 3
 2
@@ -41,13 +41,13 @@ Ecrivez une programme `counter` qui prend 3 arguments en ligne de commande:
 L'execution de ce programme devra afficher sur le terminal tous les nombres de `min` jusqu'a `max` avec un interval de `step`:
 
 ```zsh
-% node counter 1 10 2
+% node counter.js 1 10 2
 1
 3
 5
 7
 9
-% node counter 100 1000 100
+% node counter.js 100 1000 100
 100
 200
 300
