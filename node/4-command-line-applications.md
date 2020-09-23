@@ -93,7 +93,7 @@ arg1
 arg2
 ```
 
-Le 1er argument de la ligne de commande est **node**.
+Le 1er argument de la ligne de commande est **node**.  
 Le 2nd argument de la ligne de commande est **prog.js**.  
 le 3eme argument de la ligne de commande est **arg1**.  
 le 4eme argyment de la ligne de commande est **arg2**.  
@@ -109,7 +109,7 @@ Si l'on suit l'exemple précedent process.argv est un tableau qui contient ces �
 ;['node', '/Users/akersof/vsproject/js-training/src/prog.js', 'arg1', 'arg2']
 ```
 
-Puisque process.argv est un tableau de `string` nous pouvons appliquer dessus toutes les opérations que peuvent supporter un tableau:
+Puisque process.argv est un tableau de `string` nous pouvons appliquer dessus toutes les opérations que peut supporter un tableau:
 
 _process-args.js:_
 
