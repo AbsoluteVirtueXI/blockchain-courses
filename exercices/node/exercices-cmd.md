@@ -195,7 +195,7 @@ A la fin du qcm vous lui donnerez sa note qui correspondera au nombre de bonnes 
 Je vous propose les 5 questions et les choix possibles, mais vous pouvez créer les votre si vous voulez:
 
 - Question 1: Le C++ est un:  
-   1: language => réponse attendue  
+   1: langage => réponse attendue  
    2: compilateur
 
 - Question 2: TypeScript est une évolution de Javascript:  
