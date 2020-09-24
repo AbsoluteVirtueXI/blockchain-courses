@@ -211,5 +211,5 @@ Je vous propose les 5 questions et les choix possibles, mais vous pouvez créer 
    2: Faux => réponse attendue
 
 - Question 5: Ethereum est une blockchain publique:  
-   1: Vrai => réponse attendu  
+   1: Vrai => réponse attendue  
    2: Faux
