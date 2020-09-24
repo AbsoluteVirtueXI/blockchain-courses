@@ -190,7 +190,7 @@ Après chaque tentative de l'utilisateur pour trouver le nombre secret, celui en
 
 ## 11: **quiz.js**
 
-Ecrivez un qcm de 5. Le joueur devra repondre aux questions en entrant le nombre correspondant à la bonne réponse.
+Ecrivez un qcm de 5 questions. Le joueur devra repondre aux questions en entrant le nombre correspondant à la bonne réponse.
 A la fin du qcm vous lui donnerez sa note qui correspondera au nombre de bonnes reponses sur les 5 questions.
 Je vous propose les 5 questions et les choix possibles, mais vous pouvez créer les votre si vous voulez:
 
