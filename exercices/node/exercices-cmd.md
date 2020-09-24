@@ -175,7 +175,7 @@ Si l'âge est supérieur ou égal à l'argument passé en ligne de commande lui 
 prenom nom, vous êtes majeur, vous pouvez voter
 ```
 
-## 10: **guessNumber.js**
+## 11: **guessNumber.js**
 
 Ecrivez un petit jeu qui demande à un utilisateur de trouver un nombre qui aura été passé en ligne de commande.
 Le programme s'éxecutera tant que l'utilisateur n'aura pas trouvé le bon nombre.
@@ -188,7 +188,7 @@ Après chaque tentative de l'utilisateur pour trouver le nombre secret, celui en
 - si le nombre entré par l'utilisateur est égal au nombre secret:
   **'Bravo!'** en vert
 
-## 11: **quiz.js**
+## 12: **quiz.js**
 
 Ecrivez un qcm de 5 questions. Le joueur devra repondre aux questions en entrant le nombre correspondant à la bonne réponse.
 A la fin du qcm vous lui donnerez sa note qui correspondera au nombre de bonnes reponses sur les 5 questions.
