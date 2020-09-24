@@ -130,3 +130,86 @@ Ecrivez un script qui retourne le chemin absolu de votre script sur votre systè
 % node absolutePath.js
 /Users/akersof/vsproject/js-training/src/absolutePath.js
 ```
+
+## 9: **majorityTest.js**:
+
+Un état vous demande d'ecrire un petit programme qui vérifit que les citoyens ont le droit de voter.  
+Ecrivez un programme qui demande l'utilisateur son nom, son prenom, son age.  
+Si l'âge est inférieur à 18 lui afficher avec le prenom et nom correspondant:
+
+```zsh
+Désolé, prenom nom, vous êtes mineur, vous ne pouvez pas voter
+```
+
+Si l'âge est supérieur ou égal à 18 lui afficher:
+
+```zsh
+prenom nom, vous êtes majeur, vous pouvez voter
+```
+
+## 10: **interMajorityTest.js**:
+
+Le programme précedent ne fonctionnera que dans les pays ou la majorité est à 18 ans.  
+Afin que votre programme puisse fonctionner pour tous les pays, réecrivez le programme précedent pour qu'il puisse prendre un argument à son lancement en ligne de commande qui correspondera à l'age de la majorité dans le pays de l'utilisateur du programme.  
+Un utilisateur américain lancerait le programme avec la commande:
+
+```zsh
+% node interMajorityTest.js 21
+```
+
+Un utilisateur francais lancerait le programme avec la commande:
+
+```zsh
+% node interMajorityTest.js 18
+```
+
+Si l'âge est inférieur à l'argument passé en ligne de commande lui afficher avec le prenom et nom correspondant:
+
+```zsh
+Désolé, prenom nom, vous êtes mineur, vous ne pouvez pas voter
+```
+
+Si l'âge est supérieur ou égal à l'argument passé en ligne de commande lui afficher:
+
+```zsh
+prenom nom, vous êtes majeur, vous pouvez voter
+```
+
+## 10: **guessNumber.js**
+
+Ecrivez un petit jeu qui demande à un utilisateur de trouver un nombre qui aura été passé en ligne de commande.
+Le programme s'éxecutera tant que l'utilisateur n'aura pas trouvé le bon nombre.
+Après chaque tentative de l'utilisateur pour trouver le nombre secret, celui entré en argument du programe à son lancement, les messages suivant lui appaitront:
+
+- si le nombre entré par l'utilisateur est plus petit que le nombre secret:
+  **'Nombre trop petit'** en rouge
+- si le nombre entré par l'utilisateur est plus grand que le nombre secret:
+  **'Nombre trop grand'** en rouge
+- si le nombre entré par l'utilisateur est égal au nombre secret:
+  **'Bravo!'** en vert
+
+## 11: **quiz.js**
+
+Ecrivez un qcm de 5. Le joueur devra repondre aux questions en entrant le nombre correspondant à la bonne réponse.
+A la fin du qcm vous lui donnerez sa note qui correspondera au nombre de bonnes reponses sur les 5 questions.
+Je vous propose les 5 questions et les choix possibles, mais vous pouvez créer les votre si vous voulez:
+
+- Question 1: Le C++ est un:  
+   1: language => réponse attendue  
+   2: compilateur
+
+- Question 2: TypeScript est une évolution de Javascript:  
+   1: Vrai => réponse attendue  
+   2: Faux
+
+- Question 3: Lire les cours avant de faire les éxercices est inutile:  
+   1: Vrai  
+   2: Faux => réponse attendue
+
+- Question 4: react.js a été developpé par Google:  
+   1: Vrai  
+   2: Faux => réponse attendue
+
+- Question 5: Ethereum est une blockchain publique:  
+   1: Vrai => réponse attendu  
+   2: Faux
