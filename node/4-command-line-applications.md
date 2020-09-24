@@ -256,3 +256,100 @@ Error: sofiane is not a number.
 ************
 *************
 ```
+
+## Interaction avec l'utilisateur
+
+Nous utiliserons la librarie `readline-sync`: https://github.com/anseki/readline-sync
+
+**Installation**:
+
+```zsh
+yarn add readline-sync
+```
+
+**Utilisation**:
+
+- **cas simple**:
+
+  ```js
+  import rl from 'readline-sync'
+  let name = rl.question('username: ')
+  let password = rl.question('password: ', { hideEchoBack: true })
+  console.log(`Hello ${name} your password is: ${password}`)
+  ```
+
+- **demander une reponse par une simple touche Y/N**:
+
+  ```js
+  import rl from 'readline-sync'
+  if (rl.keyInYNStrict('continue? ')) {
+    // 'Y' key was pressed.
+    console.log('continue...')
+    // continuer le programme
+  } else {
+    // 'N' key was pressded.
+    console.log('goodbye!')
+    process.exit(0)
+  }
+  ```
+
+- **choix parmi une liste**:
+
+  ```js
+  import rl from 'readline-sync'
+  let choix = ['start', 'continue', 'options', 'exit']
+  let index = rl.keyInSelect(choix, 'Please select your choice: ')
+  switch (index) {
+    case 0:
+      console.log('starting the game')
+      break
+    case 1:
+      console.log('continue the game')
+      break
+    case 2:
+      console.log('access to game options')
+    case 3:
+      console.log('closing the game')
+    default:
+      console.log('bad choice')
+  }
+  ```
+
+- **simuler un prompt bash**:
+  ```js
+  import rl from 'readline-sync'
+  rl.promptCLLoop({
+    cp: (source, destination) => {
+      console.log(`copytin ${source} to ${destination}`)
+      // Do something...
+    },
+    remove: function (target) {
+      console.log(`remove ${target}`)
+      // Do something...
+    },
+    help: () => {
+      console.log('command list: cp, remove, help, quit')
+    },
+    quit: () => {
+      return true
+    },
+  })
+  console.log('Exited')
+  ```
+
+## Ajouter des couleurs
+
+Nous utiliserons la librairie `chalk`: https://github.com/chalk/chalk
+
+**Installation**:
+
+```zsh
+yarn add chalk
+```
+
+**Utilisation**:
+
+```js
+import chalk from 'chalk'
+console.log(chalk.blue('Hello world!'))
+```
