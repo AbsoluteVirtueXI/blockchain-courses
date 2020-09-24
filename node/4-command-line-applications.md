@@ -308,8 +308,10 @@ yarn add readline-sync
       break
     case 2:
       console.log('access to game options')
+      break
     case 3:
       console.log('closing the game')
+      break
     default:
       console.log('bad choice')
   }
