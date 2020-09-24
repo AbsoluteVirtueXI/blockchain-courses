@@ -272,17 +272,17 @@ yarn add readline-sync
 - **cas simple**:
 
   ```js
-  import rl from 'readline-sync'
-  let name = rl.question('username: ')
-  let password = rl.question('password: ', { hideEchoBack: true })
+  import readlineSync from 'readline-sync'
+  let name = readlineSync.question('username: ')
+  let password = readlineSync.question('password: ', { hideEchoBack: true })
   console.log(`Hello ${name} your password is: ${password}`)
   ```
 
 - **demander une reponse par une simple touche Y/N**:
 
   ```js
-  import rl from 'readline-sync'
-  if (rl.keyInYNStrict('continue? ')) {
+  import readlineSync from 'readline-sync'
+  if (readlineSync.keyInYNStrict('continue? ')) {
     // 'Y' key was pressed.
     console.log('continue...')
     // continuer le programme
@@ -296,9 +296,9 @@ yarn add readline-sync
 - **choix parmi une liste**:
 
   ```js
-  import rl from 'readline-sync'
+  import readlineSync from 'readline-sync'
   let choix = ['start', 'continue', 'options', 'exit']
-  let index = rl.keyInSelect(choix, 'Please select your choice: ')
+  let index = readlineSync.keyInSelect(choix, 'Please select your choice: ')
   switch (index) {
     case 0:
       console.log('starting the game')
@@ -317,8 +317,8 @@ yarn add readline-sync
 
 - **simuler un prompt bash**:
   ```js
-  import rl from 'readline-sync'
-  rl.promptCLLoop({
+  import readlineSync from 'readline-sync'
+  readlineSync.promptCLLoop({
     cp: (source, destination) => {
       console.log(`copytin ${source} to ${destination}`)
       // Do something...
