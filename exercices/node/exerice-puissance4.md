@@ -1,4 +1,4 @@
-# Puissance 4 en lignes de commandes
+# Puissance 4 en ligne de commande
 
 Ecrivez un programme qui est l'équivalent du célébre jeu Puissance 4 mais en ligne de commande.  
 les régles du jeu: https://www.regles-de-jeux.com/regle-du-puissance-4/  
