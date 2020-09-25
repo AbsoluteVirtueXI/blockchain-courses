@@ -41,4 +41,4 @@ Sous la grille un prompt invitera le joueur en cours à entrer l'une des command
 `Sofiane> whoami` => Affiche le jeton correspondant à ce joueur.  
 `Sofiane> abandon` => le joueur Sofiane abandonne l'autre joueur est déclaré vainqueur.
 
-La partie se terminera lorsqu'un joueur alignera 4 jetons (horizontalement, verticalement, ou en diagonale)
+La partie se terminera lorsqu'un joueur alignera 4 jetons (horizontalement, verticalement, ou en diagonale) ou que tous les jetons ont été joués sans alignements, à ce moment la partie sera déclarée comme nulle.
