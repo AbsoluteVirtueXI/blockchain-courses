@@ -35,7 +35,7 @@ Ses jetons seronts des `X` de couleur jaune.
 Ensuite la partie peut débuter.  
 Sous la grille un prompt invitera le joueur en cours à entrer l'une des commandes suivantes:
 
-`Sofiane> put(1)`=> Mettre un jeton du joueur Sofiane dans (1)  
+`Sofiane> put(1)`=> Mettre un jeton du joueur Sofiane dans la colonne 1
 `Sofiane> rules` => Affiche la régle du jeu.  
 `Sofiane> help` => Affiche la liste de toutes les commandes disponibles  
 `Sofiane> whoami` => Affiche le jeton correspondant à ce joueur  
