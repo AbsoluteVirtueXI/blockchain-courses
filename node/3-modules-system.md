@@ -5,15 +5,15 @@
 Lorsque le code source d'un projet devient volumineux, il est nécéssaire de le diviser en plusieurs répértoires et fichiers.
 Les avantages sont nombreux:
 
-- **Dépendance determiné**: les fichiers peuvent être dépendants les uns des autres de manière explicite.
+- **Dépendance determinée**: les fichiers peuvent être dépendants les uns des autres de manière explicite.
 - **Visibilité**: Les fichiers sont classés dans une arborescence, qui correspond aux fonctionalités du programme.
 - **Collaboration**: Les développeurs peuvent travailler sur des fichiers différents.
-- **Maintenance et test**: Les tests et les corrections s'effectuent sur des fichiers séparés, et plus dans un énorme fichier.
+- **Maintenance et test**: Les tests et les corrections s'effectuent sur des fichiers séparés, et non plus dans un énorme fichier.
 - **Sens**: On divise notre projet en unités qui ont du sens: code réseau, code front-end, code backend, etc
 
 En javascript _moderne_ on utilise les mots clés `import` et `export`.
-`import` sert à importer du code depuis un fichier vers un autr fichier
-`export` sert à exporter du code depuis un fichier.
+`import` sert à importer du code depuis un fichier ou module
+`export` sert à exporter du code depuis un fichier ou module.
 
 ### **export**:
 
@@ -39,10 +39,10 @@ export const div = (nb1, nb2) => {
   return nb1 / nb2
 }
 
-export const ADD = '+'
-export const SUB = '-'
-export const MUL = '*'
-export const DIV = '/'
+export const ADD_OP = '+'
+export const SUB_OP = '-'
+export const MUL_OP = '*'
+export const DIV_OP = '/'
 ```
 
 On peut aussi bien exporter des variables, des objets ou des fonctions.
@@ -71,7 +71,7 @@ _calc.js_
 
 ```js
 //calc.js
-import { ADD, SUB, mul, div } from './operation.js'
+import { ADD_OP, SUB_OP, mul, div } from './operation.js'
 let nb = mul(10, 2)
 ```
 
