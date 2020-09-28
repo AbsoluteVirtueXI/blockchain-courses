@@ -41,4 +41,4 @@ Réecrivez le programme **promiseCopy.js** afin qu'il puisse accepter 2 argument
 - un fichier **source**, qui est le fichier à copier
 - un fichier **dest**, qui sera la destination de la copie
 
-Comme pour l'exercice précedent utiliser les api asynchrones basées sur des **promises** du mode `fs` de node.js.
+Comme pour l'exercice précedent utiliser les api asynchrones basées sur des **promises** du module `fs` de node.js.
