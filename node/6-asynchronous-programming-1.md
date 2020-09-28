@@ -168,6 +168,7 @@ let content1 = await readFile1()
 console.log(content1)
 let content2 = await readFile2()
 console.log(content2)
+console.log('END OF PROGRAM')
 ```
 
 ### then/catch:
