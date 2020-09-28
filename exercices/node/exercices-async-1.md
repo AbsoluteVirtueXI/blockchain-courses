@@ -7,7 +7,7 @@ Créez un nouveau repo sur github et utilisez l'utilitaire `djinit` pour créer 
 Créez 1 fichier par exercice (ex01.js, ex02.js, ..etc) que vous enregistrerez sous le repertoire `src/` de votre repository.
 
 Pour les exercices suivant nous manipulerons le système de fichiers.
-Il vous sera nécéssaire de créer à la racine de votre projet un fichier _file1.txt_ qui contiendra le text suivant:
+Il vous sera nécessaire de créer à la racine de votre projet un fichier _file1.txt_ qui contiendra le texte suivant:
 
 _file1.txt_:
 
