@@ -124,7 +124,7 @@ fs.stat('./file1.txt', (err, stats) => {
 
 Pour rendre le code d'un programme asynchrone plus lisible on utilise les **promises**.
 
-### aynsc / await
+### async / await
 
 ```js
 import fs from 'fs/promises'
@@ -148,7 +148,7 @@ try {
 
 On retrouve ainsi la même structure de code qu'un programme synchrone.  
 Pour utiliser la directive `await` nous devons être dans une fonction asynchrone.  
-Dans l'exemple précedent nous sommes au `Top-level`, c'est à dire le script qui est directement executé par node. A ce niveau la directive `await` est disponible, sinon, lorsque nous sommes dans une autre fonction il faut qu'elle soit déclarée avec la directive `async`.
+Dans l'exemple précedent nous sommes au `Top-level`, c'est à dire le script qui est directement executé par node. A ce niveau la directive `await` est disponible, sinon, lorsque nous sommes dans une autre fonction il faut qu'elle soit déclarée avec la directive `async`:
 
 ```js
 import fs from 'fs/promises'
