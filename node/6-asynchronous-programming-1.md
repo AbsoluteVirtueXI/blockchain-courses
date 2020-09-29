@@ -1,4 +1,4 @@
-# Asynchronous programming 1
+# ** Asynchronous programming 1 **
 
 Jusqu'a présent nous n'avons écrit que des programmes **bloquants**.  
 On parle de programmation **synchrones**, en anglais **synchronous programming**.  
@@ -6,7 +6,7 @@ Les fonctions sont executées dans l'ordre où elles apparaissent dans notre scr
 Mais lorsque l'on souhaite intéragir avec le réseau, comme effectuer des requêtes HTTP, ou bien lorsqu'on souhaite intéragir avec le système de fichiers, comme ouvrir un fichier, nous exécutons des fonctions qui peuvent prendre du temps avant de retourner leur résultat.  
 Afin d'éviter de bloquer notre programme lors de l'exécution d'une fonction, on utilise les caractéristiques **asynchrone** de node.js, on parle alors d'**asynchronous programming**
 
-## introduction au module **fs**:
+## **introduction au module `fs`**:
 
 Depuis node.js toutes les fonctions qui ont accès au système de fichiers sont importables depuis le module **fs**.  
 Documentation officielle de l'API **fs**: https://nodejs.org/api/fs.html
@@ -17,7 +17,7 @@ let content = fs.readFileSync('./file.txt', 'utf-8')
 console.log(content)
 ```
 
-## synchronous programming
+## **synchronous programming**
 
 ```js
 import fs from 'fs'
@@ -62,7 +62,7 @@ in second finally
 END OF PROGRAM
 ```
 
-## asynchronous programming with callback
+## **asynchronous programming with callback**
 
 Les api asynchrones de forme callback, **callback-based API**, ne retournent pas de valeurs à l'appellant. On ne peut donc pas avoir accès au résultat d'une **callback-based API**.  
 Elles prennent en paramètre une **callback** qui sera executée avec le résultat, ou l'erreur de la **callback-based API**.
@@ -94,7 +94,7 @@ file1.txt:  content of file1.txt
 file2.txt:  content of file2.txt
 ```
 
-### callback hell
+### **callback hell**
 
 L’utilisation massive de callbacks est considérée comme une mauvaise pratique, on parle alors de **Callback hell** (l’enfer des fonctions de rappel en français).  
 Elle est également connue sous le nom de "Pyramid of doom" en raison de l’indentation qui croît à chaque appel d’une fonction asynchrone.
@@ -120,11 +120,11 @@ fs.stat('./file1.txt', (err, stats) => {
 })
 ```
 
-## asynchronous programming with promise
+## **asynchronous programming with promises**
 
 Pour rendre le code d'un programme asynchrone plus lisible on utilise les **promises**.
 
-### async / await
+### **async / await**
 
 ```js
 import fs from 'fs/promises'
@@ -171,6 +171,49 @@ console.log(content2)
 console.log('END OF PROGRAM')
 ```
 
-### then/catch:
+### **then/catch**:
 
-A voir
+Une autre syntaxe peut être utilisée pour exploiter les promises:
+
+```js
+import fs from 'fs/promises'
+
+console.log('START OF PROGRAM')
+
+fs.stat('./file1.txt')
+  .then((stats) => {
+    if (stats.isFile()) {
+      return fs.readFile('./file1.txt', 'utf-8')
+    }
+  })
+  .then((txt) => {
+    txt = txt + '\nAppended something!'
+    return fs.writeFile('./file1.txt', txt)
+  })
+  .then(() => {
+    console.log('Done')
+  })
+  .catch((err) => {
+    console.log('Error from catch:', err)
+  })
+console.log('END OF PROGRAM') // NOT EXECUTED LAST!!
+```
+
+L'avantage de cette syntaxe c'est que nous pouvons 2 tâches en parallèle sans trop d'effort.
+
+```js
+import fs from 'fs/promises'
+
+const readFile1 = async () => {
+  let content = await fs.readFile('./file1.txt', 'utf-8')
+  return content
+}
+
+const readFile2 = async () => {
+  let content = await fs.readFile('./file2.txt', 'utf-8')
+  return content
+}
+
+readFile1().then(console.log)
+readFile2().then(console.log)
+```
