@@ -258,8 +258,8 @@ documentation officielle: https://github.com/axios/axios
 
 ```js
 import axios from 'axios'
-let res = await axios.get('https://www.google.com')
-console.log(res)
+let response = await axios.get('https://www.google.com')
+console.log(response.data)
 ```
 
 Puise que nous récupérons une page html nous pouvons l'écrire dans un fichier _index.html_ et l'ouvrir dans notre navigateur:
