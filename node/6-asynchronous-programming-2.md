@@ -256,4 +256,17 @@ documentation officielle: https://github.com/axios/axios
 
 ### **example d'utilisation**:
 
-Eff
+```js
+import axios from 'axios'
+let res = await axios.get('https://www.google.com')
+console.log(res)
+```
+
+Puise que nous récupérons une page html nous pouvons l'écrire dans un fichier _index.html_ et l'ouvrir dans notre navigateur:
+
+```js
+import axios from 'axios'
+import fs from 'fs/promises'
+let response = await axios.get('https://www.google.com')
+await fs.writeFile('./index.html', response.data)
+```
