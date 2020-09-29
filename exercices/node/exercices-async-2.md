@@ -22,7 +22,7 @@ Ecrivez un programme qui determine lequel de ces 4 sites répond le plus rapidem
 ## 3 **downloadAndCopy.js**:
 
 Ecrivez un programme qui télécharge une page d'un site internet puis la copie dans un fichier.
-L'url du site ainsi que le nom du ficher où sera copié la page téléchargée devront être passés en prametre de la ligne de commande.
+L'url du site ainsi que le nom du ficher où sera copié la page téléchargée devront être passés en arguments de la ligne de commande.
 
 ## 4 **showDirFiles.js**:
 
