@@ -8,7 +8,7 @@ Créez 1 fichier par exercice (ex01.js, ex02.js, ..etc) que vous enregistrerez s
 
 ## 1 lire le cours et pratiquer:
 
-Lisez le cours _exercices-async-1.md_ et _exercices-async-2.md_, pratiquez les exemples et essayez de jouer avec eux afin de découvrir de nouvelles possibilités. Utilisez la fonction `asyncTask` du cours _exercices-async-2.md_ pour comprendre les différents concepts exposés
+Lisez le cours _6-asynchronous-programming-1.md_ et _6-asynchronous-programming-2.md_, pratiquez les exemples et essayez de jouer avec eux afin de découvrir de nouvelles possibilités. Utilisez la fonction `asyncTask` du cours _6-asynchronous-programming-2.md_ pour comprendre les différents concepts exposés
 
 ## 2 **faster.js**:
 
