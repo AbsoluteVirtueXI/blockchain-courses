@@ -56,4 +56,4 @@ Vous pouvez vous inspirer de la correction de l'exercice: https://github.com/Abs
 
 ## 7 **testServer.js**
 
-Ecrivez un script _testServer.js_ qui se connectera aux différentes url de votre serveur qui affichera dans la console les messages récupérés. _testServer.js_ utilisera le package `axios` pour éffectuer les connections
+Ecrivez un script _testServer.js_ qui se connectera aux différentes url de votre serveur et qui affichera dans la console les messages récupérés. _testServer.js_ utilisera le package `axios` pour éffectuer les requêtes HTTP sur votre serveur express
