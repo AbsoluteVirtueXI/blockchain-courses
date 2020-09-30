@@ -111,14 +111,14 @@ On peut aussi utiliser des `string patterns` pour le path de notre route:
 
 ```js
 // route path match acd and abcd
-app.get('/ab?cd', function (req, res) {
+app.get('/ab?cd', (req, res) => {
   res.send('ab?cd')
 })
 ```
 
 ```js
 // route path match abcd, abbcd, abbbcd, and so on.
-app.get('/ab+cd', function (req, res) {
+app.get('/ab+cd', (req, res) => {
   res.send('ab+cd')
 })
 ```
@@ -126,21 +126,21 @@ app.get('/ab+cd', function (req, res) {
 ```js
 // route path will match abcd, abxcd, abRANDOMcd, ab123cd,
 // and so on.
-app.get('/ab*cd', function (req, res) {
+app.get('/ab*cd', (req, res) => {
   res.send('ab*cd')
 })
 ```
 
 ```js
 // This route path will match /abe and /abcde.
-app.get('/ab(cd)?e', function (req, res) {
+app.get('/ab(cd)?e', (req, res) => {
   res.send('ab(cd)?e')
 })
 ```
 
 ```js
 // This route path will match anything with an “a” in it.
-app.get(/a/, function (req, res) {
+app.get(/a/, (req, res) => {
   res.send('/a/')
 })
 ```
@@ -148,7 +148,7 @@ app.get(/a/, function (req, res) {
 ```js
 // This route path will match butterfly and dragonfly,
 // but not butterflyman, dragonflyman, and so on.
-app.get(/.*fly$/, function (req, res) {
+app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/')
 })
 ```
@@ -178,7 +178,7 @@ app.get('/', (req, res) => {
 
 // a route with parameters userId & BookId
 // GET /users/11/books/13
-app.get('/users/:userId/books/:bookId', function (req, res) {
+app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(
     `Book with id ${req.params.bookId} for user with id ${req.params.userId}`
   )
