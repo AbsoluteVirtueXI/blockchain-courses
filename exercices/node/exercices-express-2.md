@@ -32,7 +32,7 @@ Il y aura des modifications à appliquer aux routes que vous avez écrites préc
 
 ## 5
 
-Ajouter un middleware `wrappWithHtml` qui s'appliquera à toutes les routes, et qui renverra nos messages au format `HTML` et non plus en texte simple.
+Ajouter un middleware `wrappWithHtml` qui s'appliquera à toutes les routes, et qui transformera nos messages texte en messages au format `HTML`.  
 Vous pouvez utiliser pour cela ce template:
 
 ```html
@@ -61,3 +61,5 @@ Les opérations de calcul sont accessible de cette manière:
 - `http://192.168.0.11:7777/calc//div/10/5` devra retourner 15
 - `http://192.168.0.11:7777/calc//mul/15/2` devra retourner 30
 - `http://192.168.0.11:7777/calc//sub/10/9` devra retourner 1
+
+Vous pouvez vous inspirer des corrections précédentes pour les fonctions de calculs
