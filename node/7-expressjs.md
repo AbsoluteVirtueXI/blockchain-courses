@@ -105,7 +105,7 @@ app.listen(PORT, IP_LOCAL, () => {
 
 ### **advanced path handling**
 
-#### **string patters**
+#### **string patterns**
 
 On peut aussi utiliser des `string patterns` pour le path de notre route:
 
