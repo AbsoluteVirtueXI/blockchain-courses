@@ -190,3 +190,286 @@ app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)
 })
 ```
+
+#### **chaining route handlers**
+
+Nous pouvons utiliser plusieurs route handlers (la callback que l'on passe lors de la definition de notre route).
+
+```js
+app.get(
+  '/',
+  (req, res, next) => {
+    console.log('The response will be sent by the next function')
+    next()
+  },
+  (req, res) => {
+    res.send('Welcome')
+  }
+)
+```
+
+Nos handlers agissent ainsi comme un **middleware** (notion que l'on verra plus tard).
+Le principe est d'effectuer des traitements entre l'arrivée de la requête et l'envoi de notre réponse.
+les route handlers sont exécutés dans l'ordre dans lequel ils sont déclarés, ils prennent un paramètre supplémentaires qui est `next` et doivent appeller `next()` pour passer à l'handler suivant lorsque le traitement est terminé.
+
+```js
+// import de express
+import express from 'express'
+import fs from 'fs/promises'
+
+const LOG_FILE = 'access-log.txt'
+
+// async file logger
+const logger = async (req) => {
+  try {
+    const date = new Date()
+    const log = `${date.toUTCString()} ${req.method} "${
+      req.originalUrl
+    }" from ${req.ip} ${req.headers['user-agent']}\n`
+    await fs.appendFile(LOG_FILE, log, 'utf-8')
+  } catch (e) {
+    console.error(`Error: can't write in ${LOG_FILE}`)
+  }
+}
+
+// show on console
+const shower = async (req) => {
+  const date = new Date()
+  const log = `${date.toUTCString()} ${req.method} "${req.originalUrl}" from ${
+    req.ip
+  } ${req.headers['user-agent']}`
+  console.log(log)
+}
+
+const app = express()
+const IP = '192.168.0.11'
+const PORT = 7777
+
+app.get(
+  '/hello',
+  async (req, res, next) => {
+    await logger(req)
+    next()
+  },
+  (req, res, next) => {
+    shower(req)
+    next()
+  },
+  (req, res) => {
+    res.send(`Hello ${req.ip}`)
+  }
+)
+
+app.get(
+  '/bye',
+  async (req, res, next) => {
+    await logger(req)
+    next()
+  },
+  (req, res, next) => {
+    shower(req)
+    next()
+  },
+  (req, res) => {
+    res.send(`Goodbye ${req.ip}`)
+  }
+)
+
+app.listen(PORT, IP, () => {
+  //exécution d'un affichage au lacement du serveur.
+  console.log(`Example app listening at http://${IP}:${PORT}`)
+})
+```
+
+L'exemple précédent montre l'utilisation de 2 routes handlers qui seront exécutés avant de envoi de notre réponse.  
+Un handler journalisera la requête de l'utilisateur dans le fichier `access-log.txt` et le suivant affiche des informations sur la console.  
+Pendant que vous effectuez des requêtes sur les routes `/hello` et `/bye` vous pouvez utiliser la commande `tail -f access-log.txt` pour voir les dernières lignes ajoutées à la volée.
+
+Nous pouvons aussi passer un tableau de callback à notre route et même un mélange de fonction et de tableau de callbacks
+
+```js
+const cb_logger = async (req, res, next) => {
+  await logger(req)
+  next()
+}
+const cb_shower = async (req, res, next) => {
+  await shower(req)
+  next()
+}
+
+const cb_last = async (req, res, next) => {
+  console.log('the response will be sent by the next function')
+  next()
+}
+
+app.get('/hello', [cb_logger, cb_shower], cb_last, (req, res) => {
+  res.send(`Hello ${req.ip}`)
+})
+```
+
+#### **chainable route: app.route()**
+
+Un raccourci syntaxique existe lorsqu'on veut appliquer plusieures méthodes HTTP à la même route.
+
+```js
+app
+  .route('/meteo')
+  .get(function (req, res) {
+    res.send('Get a random temperatue')
+  })
+  .post(function (req, res) {
+    res.send('Add a temperature')
+  })
+  .put(function (req, res) {
+    res.send('Update a temperature')
+  })
+```
+
+#### **express.Router**
+
+`express.Router` nous permet de créer des routes modulaires que l'on peut attacher à notre application principale.
+Avec la classe `express.Router` on peut ainsi travailler sur une sous partie de notre app/site et ensuite l'attacher à une route parente.
+C'est très pratique lorsque notre app se divise en certaines parties distinctes, comme une app principale qui possède une route qui la brancherait sur une app secondaire et une route qui la brancherait sur une partie wiki.
+On monte un `router` avec la méthode `use()`
+
+_wiki.js_:
+
+```js
+import express from 'express'
+export const wiki = express.Router()
+wiki.get('/', (req, res) => {
+  res.send('Welcome to the wiki')
+})
+wiki.get('/about', (req, res) => {
+  res.send('about wiki page')
+})
+```
+
+_app.js_:
+
+```js
+// import de express
+import express from 'express'
+import { wiki } from './wiki.js'
+
+const app = express()
+const IP = '192.168.0.11'
+const PORT = 7777
+
+app.use('/wiki', wiki)
+
+app.get('/', (req, res) => {
+  res.send('Welcome to my express app')
+})
+
+app.get('/about', (req, res) => {
+  res.send('About my express app')
+})
+
+app.listen(PORT, IP, () => {
+  //exécution d'un affichage au lacement du serveur.
+  console.log(`Example app listening at http://${IP}:${PORT}`)
+})
+```
+
+## **middleware**
+
+Dans le chapitre **chaining route handlers** nous avons montré comment effecuter des
+opérations entre la récéption d'une requête et l'envoi d'une réponse.
+C'est très pratique lorsque l'on doit effectuer de petites opérations, sinon la bonne méthode est d'utiliser des **middleware**
+Les middleware nous permettent d'éxecuter ces handlers sur la globalité des routes de l'application ou sur certaines routes précises.
+Dans sa définition un middleware n'est qu'un handler:
+
+```js
+const LOG_FILE = 'access.log'
+const logger = async (req, res, next) => {
+  try {
+    const date = new Date()
+    const log = `${date.toUTCString()} ${req.method} "${
+      req.originalUrl
+    }" from ${req.ip} ${req.headers['user-agent']}\n`
+    await fs.appendFile(LOG_FILE, log, 'utf-8')
+  } catch (e) {
+    console.error(`Error: can't write in ${LOG_FILE}`)
+  }
+  next()
+}
+```
+
+Pour utiliser un middleware pour toutes les routes de notre app:
+
+```js
+app.use(logger) // toutes les routes de app utiliseront le middleware logger
+```
+
+pour utiliser un middleware sur une route spécifique de notre app:
+
+```js
+app.use('/hello', logger) // seulement la route /hello utilisera le middleware logger
+```
+
+exemple complet:
+
+```js
+// import de express
+import express from 'express'
+import fs from 'fs/promises'
+
+const LOG_FILE = 'access-log.txt'
+
+// timer middleware
+const timer = (req, res, next) => {
+  const date = new Date()
+  req.requestDate = date.toUTCString()
+  next()
+}
+
+// logger middleware
+const logger = async (req, res, next) => {
+  try {
+    const log = `${req.requestDate} ${req.method} "${req.originalUrl}" from ${req.ip} ${req.headers['user-agent']}\n`
+    await fs.appendFile(LOG_FILE, log, 'utf-8')
+  } catch (e) {
+    console.error(`Error: can't write in ${LOG_FILE}`)
+  } finally {
+    next()
+  }
+}
+
+// shower middleware
+const shower = async (req, res, next) => {
+  const log = `${req.requestDate} ${req.method} "${req.originalUrl}" from ${req.ip} ${req.headers['user-agent']}`
+  console.log(log)
+  next()
+}
+
+const app = express()
+const IP = '192.168.0.11'
+const PORT = 7777
+
+// use timer middleware for all routes in the app
+app.use(timer)
+
+//use logger middleware for all routes in the app
+app.use(logger)
+
+//use shower middleware for the route for path /bye
+app.use('/bye', shower)
+
+app.get('/hello', (req, res) => {
+  res.send(`Hello ${req.ip}`)
+})
+
+app.get('/bye', (req, res) => {
+  res.send(`Goodbye ${req.ip}`)
+})
+
+app.listen(PORT, IP, () => {
+  //exécution d'un affichage au lacement du serveur.
+  console.log(`Example app listening at http://${IP}:${PORT}`)
+})
+```
+
+## **serve static files**
+
+## **serve a website**
