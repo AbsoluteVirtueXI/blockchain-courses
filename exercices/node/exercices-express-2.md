@@ -54,8 +54,8 @@ Vous pouvez utiliser pour cela ce template:
 
 Ajouter une route avec `express.Router` qui se chargera de gérer une calculatrice.
 Ce routeur devra se trouver dans un fichier _calc.js_
-On pourra accéder au fonctionnalité de notre calculatrice sur la route `/calc` depuis notre navigateur.
-Les opérations de calcul sont accessible de cette manière:
+On pourra accéder aux fonctionnalités de notre calculatrice sur la route `/calc` depuis notre navigateur.
+Les opérations de calcul sont accessibles de cette manière:
 
 - `http://192.168.0.11:7777/calc/add/1/10` devra retourner 11
 - `http://192.168.0.11:7777/calc//div/10/5` devra retourner 15
