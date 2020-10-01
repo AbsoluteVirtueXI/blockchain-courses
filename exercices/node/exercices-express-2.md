@@ -28,6 +28,7 @@ L'ordre dans lequel nous appliquons nos middleware est très important.
 Ils seront exécutés dans l'ordre de nos `app.use`.  
 Des middlewares peuvent aussi être executés après un `app.get`.
 Ajouter un middleware, `/sendMessage` qui s'appliquera à toute les routes et qui se chargera d'envoyer le message de réponse à l'utilisateur.
+Il y aura des modifications à appliquer aux routes que vous avez écrites précédement, afin qu'elles puissent gérer ce middleware.
 
 ## 5
 
