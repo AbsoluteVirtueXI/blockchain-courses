@@ -471,10 +471,255 @@ app.listen(PORT, IP, () => {
 })
 ```
 
-Les middleware sont exécutés dans l'ordre des appels de `app.use`sur ces middleware.
+Les middleware sont exécutés dans l'ordre des appels de `app.use` sur ces middleware.
 
 ## **handling post requests**
 
+### **Rappel sur JSON**
+
+Lorsqu'on doit recevoir ou envoyer des données l'un des formats de données les plus utilisés est le JSON, JavaScript Object Notation.
+Ce format respecte la syntaxe des objets javascript associant une clé à une valeur.
+Le format JSON est très pratique lorsqu'on travaille en javascript car le format de ce fichier, ou de string, peut être très facilement converti en object javascript, ou vice versa d'un objet javascript en string JSON.
+
+```js
+// string récupérée depuis package.json
+const jsonString = `
+{
+    "name": "first-express-app",
+    "version": "1.0.0",
+    "author": "AbsoluteVirtueXI <absolutevirtuexi@gmail.com>",
+    "license": "MIT",
+    "type": "module",
+    "exports": {
+      "./": "./src/"
+    },
+    "devDependencies": {
+      "eslint": "^7.10.0",
+      "prettier": "^2.1.2"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }
+`
+// JSON.parse convertit la string JSON passée en
+// paramète en un objet javascript
+const jsObject = JSON.parse(jsonString)
+
+// update la propriété name
+jsObject.name = 'json-testing-app'
+
+// ajoute une prorpiété date
+jsObject.date = new Date().toUTCString()
+
+// affiche l'objet javascript
+console.log(jsObject)
+
+// JSON.stringify convertit l'objet javascript en string JSON
+let newJsonString = JSON.stringify(jsObject)
+
+// affiche la string
+console.log(newJsonString)
+```
+
+`JSON.parse(jsonString)` => convertit une string JSON en un objet javascript  
+`JSON.stringigy(jsObject)` => convertit un objet javascript en une string JSON
+
+Lors du développement d'une API REST, les requêtes GET du client entraineront probablement une réponse contenant une string JSON depuis notre application, et les requêtes POST du client contiendront une string JSON que l'on convertira en objet javascript à la reception.
+
+les valeurs associées à une clé dans une string JSON peuvent être:
+
+- un nombre
+- une string
+- un boolean
+- un tableau
+- un objet
+- null
+
+```JSON
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "isAlive": true,
+  "age": 27,
+  "address": {
+    "streetAddress": "21 2nd Street",
+    "city": "New York",
+    "state": "NY",
+    "postalCode": "10021-3100"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "212 555-1234"
+    },
+    {
+      "type": "office",
+      "number": "646 555-4567"
+    }
+  ],
+  "children": [],
+  "spouse": null
+}
+```
+
+```js
+// la variable json contient la data JSON ci dessus.
+const person = JSON.parse(json)
+console.log(person.address.city)
+console.log(person.phoneNumbers[1].number)
+```
+
+### **Send a POST request from client side**
+
+Tester les requêtes GET d'un client sur nos applications express peut se faire depuis un navigateur.
+Pour les requêtes POST c'est plus difficile.  
+Quelques options seraient:
+
+- Créer une interface web d'ou l'on pourrait submit une requête POST depuis le navigateur
+- Utiliser un outil en ligne de commande comme `curl` ou en developper un avec `axios`
+- Utiliser un logiciel ou une extension de navigateur pour effectuer des requêtes POST
+
+```js
+try {
+  // If second parameter is an object, axios will
+  // automatically serialize the object to JSON for us
+  // and set Content-Type to 'application/json'
+  let res1 = await axios.post('http://www.my-app.com/login', {
+    user: 'alice',
+    password: '!WoRdPaSs1235711',
+  })
+  console.log(res1)
+
+  const json = JSON.stringify({ user: 'bob', password: 'password123' })
+  // make sure you set the Content-Type header if you pass a
+  // pre-serialized JSON string to axios.post().
+  const res = await axios.post('http://www.my-app.com/login', json, {
+    headers: {
+      // Overwrite Axios's automatically set Content-Type
+      'Content-Type': 'application/json',
+    },
+  })
+  console.log(res2)
+} catch (e) {
+  console.error(e)
+}
+```
+
+Sinon le moyen le plus rapide pour effectuer une requête POST est d'utiliser une extension de navigateur ou un logiciel.
+Un exemple d'extension sur firefox est _RESTClient_: https://addons.mozilla.org/en-US/firefox/addon/restclient/  
+Comme logiciel j'utilise par habitude _AdvancedRestClient_: https://install.advancedrestclient.com/install
+
+Dans tous les cas, il faudra toujours configurer le `header` de votre requête pour que:
+
+```json
+'Content-type': 'application/json''
+```
+
+### **Receive a POST requests on express side**
+
+Pour récupérer des données depuis une requête POST, il est requis d'installer le package `body-parser`. C'est un middleware.
+
+```zsh
+yarn add body-parser
+```
+
+```js
+import express from 'express'
+import bodyParser from 'body-parser'
+const app = express()
+
+const IP = '192.168.0.11'
+const PORT = 7777
+
+//Configure express to use body-parser as middleware.
+app.use(bodyParser.urlencoded({ extended: false })) // to support URL-encoded bodies
+app.use(bodyParser.json()) // to support JSON-encoded bodies
+
+app.post('/hello', (req, res) => {
+  // request.body is a js object containing the deserialized JSON
+  console.log(req.body)
+  //close the connection
+  res.end()
+})
+
+app.listen(PORT, IP, () => {
+  console.log(`listening on ${IP}:${PORT}`)
+})
+```
+
+les requêtes pour se logger effectuent en général une requête POST lorsque le bouton submit d'une formulaire de login est cliqué.  
+Côté backend on pourrait retrouver un code qui ressemblerait à ci-dessous:
+
+```js
+import express from 'express'
+import bodyParser from 'body-parser'
+
+// Our user database
+const db_user = {
+  alice: '123',
+  bob: '456',
+  charlie: '789',
+}
+
+// Middleware for checking if user exists
+const userChecker = (req, res, next) => {
+  const username = req.body.username
+  if (db_user.hasOwnProperty(username)) {
+    next()
+  } else {
+    res.send('Username or Password invalid.')
+  }
+}
+
+// Middleware for checking if password is correct
+const passwordChecker = (req, res, next) => {
+  const username = req.body.username
+  const password = req.body.password
+  if (db_user[username] === password) {
+    next()
+  } else {
+    res.send('Username or password invalid.')
+  }
+}
+
+const IP = '192.168.0.11'
+const PORT = 7777
+
+const app = express()
+
+// Configure express to use body-parser as middleware.
+app.use(bodyParser.urlencoded({ extended: false })) // to support URL-encoded bodies
+app.use(bodyParser.json()) // to support JSON-encoded bodies
+
+// Configure express to use these 2 middleware for /login route only
+app.use('/login', userChecker)
+app.use('/login', passwordChecker)
+
+// Create route /login for POST method
+// we are waiting for a POST request with a body containing a json data
+app.post('/login', (req, res) => {
+  let username = req.body.username
+  res.send(`Welcome to your dashboard ${username}`)
+})
+
+app.listen(PORT, IP, () => {
+  console.log(`listening on ${IP}:${PORT}`)
+})
+```
+
 ## **serve static files**
 
-## **serve a website**
+On peut aussi avec express servir des fichiers statiques: html, css, javascript, images, etc... Ainsi pour peut mettre mettre en ligne notre site ou notre application `react`.
+Pour cela on utilise le middleware `express.static`.
+Ce middleware est natif à express, donc pas besoin de l'installer.
+documentation officielle: https://expressjs.com/en/starter/static-files.html
+
+Si l'on crée dans notre projet express un dossier `public` qui contient tous les fichiers génerés par un build react, (`yarn build` générera votre app `react`, tous les fichiers et dossiers seront stockés sous le repertoire build)
+on pourra ainsi servir ce dossier `public` avec:
+
+```js
+app.use(express.static('public'))
+```
+
+Ainsi tout notre projet react stocké dans le repertoire `public` sera accessible depuis l'url de base: http://192.168.0.11
