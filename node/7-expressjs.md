@@ -391,8 +391,9 @@ const logger = async (req, res, next) => {
     await fs.appendFile(LOG_FILE, log, 'utf-8')
   } catch (e) {
     console.error(`Error: can't write in ${LOG_FILE}`)
+  } finally {
+    next()
   }
-  next()
 }
 ```
 
