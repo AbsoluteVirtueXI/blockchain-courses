@@ -471,6 +471,8 @@ app.listen(PORT, IP, () => {
 })
 ```
 
+Les middleware sont exécutés dans l'ordre des appels de `app.use`sur ces middleware.
+
 ## **handling post requests**
 
 ## **serve static files**
