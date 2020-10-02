@@ -607,7 +607,7 @@ try {
 ```
 
 Sinon le moyen le plus rapide pour effectuer une requête POST est d'utiliser une extension de navigateur ou un logiciel.
-Un exemple d'extension sur firefox est _RESTClient_: https://addons.mozilla.org/en-US/firefox/addon/restclient/  
+Un exemple d'extension sur firefox est _RESTer_: https://addons.mozilla.org/en-US/firefox/addon/rester/  
 Comme logiciel j'utilise par habitude _AdvancedRestClient_: https://install.advancedrestclient.com/install
 
 Dans tous les cas, il faudra toujours configurer le `header` de votre requête pour que:
@@ -715,7 +715,7 @@ Pour cela on utilise le middleware `express.static`.
 Ce middleware est natif à express, donc pas besoin de l'installer.
 documentation officielle: https://expressjs.com/en/starter/static-files.html
 
-Si l'on crée dans notre projet express un dossier `public` qui contient tous les fichiers génerés par un build react, (`yarn build` générera votre app `react`, tous les fichiers et dossiers seront stockés sous le repertoire build)
+Si l'on crée dans notre projet express un dossier `public` qui contient tous les fichiers génerés par un build react, (`yarn build` générera votre app `react`, tous les fichiers et dossiers génerés seront stockés sous le repertoire `build/`)
 on pourra ainsi servir ce dossier `public` avec:
 
 ```js
@@ -723,3 +723,111 @@ app.use(express.static('public'))
 ```
 
 Ainsi tout notre projet react stocké dans le repertoire `public` sera accessible depuis l'url de base: http://192.168.0.11
+
+Le repertoire `public` est relatif au repertoire d'où on lance notre commande `node`.
+Donc si on exécute notre application express depuis un repertoire ou le dossier `public` est présent il n'y aura pas de problème.  
+Mais si on souhaite exécuter notre application express depuis un repertoire différent cela posera problème. Pour cela il faudra que l'on travaille avec des chemins absolus.
+
+```js
+// We can't use __filename and __dirname directive anymore in esm modules
+const __filename = fileURLToPath(import.meta.url) //chemin absolu de notre app.js
+const __dirname = dirname(__filename) // repertoire absolu ou est stocké notre app.js
+
+//serve static file
+app.use(express.static(path.join(__dirname, '../public')))
+```
+
+Pourquoi `../public` dans l'example précédent ?  
+Depuis le début de nos cours nos scripts sont stockés dans notre package sous le repertoire `src/`, il faut donc revenir dans le repertoire parent afin d'avoir le dossier `public/` dans le repertoire courant.
+
+Ajoutons à notre app de login précédente, la capacité d'afficher une app react copiée dans repertoire `public`.
+
+```js
+import express from 'express'
+import bodyParser from 'body-parser'
+
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+// We can't use __filename and __dirname directive anymore in esm modules
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+// Our user database
+const db_user = {
+  alice: '123',
+  bob: '456',
+  charlie: '789',
+}
+
+// Middleware for checking if user exists
+const userChecker = (req, res, next) => {
+  const username = req.body.username
+  if (db_user.hasOwnProperty(username)) {
+    next()
+  } else {
+    res.send('Username or Password invalid.')
+  }
+}
+
+// Middleware for checking if password is correct
+const passwordChecker = (req, res, next) => {
+  const username = req.body.username
+  const password = req.body.password
+  if (db_user[username] === password) {
+    next()
+  } else {
+    res.send('Username or password invalid.')
+  }
+}
+
+const IP = '192.168.0.11'
+const PORT = 7777
+
+const app = express()
+
+// Configure express to use body-parser as middleware.
+app.use(bodyParser.urlencoded({ extended: false })) // to support URL-encoded bodies
+app.use(bodyParser.json()) // to support JSON-encoded bodies
+
+//serve static files
+app.use(express.static(path.join(__dirname, '../public')))
+
+// Configure express to use these 2 middleware for /login route only
+app.use('/login', userChecker)
+app.use('/login', passwordChecker)
+
+// Create route /login for POST method
+// we are waiting for a POST request with a body containing a json data
+/*
+format de json attendu:
+{
+    "username": "alice",
+    "password" : "123"
+}
+*/
+app.post('/login', (req, res) => {
+  let username = req.body.username
+  res.send(`Welcome to your dashboard ${username}`)
+})
+
+app.listen(PORT, IP, () => {
+  console.log(`listening on ${IP}:${PORT}`)
+})
+```
+
+L'application précédente offre 2 fonctionalités:
+
+- Accès à une app react en allant sur http://192.168.0.11:7777
+- Une système de login simple accessible par des requêtes POST sur
+  http://192.168.0.11:7777/login.
+  Le format du JSON attendu est:
+
+```JSON
+{
+  "username": "alice",
+  "password": "123"
+}
+```
+
+Un bon exercice serait de créer une app react qui prendrait un login et mot de passe et qui effectuera une requête au serveur express pour une tentative de login!!
