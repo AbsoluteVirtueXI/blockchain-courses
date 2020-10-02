@@ -523,7 +523,7 @@ console.log(newJsonString)
 ```
 
 `JSON.parse(jsonString)` => convertit une string JSON en un objet javascript  
-`JSON.stringigy(jsObject)` => convertit un objet javascript en une string JSON
+`JSON.stringify(jsObject)` => convertit un objet javascript en une string JSON
 
 Lors du développement d'une API REST, les requêtes GET du client entraineront probablement une réponse contenant une string JSON depuis notre application, et les requêtes POST du client contiendront une string JSON que l'on convertira en objet javascript à la reception.
 
