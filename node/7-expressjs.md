@@ -594,7 +594,7 @@ try {
   const json = JSON.stringify({ user: 'bob', password: 'password123' })
   // make sure you set the Content-Type header if you pass a
   // pre-serialized JSON string to axios.post().
-  const res = await axios.post('http://www.my-app.com/login', json, {
+  const res2 = await axios.post('http://www.my-app.com/login', json, {
     headers: {
       // Overwrite Axios's automatically set Content-Type
       'Content-Type': 'application/json',
