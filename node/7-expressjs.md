@@ -830,4 +830,4 @@ L'application précédente offre 2 fonctionalités:
 }
 ```
 
-Un bon exercice serait de créer une app react qui prendrait un login et mot de passe et qui effectuera une requête au serveur express pour une tentative de login!!
+Un bon exercice serait de créer une app react qui proposerait à un utilisateur d'entrer un login et mot de passe, et qui effectuera une requête au serveur express pour une tentative de login!!
