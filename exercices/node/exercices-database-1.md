@@ -5,7 +5,7 @@ Ce fichier contiendra toutes les commandes et les outputs de ces commandes class
 
 # 1
 
-Créer une base de donnée "db_1" qui contient une table "users" qui correspond à la database que nous avons créé dans le cour précédent sur express:
+Créer une base de donnée "db_1" qui contient une table "users" qui correspond à la database que nous avons créé dans le cours précédent sur express:
 
 ```js
 const db_user = {
@@ -59,6 +59,6 @@ Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces
 
 # 9
 
-Effacer la TABLE "user".  
+Effacer la TABLE "users".  
 Effacer la DATABASE "db_1".  
 Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces commandes.
