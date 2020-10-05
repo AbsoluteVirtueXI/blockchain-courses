@@ -251,7 +251,7 @@ Supprimons toutes les lignes qui contiennent une valeur "age" inférieure à 25 
 first_db=> DELETE FROM users WHERE age < 25 OR  age > 35;
 ```
 
-## fields type:
+## datatypes:
 
 Documentation officielle: https://www.postgresql.org/docs/12/datatype.html
 
