@@ -16,7 +16,7 @@ const db_user = {
 ```
 
 Créez les bons champs et donner les bons types à chaque champs. N'oubliez pas un champ "id" qui correspondra à la clé primaire.  
-Ensuite afficher toutes les lignes de la table "users" de la base de donnée "db_1".
+Ensuite afficher toutes les lignes de la table "users" de la base de donnée "db_1".  
 Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces commandes.
 
 # 2
@@ -32,7 +32,7 @@ Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces
 
 # 4
 
-Modifiez la table "users" afin d'ajouter une nouvelle colonne "bio" qui contiendra une description a propos de l'utilisateur. Ce champ "bio" sera du texte avec un nombre de caractères illimités et sa valeur par défaut sera "Hello, world!"
+Modifiez la table "users" afin d'ajouter une nouvelle colonne "bio" qui contiendra une description a propos de l'utilisateur. Ce champ "bio" sera du texte avec un nombre de caractères illimités et sa valeur par défaut sera "Hello, world!".  
 Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces commandes.
 
 # 5
@@ -43,18 +43,18 @@ Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces
 
 # 6
 
-Afficher les 2 lignes qui ont les "id" les plus grands par ordre décroissant.
+Afficher les 2 lignes qui ont les "id" les plus grands par ordre décroissant.  
 Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces commandes.
 
 # 7
 
-Afficher toutes les lignes de la table "users" dont les "id" sont impairs par ordre croissant.
+Afficher toutes les lignes de la table "users" dont les "id" sont impairs par ordre croissant.  
 Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces commandes.
 
 # 8
 
 Effacez toutes les lignes de la table "users dont les "id" sont pairs.
-Affichez toutes les lignes de la table users.
+Affichez toutes les lignes de la table users.  
 Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces commandes.
 
 # 9
