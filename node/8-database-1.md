@@ -29,7 +29,7 @@ Quittez le prompt postgresql:
 postgres=# \quit
 ```
 
-Dans le fichier _/usr/local/var/postgres/pg_hba.conf_ remplacer toutes les méthodes d'authentification `TRUST` par des `md5`:
+Dans le fichier _/usr/local/var/postgres/pg_hba.conf_ remplacer toutes les méthodes d'authentification `TRUST`/`PEER` par des `md5`:
 
 ```conf
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
@@ -91,7 +91,7 @@ Si vous êtes actuellement avec le user `postgres` vous devez revenir à votre s
 postgres% exit
 ```
 
-Dans le fichier _/etc/postgresql/12/main/pg_hba.conf_ remplacer toutes les méthodes d'authentification `TRUST` par des `md5`:
+Dans le fichier _/etc/postgresql/12/main/pg_hba.conf_ remplacer toutes les méthodes d'authentification `TRUST`/`PEER` par des `md5`:
 
 ```conf
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
