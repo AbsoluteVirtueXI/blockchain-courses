@@ -1,4 +1,4 @@
-# **Database 1er partie**
+# **Database 1ere partie**
 
 Actuellement il existe 2 catégories de base données, les bases de données SQL et les bases de données NO-SQL.  
 Nous utiliserons la base de données PostgreSQL, que l'on appelle communément Postgres.
