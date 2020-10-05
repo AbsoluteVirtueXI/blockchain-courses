@@ -85,6 +85,12 @@ pour quitter le prompt postgresql
 postgres=# \quit
 ```
 
+Si vous êtes actuellement avec le user `postgres` vous devez revenir à votre shell user en entrant la commande `exit`:
+
+```zsh
+postgres% exit
+```
+
 Dans le fichier _/etc/postgresql/12/main/pg_hba.conf_ remplacer toutes les méthodes d'authentification `TRUST` par des `md5`:
 
 ```conf
