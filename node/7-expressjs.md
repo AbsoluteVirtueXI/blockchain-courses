@@ -11,9 +11,9 @@ _'Fast, unopinionated, minimalist web framework for Node.js'_
 - minimalist: bien que express peut nous permettre de créer des applications web complexe, il est modulable et l'on peut se contenter des composants simples de ce framework.
 - web framework: express est utilisé dans le composant web server et/ou application de notre dapp. Il peut notre permettre de développer un web server pour servir des fichiers html, css ou js, ou plus majoritairement, lorsque l'on souhaite publier une API accessible à des clients HTTP, tel que browser.
 
-Pour résumé lorsque l'on souhaite créer une application présistante qui communique avec le protocole HTTP on utilise express
+Pour résumé lorsque l'on souhaite créer une application persistante qui communique avec le protocole HTTP on utilise express
 
-## **instalation**
+## **installation**
 
 ```zsh
 % npx djinit first-express-app
@@ -48,7 +48,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Notre serveur est accesible depuis notre navigateur, ou même une requête avec axios, sur http://localhost::3000
+Notre serveur est accessible depuis notre navigateur, ou même une requête avec axios, sur http://localhost::3000
 
 ## **routing**
 
@@ -193,7 +193,7 @@ app.listen(PORT, () => {
 
 #### **chaining route handlers**
 
-Nous pouvons utiliser plusieurs route handlers (la callback que l'on passe lors de la definition de notre route).
+Nous pouvons utiliser plusieurs route handlers (la callback que l'on passe lors de la définition de notre route).
 
 ```js
 app.get(
@@ -210,7 +210,7 @@ app.get(
 
 Nos handlers agissent ainsi comme un **middleware** (notion que l'on verra plus tard).
 Le principe est d'effectuer des traitements entre l'arrivée de la requête et l'envoi de notre réponse.
-les route handlers sont exécutés dans l'ordre dans lequel ils sont déclarés, ils prennent un paramètre supplémentaires qui est `next` et doivent appeller `next()` pour passer à l'handler suivant lorsque le traitement est terminé.
+les route handlers sont exécutés dans l'ordre dans lequel ils sont déclarés, ils prennent un paramètre supplémentaires qui est `next` et doivent appeler `next()` pour passer à l'handler suivant lorsque le traitement est terminé.
 
 ```js
 // import de express
@@ -309,7 +309,7 @@ app.get('/hello', [cb_logger, cb_shower], cb_last, (req, res) => {
 
 #### **chainable route: app.route()**
 
-Un raccourci syntaxique existe lorsqu'on veut appliquer plusieures méthodes HTTP à la même route.
+Un raccourci syntaxique existe lorsqu'on veut appliquer plusieurs méthodes HTTP à la même route.
 
 ```js
 app
@@ -374,10 +374,10 @@ app.listen(PORT, IP, () => {
 
 ## **middleware**
 
-Dans le chapitre **chaining route handlers** nous avons montré comment effecuter des
-opérations entre la récéption d'une requête et l'envoi d'une réponse.
+Dans le chapitre **chaining route handlers** nous avons montré comment effectuer des
+opérations entre la réception d'une requête et l'envoi d'une réponse.
 C'est très pratique lorsque l'on doit effectuer de petites opérations, sinon la bonne méthode est d'utiliser des **middleware**
-Les middleware nous permettent d'éxecuter ces handlers sur la globalité des routes de l'application ou sur certaines routes précises.
+Les middleware nous permettent d'exécuter ces handlers sur la globalité des routes de l'application ou sur certaines routes précises.
 Dans sa définition un middleware n'est qu'un handler:
 
 ```js
@@ -715,18 +715,18 @@ Pour cela on utilise le middleware `express.static`.
 Ce middleware est natif à express, donc pas besoin de l'installer.
 documentation officielle: https://expressjs.com/en/starter/static-files.html
 
-Si l'on crée dans notre projet express un dossier `public` qui contient tous les fichiers génerés par un build react, (`yarn build` générera votre app `react`, tous les fichiers et dossiers génerés seront stockés sous le repertoire `build/`)
+Si l'on crée dans notre projet express un dossier `public` qui contient tous les fichiers générés par un build react, (`yarn build` générera votre app `react`, tous les fichiers et dossiers générés seront stockés sous le répertoire `build/`)
 on pourra ainsi servir ce dossier `public` avec:
 
 ```js
 app.use(express.static('public'))
 ```
 
-Ainsi tout notre projet react stocké dans le repertoire `public` sera accessible depuis l'url de base: http://192.168.0.11
+Ainsi tout notre projet react stocké dans le répertoire `public` sera accessible depuis l'url de base: http://192.168.0.11
 
-Le repertoire `public` est relatif au repertoire d'où on lance notre commande `node`.
-Donc si on exécute notre application express depuis un repertoire ou le dossier `public` est présent il n'y aura pas de problème.  
-Mais si on souhaite exécuter notre application express depuis un repertoire différent cela posera problème. Pour cela il faudra que l'on travaille avec des chemins absolus.
+Le répertoire `public` est relatif au répertoire d'où on lance notre commande `node`.
+Donc si on exécute notre application express depuis un répertoire ou le dossier `public` est présent il n'y aura pas de problème.  
+Mais si on souhaite exécuter notre application express depuis un répertoire différent cela posera problème. Pour cela il faudra que l'on travaille avec des chemins absolus.
 
 ```js
 // We can't use __filename and __dirname directive anymore in esm modules
@@ -737,10 +737,10 @@ const __dirname = dirname(__filename) // repertoire absolu ou est stocké notre 
 app.use(express.static(path.join(__dirname, '../public')))
 ```
 
-Pourquoi `../public` dans l'example précédent ?  
-Depuis le début de nos cours nos scripts sont stockés dans notre package sous le repertoire `src/`, il faut donc revenir dans le repertoire parent afin d'avoir le dossier `public/` dans le repertoire courant.
+Pourquoi `../public` dans l'exemple précédent ?  
+Depuis le début de nos cours nos scripts sont stockés dans notre package sous le répertoire `src/`, il faut donc revenir dans le répertoire parent afin d'avoir le dossier `public/` dans le répertoire courant.
 
-Ajoutons à notre app de login précédente, la capacité d'afficher une app react copiée dans repertoire `public`.
+Ajoutons à notre app de login précédente, la capacité d'afficher une app react copiée dans répertoire `public`.
 
 ```js
 import express from 'express'
@@ -816,7 +816,7 @@ app.listen(PORT, IP, () => {
 })
 ```
 
-L'application précédente offre 2 fonctionalités:
+L'application précédente offre 2 fonctionnalités:
 
 - Accès à une app react en allant sur http://192.168.0.11:7777
 - Une système de login simple accessible par des requêtes POST sur

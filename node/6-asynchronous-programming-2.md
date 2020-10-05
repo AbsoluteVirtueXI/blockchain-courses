@@ -2,8 +2,8 @@
 
 ## **Rappel**:
 
-Dans le cours précedent nous avons vu comment organiser des appels de fonctions asynchrones grâce à des **callbacks** ou des **promises**
-Vous devez saisir qu'on ne peut savoir lorsqu'une function asynchrone va retourner. Nous n'avons que 2 possibilités d'exploiter son résultat, utiliser des **callbacks** ou utiliser des **promises**:
+Dans le cours précédent nous avons vu comment organiser des appels de fonctions asynchrones grâce à des **callbacks** ou des **promises**
+Vous devez saisir qu'on ne peut savoir lorsqu'une fonction asynchrone va retourner. Nous n'avons que 2 possibilités d'exploiter son résultat, utiliser des **callbacks** ou utiliser des **promises**:
 
 _Utilisation de *callback* pour exploiter le résultat de la fonction `fs.readFile`_:
 
@@ -57,7 +57,7 @@ console.log(content1)
 console.log(content2)
 ```
 
-## **illusation des promises avec des timers**:
+## **illustration des promises avec des timers**:
 
 Pour cela nous allons utiliser la fonction `setTimeout` pour simuler des opérations qui prennent du temps à s'exécuter.
 
@@ -81,8 +81,8 @@ tic                 # print after 2 seconds
 tac                 # print after 5 seconds
 ```
 
-Créeons une fonction asynchrone qui retourne une **promise**.  
-Elle prend comme paramètre un _id_ qui nous premettera d'identifier la tâche executée et un _timeout_ qui correspondera au temps d'exécution de la tâche:
+Créons une fonction asynchrone qui retourne une **promise**.  
+Elle prend comme paramètre un _id_ qui nous permettra d'identifier la tâche exécutée et un _timeout_ qui correspondra au temps d'exécution de la tâche:
 
 ```js
 const asyncTask = (id, timeout) => {
@@ -115,7 +115,7 @@ Log: task1 done after 10 seconds
 
 On remarque que les tâches s'exécutent bien de manière asynchrone, celle qui ont un timemout plus court se finissent avant celle qui ont un timeout plus long.
 
-La probématique est de désormais pouvoir récupérer leur résultat afin d'effectuer.
+La problématique est de désormais pouvoir récupérer leur résultat afin d'effectuer.
 On peut utiliser la syntaxe `then & catch`:
 
 ```js
@@ -165,7 +165,7 @@ result from task4
 ```
 
 Malgré que nos fonctions soient asynchrones et retournent des promises, elles sont exécutées comme si elles étaient synchrones.  
-Pour obtenir une meilleure alternative c'est d'abord de toutes les executer et ensuite d'`await` sur les promises retournées:
+Pour obtenir une meilleure alternative c'est d'abord de toutes les exécuter et ensuite d'`await` sur les promises retournées:
 
 ```js
 let promise1 = asyncTask(1, 10)
@@ -225,7 +225,7 @@ Log: task1 done after 10 seconds
 
 La subtilité dans le cas précédent est que `Promise.all` retourne qu'une seule **promise**, qui sera complétée si, et seulement si, toutes les promises sont compétées avec succès.
 
-On peut également récupérér la valeur de la 1ere promise complétée parmit une liste de fonctions asynchrones executées simultanément, aussi bien en cas de succès que d'une erreur avec la fonction `Promise.race`:
+On peut également récupérer la valeur de la 1ere promise complétée parmi une liste de fonctions asynchrones exécutées simultanément, aussi bien en cas de succès que d'une erreur avec la fonction `Promise.race`:
 
 ```js
 let data = await Promise.race([
