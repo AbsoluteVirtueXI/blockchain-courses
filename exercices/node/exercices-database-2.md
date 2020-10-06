@@ -48,3 +48,11 @@ Il faudra récupérer l'id, le prénom, le nom du client ainsi que le montant et
 ```txt
 customer_id | first_name |  last_name   | amount |        payment_date
 ```
+
+## 3
+
+Ecrivez une requête SQL qui affiche le chiffre d'affaire gagné par le video club depuis son ouverture.
+
+## 4
+
+Ecrivez une requête SQL qui affiche le titre de tous les films dont la langue est l'anglais et dont la durée est supérieure à 120 minutes.
