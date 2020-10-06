@@ -23,7 +23,7 @@ postgres=> \quit
 
 ```zsh
 % pg_restore -U db_user -d dvdrental ./dvdrental.tar
-% psql -d dvbrental -U db_user
+% psql -d dvdrental -U db_user
 ```
 
 Vous êtes maintenant connectés à la base de donnée `dvdrental`
