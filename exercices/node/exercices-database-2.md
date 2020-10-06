@@ -56,3 +56,17 @@ Ecrivez une requête SQL qui affiche le chiffre d'affaire gagné par le video cl
 ## 4
 
 Ecrivez une requête SQL qui affiche le titre de tous les films dont la langue est l'anglais et dont la durée est supérieure à 120 minutes.
+
+## 5
+
+Ecrivez une requête SQL qui affiche le TOP 10 des clients qui ont fait le plus d'achat dans ce video club.
+Il faudra récupérer leur id, prénom, nom, email.
+Il vous faudra utiliser les requêtes auxiliaires avec `WITH` pour cette exercice.
+
+## 6
+
+Récupérer les mêmes informations que l'exercice précédent, mais ajouter avec un `JOIN` le montant total des achats pour chacun du TOP 10 des clients.
+
+## 7
+
+Faîtes preuves d'imagination et essayez de créer une requête très complexes que vous expliquerez. Cette requête devra utiliser les concepts que nous avons étudié en cours et vu dans les exercices précédents.
