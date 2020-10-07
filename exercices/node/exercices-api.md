@@ -30,7 +30,7 @@ Créer une route `/blacklist` qui invalidera un utilisateur en mettant le champ 
 **Seul le user avec l'id 1 pourra faire appelle à cette fonction**
 Mettez en place ce système de contrôle afin que d'autres utilisateurs ne puisse faire appelle à cette fonction.
 
-## 4 créer une route
+## 5
 
 Créer une route `/whitelist` qui invalidera un utilisateur en mettant le champ `active` de la table `users` à `true` pour un id passé en paramètre.
 **Seul le user avec l'id 1 pourra faire appelle à cette fonction**
