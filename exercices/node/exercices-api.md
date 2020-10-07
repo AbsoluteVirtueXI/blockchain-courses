@@ -63,6 +63,7 @@ Cette route sera accessible avec une méthode `POST` pour des utilisateurs avec 
 ```
 
 Si nous effectuons une requête POST vers `/send` avec le JSON précédent, nous enverrons le message `Hello, how are you ?` à l'utilisateur d'id 2.
+**Envoyer un message veut dire l'enregistrer dans la table `messages`**
 L'id du sender peut être récupéré grâce à l'objet `req.user` créé dans l'exercice précédent.
 
 ## 9
