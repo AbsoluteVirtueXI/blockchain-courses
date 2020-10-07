@@ -40,7 +40,7 @@ Le user avec l'id 1 est considéré comme l'administrateur de l'application.
 
 ## 6
 
-Dans le middleware `validateApiKey` nous vérifions si l'api key de l'utilisateur existe, mais nous ne vérifions pas si le champ `active` est à `true` dans la table `user`.
+Dans le middleware `validateApiKey` nous vérifions si l'api key de l'utilisateur existe, mais nous ne vérifions pas si le champ `active` est à `true` dans la table `users`.
 Récrivez ce middleware afin que l'on vérifie si l'api key existe (c'est déjà le cas), mais aussi que le champ `active` est bien égal à `true`.
 Si un utilisateur a été blacklisté, il ne faut surtout pas qu'il puisse accéder à notre api.
 
