@@ -33,6 +33,8 @@ Pour cela nous allons utiliser l'ORM `Sequelize`.
 
 ### Sequelize introduction
 
+documentation officielle: https://sequelize.org/master/manual/getting-started.html
+
 `Sequelize` est un _Object-relational mapping_. C'est un package node.js.  
 Ce qu'il faut retenir c'est qu'un ORM est une couche d'abstraction entre notre code javascript et la base de données que l'on souhaite interroger.
 Ainsi un ORM nous permet d'interroger une base de données depuis son API, au lieu d'effectuer des raw queries depuis notre code javascript.  
@@ -208,7 +210,7 @@ Dans le répertoire `src` créons un fichier _api-server.js_
 _api-server.js_
 
 ```js
-mport express from 'express'
+import express from 'express'
 import bodyParser from 'body-parser'
 
 // import sequelize connector and User and Message models instances
@@ -216,13 +218,13 @@ import { sequelize, User, Message } from './models/db.js'
 
 // Test if database connection is OK else exit
 try {
-    await sequelize.authenticate() // try to authentificate on the database
-    console.log('Connection has been established successfully.')
-    await User.sync({ alter: true }) // modify users table schema is something changed
-    await Message.sync({ alter: true }) // same for messages table
+  await sequelize.authenticate() // try to authentificate on the database
+  console.log('Connection has been established successfully.')
+  await User.sync({ alter: true }) // modify users table schema is something changed
+  await Message.sync({ alter: true }) // same for messages table
 } catch (error) {
-    console.error('Unable to connect to the database:', error)
-    process.exit(1)
+  console.error('Unable to connect to the database:', error)
+  process.exit(1)
 }
 
 // Local network configuration
@@ -231,8 +233,35 @@ const PORT = 7777
 
 const app = express()
 
+const getApiKey = async (req, res, next) => {
+  const key = req.headers.authorization
+  if (key === null) {
+    res.status(403).json({ code: 403, data: 'No api token' })
+  }
+  req.api_key = key
+  next()
+}
+
+const validateApiKey = async (req, res, next) => {
+  try {
+    const user = await User.findAll({
+      attributes: ['username', 'email'],
+      where: { api_token: req.api_key },
+    })
+    if (user === null) {
+      res.status(403).json({ code: 403, data: 'Invalid api token' })
+    }
+    req.user = user
+    next()
+  } catch (e) {
+    res.status(405).json({ code: 405, data: 'Internal server error' })
+  }
+}
+
 app.use(bodyParser.json()) // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })) // to support URL-encoded bodies
+app.use(getApiKey)
+app.use(validateApiKey)
 
 /*
 Endpoint for user registration.
@@ -243,57 +272,68 @@ input:
 }
 */
 app.post('/register', async (req, res) => {
-    let username = req.body.username
-    let email = req.body.email
-    const user = await User.create({ username: username, email: email })
-    res.json(user)
+  let username = req.body.username
+  let email = req.body.email
+  const user = await User.create({ username: username, email: email })
+  res.json(user)
 })
 
+// GET user by id
 app.get('/id/:id', async (req, res) => {
-    const id = req.params.id
-    const user = await User.findAll({
-        attributes: ['username', 'email'],
-        where: { id: id },
-    })
-    res.json(user)
+  const id = req.params.id
+  const user = await User.findAll({
+    attributes: ['username', 'email'],
+    where: { id: id },
+  })
+  res.json(user)
 })
 
+// GET user by username
 app.get('/username/:username', async (req, res) => {
-    const username = req.params.username
-    const user = await User.findAll({
-        attributes: ['username', 'email'],
-        where: { username: username },
-    })
-    res.json(user)
+  const username = req.params.username
+  const user = await User.findAll({
+    attributes: ['username', 'email'],
+    where: { username: username },
+  })
+  res.json(user)
 })
 
+// GET user by email
 app.get('/email/:email', async (req, res) => {
-    const email = req.params.email
-    const user = await User.findAll({
-        attributes: ['username', 'email'],
-        where: { email: email },
-    })
-    res.json(user)
+  const email = req.params.email
+  const user = await User.findAll({
+    attributes: ['username', 'email'],
+    where: { email: email },
+  })
+  res.json(user)
 })
 
+// GET all users
 app.get('/users', async (req, res) => {
-    const users = await User.findAll({
-        attributes: ['username', 'email'],
-    })
-    res.json(users)
+  const users = await User.findAll({
+    attributes: ['username', 'email'],
+  })
+  res.json(users)
 })
-/*
+
 app.post('/send/:id', async (req, res) => {
-    const id = req.params.id
-    const user = await User.findbyPk(id)
+  const id = req.params.id
+  const user = await User.findbyPk(id)
+  /*
     if(user !== null) {
-        const message =
-    }
-    res.status(404).end()
+        const message = 
+    }*/
+  res.status(404).end()
 })
-*/
+
+try {
+  await sequelize.authenticate()
+  console.log('Connection has been established successfully.')
+} catch (error) {
+  console.error('Unable to connect to the database:', error)
+}
 
 app.listen(PORT, IP, () => {
-    console.log(`listening on ${IP}:${PORT}`)
+  console.log(`listening on ${IP}:${PORT}`)
 })
 ```
