@@ -27,14 +27,14 @@ Il vous faudra renseigner dans les headers de votre client REST, le champ `Autho
 ## 4
 
 Créer une route `/blacklist` qui invalidera un utilisateur en mettant le champ `active` de la table `users` à `false` pour un id passé en paramètre.
-**Seul le user avec l'id 1 pourra faire appelle à cette fonction**
+**Seul le user avec l'id 1 pourra appeler cette fonction**
 Mettez en place ce système de contrôle afin que d'autres utilisateurs ne puisse faire appeler cette fonction.
 Le user avec l'id 1 est considéré comme l'administrateur de l'application
 
 ## 5
 
 Créer une route `/whitelist` qui invalidera un utilisateur en mettant le champ `active` de la table `users` à `true` pour un id passé en paramètre.
-**Seul le user avec l'id 1 pourra faire appelle à cette fonction**
+**Seul le user avec l'id 1 pourra appeler cette fonction**
 Mettez en place ce système de contrôle afin que d'autres utilisateurs ne puisse faire appeler cette fonction.
 Le user avec l'id 1 est considéré comme l'administrateur de l'application.
 
