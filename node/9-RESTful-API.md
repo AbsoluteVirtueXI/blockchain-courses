@@ -233,28 +233,37 @@ const PORT = 7777
 
 const app = express()
 
+// A middle for checking if an api key is provided by the user
+// in the Authorization header
 const getApiKey = async (req, res, next) => {
   const key = req.headers.authorization
-  if (key === null) {
+  if (!key) {
     res.status(403).json({ code: 403, data: 'No api token' })
+  } else {
+    next()
   }
-  req.api_key = key
-  next()
 }
 
+// A middleware for checking if an api token is valid
+// and is still active.
+// if Ok the user performing the request is attached to the req object.
 const validateApiKey = async (req, res, next) => {
+  const key = req.headers.authorization
   try {
     const user = await User.findAll({
       attributes: ['username', 'email'],
-      where: { api_token: req.api_key },
+      where: { api_key: key },
     })
-    if (user === null) {
+    // check if empty results then not found
+    if (user.length === 0) {
       res.status(403).json({ code: 403, data: 'Invalid api token' })
+    } else {
+      console.log('USER:', user)
+      req.user = user
+      next()
     }
-    req.user = user
-    next()
   } catch (e) {
-    res.status(405).json({ code: 405, data: 'Internal server error' })
+    res.status(500).json({ code: 500, data: 'Internal server error' })
   }
 }
 
@@ -264,7 +273,7 @@ app.use(getApiKey)
 app.use(validateApiKey)
 
 /*
-Endpoint for user registration.
+Endpoint for user registration. 
 input:
 {
     "username": string,
@@ -272,67 +281,87 @@ input:
 }
 */
 app.post('/register', async (req, res) => {
-  let username = req.body.username
-  let email = req.body.email
-  const user = await User.create({ username: username, email: email })
-  res.json(user)
+  //check username n'et pas null, pareil pour email
+  try {
+    const user = await User.create({ username: username, email: email })
+    res.json({ code: 200, data: user })
+  } catch (e) {
+    console.log('Error', e)
+    res.status(500).json({ code: 500, data: e })
+  }
 })
 
 // GET user by id
 app.get('/id/:id', async (req, res) => {
   const id = req.params.id
-  const user = await User.findAll({
-    attributes: ['username', 'email'],
-    where: { id: id },
-  })
-  res.json(user)
+  try {
+    const user = await User.findAll({
+      attributes: ['username', 'email'],
+      where: { id: id },
+    })
+    if (user.length === 0) {
+      res.status(404).json({ code: 404, data: 'user not found' })
+    } else {
+      res.json({ code: 200, data: user })
+    }
+  } catch (e) {
+    res.status(500).json({ code: 500, data: 'Internal server error' })
+  }
 })
 
 // GET user by username
 app.get('/username/:username', async (req, res) => {
   const username = req.params.username
-  const user = await User.findAll({
-    attributes: ['username', 'email'],
-    where: { username: username },
-  })
-  res.json(user)
+  try {
+    const user = await User.findAll({
+      attributes: ['username', 'email'],
+      where: { username: username },
+    })
+    if (user.length === 0) {
+      res.status(404).json({ code: 404, data: 'user not found' })
+    } else {
+      res.json({ code: 200, data: user })
+    }
+  } catch (e) {
+    res.status(500).json({ code: 500, data: 'Internal server error' })
+  }
 })
 
 // GET user by email
 app.get('/email/:email', async (req, res) => {
   const email = req.params.email
-  const user = await User.findAll({
-    attributes: ['username', 'email'],
-    where: { email: email },
-  })
-  res.json(user)
+  try {
+    const user = await User.findAll({
+      attributes: ['username', 'email'],
+      where: { email: email },
+    })
+    if (user.length === 0) {
+      res.status(404).json({ code: 404, data: 'user not found' })
+    } else {
+      res.json({ code: 200, data: user })
+    }
+  } catch (e) {
+    res.status(500).json({ code: 500, data: 'Internal server error' })
+  }
 })
 
 // GET all users
 app.get('/users', async (req, res) => {
-  const users = await User.findAll({
-    attributes: ['username', 'email'],
-  })
-  res.json(users)
+  try {
+    const users = await User.findAll({
+      attributes: ['username', 'email'],
+    })
+    if (users.length === 0) {
+      res.status(404).json({ code: 404, data: 'users not found' })
+    } else {
+      res.json({ code: 200, data: users })
+    }
+  } catch (e) {
+    res.status(500).json({ code: 500, data: 'Internal server error' })
+  }
 })
 
-app.post('/send/:id', async (req, res) => {
-  const id = req.params.id
-  const user = await User.findbyPk(id)
-  /*
-    if(user !== null) {
-        const message = 
-    }*/
-  res.status(404).end()
-})
-
-try {
-  await sequelize.authenticate()
-  console.log('Connection has been established successfully.')
-} catch (error) {
-  console.error('Unable to connect to the database:', error)
-}
-
+// Start express server
 app.listen(PORT, IP, () => {
   console.log(`listening on ${IP}:${PORT}`)
 })
