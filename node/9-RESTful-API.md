@@ -269,8 +269,6 @@ const validateApiKey = async (req, res, next) => {
 
 app.use(bodyParser.json()) // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })) // to support URL-encoded bodies
-app.use(getApiKey)
-app.use(validateApiKey)
 
 /*
 Endpoint for user registration. 
@@ -282,14 +280,19 @@ input:
 */
 app.post('/register', async (req, res) => {
   //check username n'et pas null, pareil pour email
+  const username = req.body.username
+  const email = req.body.email
   try {
     const user = await User.create({ username: username, email: email })
     res.json({ code: 200, data: user })
   } catch (e) {
     console.log('Error', e)
-    res.status(500).json({ code: 500, data: e })
+    res.status(500).json({ code: 500, data: 'Internal server error' })
   }
 })
+
+app.use(getApiKey)
+app.use(validateApiKey)
 
 // GET user by id
 app.get('/id/:id', async (req, res) => {
