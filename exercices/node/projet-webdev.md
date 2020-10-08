@@ -55,7 +55,7 @@ Faut être authentifié pour les routes suivantes:
 ### Frontend
 
 Utilisez la librairie `React`
-
+Inspirez vous des travaux que vous avez effectués avec Paulina.  
 communiquer avec express via fetch ou axios
 Pour effectuer des requêtes authentifiées, créer le header `'Authorization': 'mon api key'`
 
