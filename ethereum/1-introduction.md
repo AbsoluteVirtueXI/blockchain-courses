@@ -19,7 +19,7 @@ Bellow how this kind of process can be implemented with code:
 ![code structure of blockchain](../res/codeview.jpg)  
 This process confirms the **integrity** of the block, all the way back to the original `genesis block`.
 
-If a malicious actor want to alter a block, by changing a transaction amount for example, he will alter the `hash` of all the transactions within the block. So he will have to mine again this block. The process will alter the whole block `hash`, and all the following blocks will have a different `hash` stored in their header for the previous block. So the malicious actor will have to mine also all the following blocks based on the `hash` of the malicious crafted block.  
+If a malicious actor want to alter a block, for example by changing a transaction amount, he will alter the `hash` of all the transactions within the block. So he will have to mine again this block. The process will alter the whole block `hash`, and all the following blocks will have a different `hash` stored in their header for the previous block. So the malicious actor will have to mine also all the following blocks based on the `hash` of the malicious crafted block.  
 The other protection which prevent these kind of modifications is a consensus mechanism.
 Attackers would need to control 51% of the network to reverse transactions that have already taken place in a blockchain.
 This is known as the **51% Attack**
@@ -30,26 +30,26 @@ Needless to say that this is actually impossible, attackers would need to much c
 ![Centralized vs Decentralized vs Distributed](../res/CDD.png)
 
 In a Distributed network there is not a single (or even multi) point of authority, named `POA`.  
-So consensus mechanisms are used to make sure each nodes in a distributed network work together, and never in a malicious way.  
+So consensus mechanisms are used to make sure that each nodes in a distributed network work together, and never in a malicious way.  
 In the case of a blockchain network, consensus mechanisms are used to control how a blockchain transaction can be validated, written in a block and executed.
 
 ### **Consensus mechanisms**
 
-#### **Byzantine general problem**
+#### **Byzantine generals problem**
 
 https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins
 
 #### **Proof of work: PoW**
 
 In french: **preuve de travail**.  
-This is the original consensus algorithm.
+This is the original consensus algorithm.  
 With `PoW`, miners compete against each other to complete transactions on the network and add new blocks to the blockchain.  
 Miners have to solve a difficult puzzle using their computers processing power.  
-The mathematical puzzle to solve is
+The mathematical puzzle to solve consists in finding a hash number by manipulating the `nonce`. The hash number to find has to be less than a `target` hash. The `target` hash is defined by a `difficulty`.  
 The first miner to solve the puzzle is given a reward for their work.  
 A proof of work is a piece of data which is difficult (costly, time-consuming) to produce but easy for others to verify and which satisfies certain requirements.
 
-#### **Proof of stake: POS**
+#### **Proof of stake: PoS**
 
 In french: **preuve d'enjeu** ou **preuve de participation**.
 
@@ -160,7 +160,8 @@ and then load your profile, in my case `~/.zprofile`:
 `BTC`: Bitcoin cryptocurrency  
 `DAO`: Decentralized Autonomous Organization
 `cryptographic hash`: see `hash`
-`cryptographic hash function`: see `hasing function`
+`cryptographic hash function`: see `hasing function`  
+`Difficulty`: This describes how difficult, in relation to the genesis block, the target will be to reach.
 `ECDSA`: Elliptic Curve Digital Signature Algorithm  
 `ETH`: Ethereum/Ether cryptocurrency
 `EVM`: Ethereum Virtual Machine  
@@ -170,4 +171,6 @@ and then load your profile, in my case `~/.zprofile`:
 `hashing function`: take an input, file or data, and generate a `hash` of this input  
 `POA`: Point Of Authority
 `PoW`: Proof of Work
-`PoS`: Proof of Stake
+`PoS`: Proof of Stake  
+`SPOF`: Single Point Of Failure
+`Target`: The number that the block hash must be less than in order to be valid
