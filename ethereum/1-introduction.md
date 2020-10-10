@@ -30,6 +30,7 @@ Needless to say that this is actually impossible, attackers would need to much c
 ![Centralized vs Decentralized vs Distributed](../res/CDD.png)
 
 In a Distributed network there is not a single (or even multi) point of authority, named `POA`.  
+The objective is to avoid a single point of failure: `SPOF`
 So consensus mechanisms are used to make sure that each nodes in a distributed network work together, and never in a malicious way.  
 In the case of a blockchain network, consensus mechanisms are used to control how a blockchain transaction can be validated, written in a block and executed.
 
