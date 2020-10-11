@@ -155,16 +155,31 @@ It is the same with Ethereum and `Gas`, if you have a transaction that needs 10 
 
 The `gasLimit` is the maximum `Gas` that the transaction sender is willing to spend executing that transaction. Sometimes when executing a transaction, you might not know exactly how much it is going to cost. Imagine a scenario where you have a smart contract with a bug, an infinity loop. Without a gasLimit, it would be possible to consume the whole balance of the sender account. The `gasLimit` is a safety mechanism to prevent someone from using all their Ether due to a bug or an estimation error.
 
-So when a user sends a transaction he will pay a first amount of:
-Intial cost = `gasPrice` \* `gasLimit`.
-If the intrinsic cost is higher than the balance of the sender account, the transaction is considered invalid. After the transaction has been processed, any unused gas is refunded to the sender account. So a user will pay when the transaction has ben processed:
-Real cost = `gasPrice` \* `gasUsed`.  
+So when a user sends a transaction he will pay a first amount of:  
+**Intial cost = `gasPrice` \* `gasLimit`**  
+If the intrinsic cost is higher than the balance of the sender account, the transaction is considered invalid. After the transaction has been processed, any unused gas is refunded to the sender account. So a user will pay when the transaction has ben processed:  
+**Real cost = `gasPrice` \* `gasUsed`**  
 However, if your transaction runs out of gas during execution, there is no refund. That is why usually the transaction sender sets the gasLimit to higher than the estimated amount of gas.
 
-A miner will always prioritize transactions with higher Gas cost.
+If the Ethereum network is not congested, costs and `gasPrice` are cheap. This is why they are expressed in a smaller denomination than Ether:
+
+| Unit                | Wei Value | Wei                       |
+| ------------------- | --------- | ------------------------- |
+| wei                 | 1 wei     | 1                         |
+| Kwei (babbage)      | 1e3 wei   | 1,000                     |
+| Mwei (lovelace)     | 1e6 wei   | 1,000,000                 |
+| Gwei (shannon)      | 1e9 wei   | 1,000,000,000             |
+| microether (szabo)  | 1e12 wei  | 1,000,000,000,000         |
+| milliether (finney) | 1e15 wei  | 1,000,000,000,000,000     |
+| ether               | 1e18 wei  | 1,000,000,000,000,000,000 |
+
+<br />
+A miner will always prioritize transactions with higher Gas cost.  
 People sending transactions specify a gas price, and miners decide which transactions to mine into a block. The two meet somewhere in the middle on a price.
-ETH Gas Station: https://ethgasstation.info/
-Etherscan Gas tracker: https://etherscan.io/gastracker
+
+When sending a transaction, it can be hard to know what is the minimum gasPrice at that moment. There are some tools that scan the network and the average gasPrice used in recent transactions to help with choosing a fair gasPrice that is likely to be accepted by miners:  
+ETH Gas station: https://ethgasstation.info/  
+Etherscan Gas tracker: https://etherscan.io/gastracker  
 Browser addons: https://addons.mozilla.org/en-US/firefox/addon/ethereum-gas-price-extension/
 
 ## **Metamask**
