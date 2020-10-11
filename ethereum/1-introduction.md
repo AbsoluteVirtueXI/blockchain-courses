@@ -215,6 +215,7 @@ and then load your profile, in my case `~/.zprofile`:
 ## Glossary:
 
 `Block header`: A data structure containing all information of a block. It is used as an identifier of a block  
+`Block hash`: A Block Hash is a reference number for a block in the blockchain. You get a Block Hash by hashing the block header  
 `BTC`: Bitcoin cryptocurrency  
 `DAO`: Decentralized Autonomous Organization  
 `cryptographic hash`: see `hash`  
