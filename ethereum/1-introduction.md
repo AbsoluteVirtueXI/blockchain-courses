@@ -76,7 +76,7 @@ In Ethereum, when a miner mines a new block, it receives the fees from all trans
 
 ### **Fees/Gas**
 
-The fees on Bitcoin blockchain, or the gas on Ethereum blockchain, are a protection system and reward for nodes processing the transaction.
+The fees on Bitcoin blockchain, or the `Gas` system on Ethereum blockchain, are a protection system and reward for nodes processing the transaction.
 Computing costs money:
 
 - hosting a service
@@ -113,6 +113,9 @@ With the signature and the hash of the original data we can perform an `elliptic
 
 ### **Ethereum vs Bitcoin**
 
+Bitcoin white paper: https://bitcoin.org/bitcoin.pdf
+Ethereum yellow paper: https://ethereum.github.io/yellowpaper/paper.pdf
+
 Technically Ethereum and Bitcoin follow the same scheme in their implementation, but there are 3 main differences between these 2 blockchains:
 
 - Ethereum has a virtual machine which can execute instructions and store data.
@@ -135,13 +138,34 @@ Smart contract can execute instructions, but are limited by a small list of avai
 
 ### **Gas**
 
-https://pegasys.tech/ethereum-explained-gas-payment-and-mining/
-gasPrice:The gasPrice is the value that the transaction sender is willing to pay per gas unit.  
-gasLimit: Sometimes when executing a transaction, you might not know exactly how much it is going to cost. Imagine a scenario where you have a smart contract with a bug, an infinity loop. Without a gasLimit, it would be possible to consume the whole balance of the sender account. The gasLimit is a safety mechanism to prevent someone from using all their Ether due to a bug or an estimation error.
-When sending a transaction, it can be hard to know what is the minimum gasPrice at that moment. There are some tools that scan the network and the average gasPrice used in recent transactions to help with choosing a fair gasPrice that is likely to be accepted by miners.  
-https://ethgasstation.info/ (install browser extension too)
-https://etherscan.io/gastracker
-https://addons.mozilla.org/en-US/firefox/addon/ethereum-gas-price-extension/
+Only read-only transactions are free. Else the sender has to pay for the amount of `Gas` needed when he sends a transaction to the Ethereum blockchain.  
+There are 3 main use cases of `Gas`:
+
+- reward for the miner who mined the block. He will earn all the `Gas` cost spent for all the transactions per block mined.
+- avoid `DDoS` attacks. As Transactions need an amount `Gas`, a `DDoS` attack need a huge amount of cryptocurrencies for paying this `Gas` cost.
+- protection of the user. The `gasLimit` is used to protect the user from wasting his Ether because of a bug in a smart contract or estimation errors.
+
+The well known analogy to understand `Gas` is car and fuel.  
+If you own a car, and you need to drive it from point A to point B, you need an amount of fuel. In the same way, if you have some operations that you want to execute in the Ethereum EVM, you need `Gas`. With your car, the further you drive, the more fuel you need. In Ethereum, the more you compute, the more `Gas` you need.
+The amount of `Gas` needed is specified in the Appendix G of the Yellow Paper.
+
+The `gasPrice` is the value that the transaction sender is willing to pay per `Gas` unit.
+Following the car/fuel analogy, if your car has a 50 liter tank, how much do you pay to completely fill the tank? The answer depends on the price per liter in the pump.  
+It is the same with Ethereum and `Gas`, if you have a transaction that needs 10 gas to execute, the price you pay to execute that transaction depends on the price per unit of gas.
+
+The `gasLimit` is the maximum `Gas` that the transaction sender is willing to spend executing that transaction. Sometimes when executing a transaction, you might not know exactly how much it is going to cost. Imagine a scenario where you have a smart contract with a bug, an infinity loop. Without a gasLimit, it would be possible to consume the whole balance of the sender account. The `gasLimit` is a safety mechanism to prevent someone from using all their Ether due to a bug or an estimation error.
+
+So when a user sends a transaction he will pay a first amount of:
+Intial cost = `gasPrice` \* `gasLimit`.
+If the intrinsic cost is higher than the balance of the sender account, the transaction is considered invalid. After the transaction has been processed, any unused gas is refunded to the sender account. So a user will pay when the transaction has ben processed:
+Real cost = `gasPrice` \* `gasUsed`.  
+However, if your transaction runs out of gas during execution, there is no refund. That is why usually the transaction sender sets the gasLimit to higher than the estimated amount of gas.
+
+A miner will always prioritize transactions with higher Gas cost.
+People sending transactions specify a gas price, and miners decide which transactions to mine into a block. The two meet somewhere in the middle on a price.
+ETH Gas Station: https://ethgasstation.info/
+Etherscan Gas tracker: https://etherscan.io/gastracker
+Browser addons: https://addons.mozilla.org/en-US/firefox/addon/ethereum-gas-price-extension/
 
 ## **Metamask**
 
@@ -173,7 +197,7 @@ Signed transaction are mandatory for changing state on the Ethereum blockchain. 
 
 ## **Remix**
 
-On voit les réseau
+Plusieurs réseau
 
 ## **Ganache**
 
@@ -221,14 +245,12 @@ and then load your profile, in my case `~/.zprofile`:
 `cryptographic hash`: see `hash`  
 `cryptographic hash function`: see `hasing function`  
 `Difficulty`: This describes how difficult, in relation to the genesis block, the target will be to reach.  
+`DDoS`: Distributed Denial of Service  
 `ECDSA`: Elliptic Curve Digital Signature Algorithm  
+`EIP`: Ethereum Improvement Proposals
 `ETH`: Ethereum/Ether cryptocurrency  
 `EVM`: Ethereum Virtual Machine  
-`Gas`:  
-`Genesis block`: The first block of a blockchain  
-`hash`: A unique identifier of a data.  
-`hashing function`: take an input, file or data, and generate a `hash` of this input  
-`PoW`: Proof of Work  
-`PoS`: Proof of Stake  
-`SPOF`: Single Point Of Failure  
-`Target`: The number that the block hash must be less than in order to be valid
+`Gas`:
+`gasLimit`:
+`gasPrice`:
+`Genesis block`: The first block of a blockchain `hash`: A unique identifier of a data. `hashing function`: take an input, file or data, and generate a `hash`of this input `PoW`: Proof of Work `PoS`: Proof of Stake `SPOF`: Single Point Of Failure `Target`: The number that the block hash must be less than in order to be valid
