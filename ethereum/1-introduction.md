@@ -97,10 +97,10 @@ The elliptic curve used by Bitcoin, Ethereum, and many other cryptocurrencies is
 ![ecdsa](../res/ecdsa.gif)
 
 A private key is a big number, preferably, randomly generated.
-The private key has to be kept secret.
+The private key has to be kept secret.  
 A public key is a big number obtained by an `ecdsa` on the private key.
-The public key can be shared with anyone without compromising security.
-An address is obtained from a public key with a hash function.
+The public key can be shared with anyone without compromising security.  
+An address is obtained from a public key with a hash function.  
 A transaction contains the message of the transaction, and a signature of this message generated with the private key of the sender.
 Anyone can verify the generated signature to:
 
