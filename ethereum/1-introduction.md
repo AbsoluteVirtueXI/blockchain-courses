@@ -113,7 +113,7 @@ With the signature and the hash of the original data we can perform an `elliptic
 
 ### **Ethereum vs Bitcoin**
 
-Bitcoin white paper: https://bitcoin.org/bitcoin.pdf
+Bitcoin white paper: https://bitcoin.org/bitcoin.pdf  
 Ethereum yellow paper: https://ethereum.github.io/yellowpaper/paper.pdf
 
 Technically Ethereum and Bitcoin follow the same scheme in their implementation, but there are 3 main differences between these 2 blockchains:
@@ -266,7 +266,7 @@ and then load your profile, in my case `~/.zprofile`:
 `EIP`: Ethereum Improvement Proposals
 `ETH`: Ethereum/Ether cryptocurrency  
 `EVM`: Ethereum Virtual Machine  
-`Gas`:
-`gasLimit`:
-`gasPrice`:
+`Gas`:  
+`gasLimit`:  
+`gasPrice`:  
 `Genesis block`: The first block of a blockchain `hash`: A unique identifier of a data. `hashing function`: take an input, file or data, and generate a `hash`of this input `PoW`: Proof of Work `PoS`: Proof of Stake `SPOF`: Single Point Of Failure `Target`: The number that the block hash must be less than in order to be valid
