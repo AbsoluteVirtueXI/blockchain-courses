@@ -355,24 +355,15 @@ Simply run the `ganache-cli` from the command line.
 
 ## **Deploy a Smart contract from Remix**
 
-A simple smart contract:
+A simple hello world smart contract:
+
+_Hello.sol_:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.7.3;              // version du compilateur
-pragma experimental ABIEncoderV2;   // pour encoder et decoder des struct de données complexes
-contract SimpleStorage {
-    uint storedData;                // unsigned int private variable
-
-    // a public function
-    function set(uint x) public {
-        storedData = x;
-    }
-
-    // a public function, only read information and return an unint
-    function get() public view returns (uint) { // a publi
-        return storedData;
-    }
+pragma solidity 0.7.3;                      // version du compilateur
+contract HelloWorld {                        // Definition de notre contrat
+     string public hello = "Hello world!";  // unne variable public de type string
 }
 ```
 
@@ -381,6 +372,28 @@ contract SimpleStorage {
 ### **First smart contract on ganache**
 
 ### **First smart contract on a testnet**
+
+### **SimpleStorage.sol**
+
+Deploy and use this smart contract:
+_SimpleStorage.sol_:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.16 <0.8.0;
+
+contract SimpleStorage {
+    uint storedData;
+
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+```
 
 ## Glossary:
 
