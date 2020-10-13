@@ -355,6 +355,17 @@ Simply run the `ganache-cli` from the command line.
 
 ## **Deploy a Smart contract from Remix**
 
+A simple smart contract:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity 0.7.3;              // version du compilateur
+pragma experimental ABIEncoderV2;   // pour encoder et decoder des struct de données complexes
+contract Hello {                    // Declaration d'un contract Hello
+    string  public hello = "Hello"; // Declaration d'une string public
+}
+```
+
 ### **First smart contract on browser**
 
 ### **First smart contract on ganache**
