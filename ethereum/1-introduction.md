@@ -331,7 +331,7 @@ v12.19.0
 Install with `yarn`:
 
 ```zsh
-% yarn global ganache-cli
+% yarn global add ganache-cli
 ```
 
 To have access to Yarn’s executables globally, you will need to set up the PATH environment variable in your terminal. To do this, add the line below into your profile, in my case my profile is in `~/.zprofile`:
