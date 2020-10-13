@@ -361,8 +361,18 @@ A simple smart contract:
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.3;              // version du compilateur
 pragma experimental ABIEncoderV2;   // pour encoder et decoder des struct de données complexes
-contract Hello {                    // Declaration d'un contract Hello
-    string  public hello = "Hello"; // Declaration d'une string public
+contract SimpleStorage {
+    uint storedData;                // unsigned int private variable
+
+    // a public function
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    // a public function, only read information and return an unint
+    function get() public view returns (uint) { // a publi
+        return storedData;
+    }
 }
 ```
 
