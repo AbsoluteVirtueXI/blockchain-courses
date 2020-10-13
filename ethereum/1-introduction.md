@@ -182,47 +182,151 @@ ETH Gas station: https://ethgasstation.info/
 Etherscan Gas tracker: https://etherscan.io/gastracker  
 Browser addons: https://addons.mozilla.org/en-US/firefox/addon/ethereum-gas-price-extension/
 
-## **Metamask**
+## **MetaMask**
+
+A crypto wallet & gateway to blockchain apps
 
 ### **Installation**
+
+Download from MetaMask browser extension from: https://metamask.io/
 
 ### **Configuration**
 
+Setup a password and keep your seed phrase in a safe place.
+
 ### **Networks**
+
+5 known networks:
+
+- Mainnet => The real Ethereum network, no joke here!!!
+- Ropsten
+- Kovan
+- Rinkeby
+- Goerli
+
+We can also configure personal networks, it will be useful when we will run our local `ganache` node.
+
+Networks comparison: https://ethereum.stackexchange.com/questions/27048/comparison-of-the-different-testnets
 
 ### **Faucets**
 
+All test networks provide faucets platform for getting testnet Ethers.
+
+- Ropsten: https://faucet.ropsten.be/
+- Kovan: https://faucet.kovan.network/
+- Rinkeby: https://faucet.rinkeby.io/
+- Goerli: https://goerli-faucet.slock.it/
+
 ### **web3**
+
+While using MetaMask as a browser extension, the `web3` environment is injected into the browser. This way the browser can perform blockchain operation on Dapp through the MetaMask extension.  
+MetaMask injects a global API into websites visited by its users at `window.ethereum`. This API allows websites to request users' Ethereum accounts, read data from blockchains the user is connected to, and suggest that the user sign messages and transactions. The presence of the provider object indicates an Ethereum user. MetaMask dev recommend using **detect-provider** package to detect our provider, on any platform or browser.
+**detect-provider**: https://www.npmjs.com/package/@metamask/detect-provider
+You can check in your browser console that `window.ethereum` and `window.web3` objects exist.  
+Soon the `window.web3` will be removed following the MetaMask api documentation:
+https://docs.metamask.io/guide/ethereum-provider.html#window-web3-removal  
+So `window.ethereum` is the API to use for interacting with a browser.
 
 ## **Transaction**
 
-Depuis metamask + blockchain explorer
-2 types of transaction signed and unsigned.
+### **First transaction with MetaMask**:
 
-Unsigned transaction are free, used for reading states on the Ethereum blockchain
+1. Create a second account in your MetaMask wallet.
+2. Copy the Ethereum address of this new account in your clipboard.
+3. Select an account that has testnet Ethers.
+4. Click `Send`.
+5. Copy the address of your second account in `Add Recipient`.
+6. Select an amount to send, for example 1 `ETH`.
+7. Click next and confirm. And wait a confirmation from MetaMask confirming your transaction.
 
-- Check ETH amount own an ETH address
-- Read a state/value from a smart contracts
+### **Analysis of a transaction**:
 
-Signed transaction are mandatory for changing state on the Ethereum blockchain. Sender of the transaction have to prove that he
-
-- Sending ETH
-- Deploy a smart contracts
-- Change the state of a smart contracts.
+In MetaMask, under `Activity` we can find an history of sent, received and rejected transactions. But there is not so much information we can read from there.
+For getting a deeper overview of our transaction we can go on **Etherscan**.  
+From MetaMask there is a link for viewing a specific transaction on Etherscan directly.
+Etherscan website: https://etherscan.io/
+Etherscan is an Ethereum explorer for getting informations on blocks, transactions, addresses and even smart contracts code.
+You have to browse the Etherscan version of the network you want to get information from.
 
 ## **Remix**
 
-Plusieurs réseau
+Access to remix: https://remix.ethereum.org  
+Remix is a web IDE (like CodePen for Javascript).
+On remix we can write, deploy and depoy a contract. We can also interact with a deployed contract.  
+Remix is pretty good for learning `Solidity` and test quickly small smart contracts, but it is not an option for serious project.
+
+_remix live coding..._
 
 ## **Ganache**
 
-Ganache is a local development Ethereum node, for fast deployment and testing. In a professional Environment `remix`is not an option.
+Ganache is a local development Ethereum node, for fast deployment and testing.
 
 ### **Switch back to node 12**
 
-ganache-cli doesn't work on nodejs 14 yet. So we need to switch back to nodejs 12.
+ganache-cli doesn't work on node 14 yet. So we need to switch back to node 12.
 
-### **Installation**
+check your node version with:
+
+```zsh
+% node --version
+v12.19.0
+```
+
+If the output doesn't show you `v12.19.0` please follow the instructions below.
+
+#### **Linux and WSL**:
+
+On Linux and WSL just use `nvm` to install and switch to node `12.19.0 LTS`.
+
+#### **Macos**:
+
+Check available node versions:
+
+```zsh
+% brew search node
+==> Formulae
+libbitcoin-node         node ✔                  node-sass               node@12                 nodebrew                nodenv
+llnode                  node-build              node@10                 node_exporter           nodeenv
+```
+
+Unlink current version:
+
+```zsh
+% brew unlink node
+```
+
+Install node@12:
+
+```zsh
+% brew install node@12
+```
+
+Link it:
+
+```zsh
+% brew link node@12
+```
+
+Check the last message output from the previous command, i had to add the of node in my _~/.zshrc_
+
+```
+If you need to have this software first in your PATH instead consider running:
+  echo 'export PATH="/usr/local/opt/node@12/bin:$PATH"' >> ~/.zshrc
+```
+
+```zsh
+% echo 'export PATH="/usr/local/opt/node@12/bin:$PATH"' >> ~/.zshrc
+% source ~/.zshrc
+```
+
+Check your current version:
+
+```zsh
+% node --version
+v12.19.0
+```
+
+### **Install ganache**
 
 Install with `yarn`:
 
@@ -242,6 +346,12 @@ and then load your profile, in my case `~/.zprofile`:
 ````
 
 ### **Execution**
+
+Simply run the `ganache-cli` from the command line.
+
+```
+% ganache-cli
+```
 
 ## **Deploy a Smart contract from Remix**
 
