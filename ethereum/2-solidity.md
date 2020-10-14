@@ -30,15 +30,64 @@ _SolidityCourse.sol_:
 // SPDX-License-Identifier: MIT                 // SPDX Licence Identifier
 pragma solidity ^0.6.0;                         // Version pragma
 pragma experimental ABIEncoderV2;               // Experimental pragma
-contract SolidityCourse {
 
+import './Logger.sol' as logger;                // import de ./Logger.sol
+
+contract SolidityCourse is logger.Logger {      // Declaration du contract
+    address private owner;
+
+    constructor() public {
+        owner = msg.sender;
+    }
+
+    function whoIsOwner() public returns(address) {
+        log();
+        return owner;
+    }
+
+    function getLastVisitor() public returns(address) {
+        address lastVisitor = getLast();
+        log();
+        return lastVisitor;
+    }
+
+    function getNthVisitor(uint _pos) public returns(address) {
+        address nthVisitor = getVisitorByPosition(_pos);
+        log();
+        return nthVisitor;
+    }
+
+    function getAllVisitors() public view returns(address[] memory) {
+        require(owner == msg.sender, 'Only owner can use this function.');
+
+        return getAll();
+    }
 }
 ```
 
-_DummyLib.sol_:
+_Logger.sol_:
 
 ```solidity
+// SPDX-License-Identifier: MIT                 // SPDX Licence Identifier
+pragma solidity ^0.6.0;                         // Version pragma
+pragma experimental ABIEncoderV2;               // Experimental pragma
+contract Logger {                               // Declaration du contract
+    address[] private  logs;
+    function log() internal {
+        logs.push(msg.sender);
+    }
+    function getLast() internal view returns(address) {
+        return logs[logs.length - 1];
+    }
 
+    function getVisitorByPosition(uint _pos) internal view returns(address) {
+        return logs[_pos - 1];
+    }
+
+    function getAll() internal view returns(address[] memory) {
+        return logs;
+    }
+}
 ```
 
 ### **`SPDX Licence Identifier`**
@@ -94,10 +143,254 @@ et
 pragma experimental SMTChecker;
 ```
 
+### **import**
+
+Solidity utilise la même syntaxe d'`import` que l'on a utilisé en JavaScript ES6.
+Le chemin d'accès du fichier à importer est important. Tous les noms de fichiers importés sont considérés comme des chemins absolus. Si nous souhaitons importer un fichier qui est dans le répertoire courant nous devons ajouter `./` devant le nom du fichier.  
+Il existe des options que nous pouvons passer au compilateur afin de déterminer le répertoire de base des `import`.
+
+```solidity
+// Importe tout le contenu de ./DummyLib.sol dans le fichier
+// Peu recommandé car cela pollue l'espace de noms dans notre fichier actuel
+import "./Logger.sol";
+```
+
+L'`import` précédent peut créer une collision de noms, cad que des noms importés existe déjà dans le fichier courant.
+Pour éviter cela on peut créer des alias:
+
+```solidity
+// Importe symbol1 en tant que symbol2 depuis ./DummyLib.sol
+import {Logger as logger} from "./Logger.sol";
+```
+
+Une autre façon de faire:
+
+```solidity
+// Importe tout le contenu de ./DummyLib.sol et le rend accessible
+// dans le symbole dummyLib
+import * as logger from "./Logger.sol";
+```
+
+Une alternative à la syntaxe précédente est:
+
+```solidity
+// Importe tout le contenu de ./DummyLib.sol et le rend accessible
+// dans le symbole dummyLib
+import "./DummyLib.sol" as logger;
+```
+
+### **Les commentaires**
+
+Comme en JavaScript:
+
+```solidity
+// Commentaire sur une ligne.
+
+/*
+    Commentaire sur
+    plusieures lignes.
+*/
+```
+
+Il existe un autre type de commentaire qui en plus de servir à documenter le code,
+sert également à générer la documentation technique du code automatiquement.
+Ce sont les commentaires `natspec`:
+
+```solidity
+pragma solidity >=0.4.0 <0.6.0;
+
+/** @title Shape calculator. */
+contract ShapeCalculator {
+    /** @dev Calculates a rectangle's surface and perimeter.
+      * @param w Width of the rectangle.
+      * @param h Height of the rectangle.
+      * @return s The calculated surface.
+      * @return p The calculated perimeter.
+      */
+    function rectangle(uint w, uint h) public pure returns (uint s, uint p) {
+        s = w * h;
+        p = 2 * (w + h);
+    }
+}
+```
+
+## **Déclaration d'un contrat**
+
+Un contract est l'équivalent d'une classe d'un langage orienté objet.
+Un contract se déclare de la manière suivante:
+
+```solidity
+contract MyContract {
+    // Déclarations goes here...
+}
+```
+
+le mot clé `contract` suivit du nom du contract et entre les 2 accolades le contenu du contract.
+Un contract peut contenir les déclarations suivantes:
+
+- un `constructor`
+- variables d'état
+- `function`s
+- `modifier`s
+- `event`s
+- types `struct`
+- types `enum`
+
+### **constructor**
+
+Le `constructor` est la première fonction apppelée lors du déploiment d'un contract.  
+Il est optionnel mais il est très utile lorsqu'il faut initialiser les variables d'état, et particluièrement lorsque cette initialisation dépend de `global variables`.
+Un contrat sans `constructor` possédera le `constructor` par défaut: `constructor() {}`
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+pragma experimental ABIEncoderV2;
+
+contract MyContract {
+    address private owner;
+    uint public  max;
+
+    constructor(uint _max) public  {
+        owner = msg.sender;
+        max = _max;
+    }
+}
+```
+
+Les variables d'états peuvent aussi être initialisées hors du `constructor`, si elle ne sont pas initialisées elles prenderont une valeur par défaut qui correspondera à `0` selon leur type.
+
+### **State variables**
+
+Par défaut ces variables sont initialisées
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.0 <0.8.0;
+
+contract SimpleStorage {
+    uint storedData; // State variable
+    // ...
+}
+```
+
+Ces variables sont stockées de manière permanente dans le smart contract.  
+Sa `data location` est le `storage`.
+
+### **function**
+
+Tout code exécutable se trouve dans une fonction.
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >0.7.0 <0.8.0;
+
+contract SimpleAuction {
+    function bid() public payable { // Function
+        // ...
+    }
+}
+
+// Helper function defined outside of a contract
+function helper(uint x) pure returns (uint) {
+    return x * 2;
+}
+```
+
+Les fonctions peuvent également être définie à l'extérieur d'un smart contract.
+
+### **modifier**
+
+Les `modifier`s ajoutent un contrôle sur l'exécution d'une fonction. Ils vérifient la condition d'exécution ou non de la fonction à laquelle est appliqué le `modifier`s.
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.22 <0.8.0;
+
+contract Purchase {
+    address public seller;
+
+    modifier onlySeller() { // Modifier
+        require(
+            msg.sender == seller,
+            "Only seller can call this."
+        );
+        _;
+    }
+
+    function abort() public view onlySeller { // Modifier usage
+        // ...
+    }
+}
+```
+
+### **event**
+
+Les events servent à écrire dans le journal de l'`EVM`.
+C'est un moyen efficace de vérifier si un évenement s'est produit depuis notre Dapp.
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.21 <0.8.0;
+
+contract SimpleAuction {
+    event HighestBidIncreased(address bidder, uint amount); // Event
+
+    function bid() public payable {
+        // ...
+        emit HighestBidIncreased(msg.sender, msg.value); // Triggering event
+    }
+}
+```
+
+### **struct**
+
+Les `struct` sont l'équivalent des objets en Javascript.
+Nous pouvons définir une `struct` qui contient plusieurs variables.
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.0 <0.8.0;
+
+contract Ballot {
+    struct Voter { // Struct
+        uint weight;
+        bool voted;
+        address delegate;
+        uint vote;
+    }
+}
+```
+
+### **enum**
+
+Les `enum`est un type de données qui consiste en un ensemble de valeurs constantes. Ces différentes valeurs représentent différents cas.  
+Lorsqu'une variable est de type énuméré, elle peut avoir comme valeur n'importe quel cas de ce type énuméré.
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.0 <0.8.0;
+
+contract Purchase {
+    enum State { Created, Locked, Inactive } // Enum
+}
+```
+
 ## **Types de données**
 
 ## **Structures de contrôle**
 
+Solidity supporte les structures de contrôle suivantes:
+`if`, `else if`, `else`, `while`, `do`, `for`, `break`, `continue`, `return`.
+La syntaxe est là même que pour JavaScript à la différence de certaines execptions:
+
+- Les points virgules sont obligatoires.
+- Il n'y a pas de conversions entre un non-booléen vers un booléen, le code suivant est invalide en Solidity `if (1) { ... }`.
+
 ## **Precedence of operators**
 
 ## **Variables globales**
+
+```
+
+```
