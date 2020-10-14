@@ -395,15 +395,17 @@ La syntaxe est là même que pour JavaScript à la différence de certaines exec
 
 A literal number can take a suffix of wei, gwei or ether to specify a subdenomination of Ether, where Ether numbers without a postfix are assumed to be Wei.
 
+```solidity
 assert(1 wei == 1);
 assert(1 gwei == 1e9);
 assert(1 ether == 1e18);
+```
 
 The only effect of the subdenomination suffix is a multiplication by a power of ten.
 
 ### **time units**
 
-Suffixes like seconds, minutes, hours, days and weeks after literal numbers can be used to specify units of time where seconds are the base unit and units are considered naively in the following way:
+Suffixes like `seconds`, `minutes`, `hours`, `days` and `weeks` after literal numbers can be used to specify units of time where seconds are the base unit and units are considered naively in the following way:
 
         1 == 1 seconds
         1 minutes == 60 seconds
