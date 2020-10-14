@@ -458,11 +458,11 @@ function f(uint start, uint daysAfter) public {
 - `<address payable>.send(uint256 amount) returns (bool`): send given amount of Wei to Address, returns false on failure
 - `<address payable>.transfer(uint256 amount)`: send given amount of Wei to Address, throws on failure
 - `type(C).name (string)`: the name of the contract
-- `type(C).creationCode (bytes memory)`: creation bytecode of the given contract, see Type Information.
-- `type(C).runtimeCode (bytes memory)`: runtime bytecode of the given contract, see Type Information.
-- `type(I).interfaceId (bytes4)`: value containing the EIP-165 interface identifier of the given interface, see Type Information.
-- `type(T).min (T)`: the minimum value representable by the integer type T, see Type Information.
-- `type(T).max (T)`: the maximum value representable by the integer type T, see Type Information.
+- `type(C).creationCode (bytes memory)`: creation bytecode of the given contract.
+- `type(C).runtimeCode (bytes memory)`: runtime bytecode of the given contract.
+- `type(I).interfaceId (bytes4)`: value containing the EIP-165 interface identifier of the given interface.
+- `type(T).min (T)`: the minimum value representable by the integer type T.
+- `type(T).max (T)`: the maximum value representable by the integer type T.
 
 ## **cheatsheet**
 
