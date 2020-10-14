@@ -389,6 +389,40 @@ La syntaxe est là même que pour JavaScript à la différence de certaines exec
 
 ## **Precedence of operators**
 
+## **Ether and time units**
+
+### **Ether units**
+
+A literal number can take a suffix of wei, gwei or ether to specify a subdenomination of Ether, where Ether numbers without a postfix are assumed to be Wei.
+
+assert(1 wei == 1);
+assert(1 gwei == 1e9);
+assert(1 ether == 1e18);
+
+The only effect of the subdenomination suffix is a multiplication by a power of ten.
+
+### **time units**
+
+Suffixes like seconds, minutes, hours, days and weeks after literal numbers can be used to specify units of time where seconds are the base unit and units are considered naively in the following way:
+
+        1 == 1 seconds
+        1 minutes == 60 seconds
+        1 hours == 60 minutes
+        1 days == 24 hours
+        1 weeks == 7 days
+
+Take care if you perform calendar calculations using these units, because not every year equals 365 days and not even every day has 24 hours because of leap seconds. Due to the fact that leap seconds cannot be predicted, an exact calendar library has to be updated by an external oracle.
+
+These suffixes cannot be applied to variables. For example, if you want to interpret a function parameter in days, you can in the following way:
+
+```solidity
+function f(uint start, uint daysAfter) public {
+    if (block.timestamp >= start + daysAfter * 1 days) {
+      // ...
+    }
+}
+```
+
 ## **Variables globales**
 
 - `abi.decode(bytes memory encodedData, (...)) returns (...)`: ABI-decodes the provided data. The types are given in parentheses as second argument. Example: `(uint a, uint[2] memory b, bytes memory c) = abi.decode(data, (uint, uint[2], bytes))
@@ -414,8 +448,9 @@ La syntaxe est là même que pour JavaScript à la différence de certaines exec
 - `ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) returns (address)`: recover address associated with the public key from elliptic curve signature, return zero on error
 - `addmod(uint x, uint y, uint k) returns (uint)`: compute (x + y) % k where the addition is performed with arbitrary precision and does not wrap around at 2\*\*256. Assert that k != 0 starting from version 0.5.0.
 - `mulmod(uint x, uint y, uint k) returns (uint)`: compute (x \* y) % k where the multiplication is performed with arbitrary precision and does not wrap around at 2\*\*256. Assert that k != 0 starting from version 0.5.0.
-  this (current contract’s type): the current contract, explicitly convertible to address or address payable
-- `super: the contract one level higher in the inheritance hierarchy `selfdestruct(address payable recipient): destroy the current contract, sending its funds to the given address
+- `this (current contract’s type)`: the current contract, explicitly convertible to address or address payable
+- `super`: the contract one level higher in the inheritance hierarchy
+- `selfdestruct(address payable recipient)`: destroy the current contract, sending its funds to the given address
 - `<address>.balance (uint256)`: balance of the Address in Wei
 - `<address payable>.send(uint256 amount) returns (bool`): send given amount of Wei to Address, returns false on failure
 - `<address payable>.transfer(uint256 amount)`: send given amount of Wei to Address, throws on failure
@@ -425,3 +460,7 @@ La syntaxe est là même que pour JavaScript à la différence de certaines exec
 - `type(I).interfaceId (bytes4)`: value containing the EIP-165 interface identifier of the given interface, see Type Information.
 - `type(T).min (T)`: the minimum value representable by the integer type T, see Type Information.
 - `type(T).max (T)`: the maximum value representable by the integer type T, see Type Information.
+
+## **cheatsheet**
+
+https://solidity.readthedocs.io/en/latest/cheatsheet.html
