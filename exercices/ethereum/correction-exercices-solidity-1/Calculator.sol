@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT                 r
-pragma solidity ^0.6.0;
+pragma solidity >=0.6.0;
 pragma experimental ABIEncoderV2;
 
 /// @title A blockchain calculator API
