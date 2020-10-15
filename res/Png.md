@@ -8,7 +8,7 @@ Créez un nouveau repo sur github et créer le repo en local sur votre machine:
 
 ## 1
 
-Décrivez comment vous êtes arrivé juste que là
+Décrivez comment vous êtes arrivé jusque là
 
 ## 2 _FirstToken.sol_
 
