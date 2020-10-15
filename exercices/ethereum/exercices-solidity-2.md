@@ -2,7 +2,7 @@ Le lien vers les exercices d'aujourd'hui est dans un smart contract qui a été 
 Le code du smart contract est:
 
 ```solidity
-// SPDX-License-Identifier: MIT                 r
+// SPDX-License-Identifier: MIT
 pragma solidity >= 0.6.0;
 
 contract WhereAreTheExercices {
