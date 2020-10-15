@@ -1,4 +1,4 @@
-Le lien vers les exercices d'aujourd'hui est dans un smart contract qui a été déployé à l'addresse: `0x2C308a229a537802fe9411F684930F2A205B6295` sur le réseau `rinkeby`.  
+Le lien vers les exercices d'aujourd'hui est dans un smart contract qui a été déployé à l'adresse: `0x2C308a229a537802fe9411F684930F2A205B6295` sur le réseau `rinkeby`.  
 Le code du smart contract est:
 
 ```solidity
