@@ -45,3 +45,4 @@ Si c'est le cas ils obtiendront 10 fois le nombre de token pour le prix standard
 
 Commencez les exercices sur https://cryptozombies.io/en/course/.  
 Essayez d'aller le plus loin possible.
+Les exercices/cours sont aussi disponible en Français!! (peut être pas tous)
