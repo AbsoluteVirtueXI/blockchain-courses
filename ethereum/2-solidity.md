@@ -446,7 +446,7 @@ Members:
 #### **Function Types**
 
 ```solidity
-function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
+function (<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
 ```
 
 ### **Reference Types**
@@ -498,8 +498,8 @@ function nbAddress() public view returns(uint) {
 ```solidity
 struct Instructor {
     uint age;
-    uint first_name;
-    uint last_name;
+    string first_name;
+    string last_name;
 }
 ```
 
