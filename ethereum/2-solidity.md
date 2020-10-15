@@ -378,6 +378,170 @@ contract Purchase {
 
 ## **Types de données**
 
+### **Value Types**
+
+`Value types` car les types suivants sont passés par valeurs, cad qu'ils sont copiés quand ils sont utilisés comme arguments de fonctions ou lors d'asignements vers une autre valeurs.
+
+#### **Booleans**
+
+`bool`: The possible values are constants true and false.
+
+Operators:
+
+- `!`: (logical negation)
+- `&&`: (logical conjunction, “and”)
+- `||`: (logical disjunction, “or”)
+- `==`: (equality)
+- `!=`: (inequality)
+
+#### **Integers**
+
+`int` / `uint`: Signed and unsigned integers of various sizes. Keywords uint8 to uint256 in steps of 8 (unsigned of 8 up to 256 bits) and int8 to int256. uint and int are aliases for uint256 and int256, respectively.
+
+Operators:
+
+- Comparisons: <=, <, ==, !=, >=, > (evaluate to bool)
+- Bit operators: &, |, ^ (bitwise exclusive or), ~ (bitwise negation)
+- Shift operators: << (left shift), >> (right shift)
+- Arithmetic operators: +, -, unary -, \*, /, % (modulo), \*\* (exponentiation)
+
+For an integer type X, you can use type(X).min and type(X).max to access the minimum and maximum value representable by the type.
+
+#### **Address**
+
+The address type comes in two flavours, which are largely identical:
+
+- `address`: Holds a 20 byte value (size of an Ethereum address).
+- `address payable`: Same as address, but with the additional members transfer and send.
+
+```solidity
+address payable x = address(0x123);
+address myAddress = address(this);
+if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
+```
+
+The idea behind this distinction is that address payable is an address you can send Ether to, while a plain address cannot be sent Ether.
+
+Type conversions:  
+Implicit conversions from address payable to address are allowed, whereas conversions from address to address payable must be explicit via `payable(<address>)`.  
+Only expressions of type `address` can be converted to type `address payable` via `payable(<address>)`.
+
+#### **Fixed-size byte arrays**
+
+The value types `bytes1`, `bytes2`, `bytes3`, …, `bytes32` hold a sequence of bytes from one to up to 32. `byte` is an alias for `bytes1`.
+
+Operators:
+
+- Comparisons: <=, <, ==, !=, >=, > (evaluate to bool)
+- Bit operators: &, |, ^ (bitwise exclusive or), ~ (bitwise negation)
+- Shift operators: << (left shift), >> (right shift)
+- Index access: If x is of type bytesI, then x[k] for 0 <= k < I returns the k th byte (read-only).
+
+The shifting operator works with unsigned integer type as right operand (but returns the type of the left operand), which denotes the number of bits to shift by. Shifting by a signed type will produce a compilation error.
+
+Members:
+
+- `length` yields the fixed length of the byte array (read-only).
+
+#### **Function Types**
+
+```solidity
+function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
+```
+
+### **Reference Types**
+
+Values of reference type can be modified through multiple different names.
+For all reference types we have to specify the `data location`.
+
+#### **Data location**
+
+- `memory`: Une zone de mémoire sur chaque EVM est utilisé par Solidity pour stocker des valeurs temporaires. Les valeurs stockées ici sont effacées entre les appels de fonction.
+- `storage`: Zone de stockage permanente, elle contient les variables d'état définies dans un smart contract. Ces variables d'état se trouvent dans la section des données du smart contract sur la Blockchain.
+- `calldata`: a voir
+
+#### **Arrays**:
+
+Arrays can have a compile-time fixed size, or they can have a dynamic size.
+
+The type of an array of fixed size k and element type T is written as T[k], and an array of dynamic size as T[].
+
+```solidity
+address[] private user_address;
+
+function addAddress(address _addr) public {
+    user_address.push(_addr);
+}
+
+function delLastAddress() public {
+    user_address.pop();
+}
+
+function nbAddress() public view returns(uint) {
+    return user_address.length;
+}
+```
+
+- `length`:
+  Arrays have a length member that contains their number of elements. The length of memory arrays is fixed (but dynamic, i.e. it can depend on runtime parameters) once they are created.
+  - `push()`:
+    Dynamic storage arrays and bytes (not string) have a member function called push() that you can use to append a zero-initialised element at the end of the array. It returns a reference to the element, so that it can be used like x.push().t = 2 or x.push() = b.
+  - `push(x)`:
+    Dynamic storage arrays and bytes (not string) have a member function called push(x) that you can use to append a given element at the end of the array. The function returns nothing.
+  - `pop()`:
+    Dynamic storage arrays and bytes (not string) have a member function called pop that you can use to remove an element from the end of the array. This also implicitly calls delete on the removed element.
+
+`bytes` and `string` types are special array.
+
+#### **`struct`**
+
+```solidity
+struct Instructor {
+    uint age;
+    uint first_name;
+    uint last_name;
+}
+```
+
+3 facons de déclarer une variable de type `struct`:
+
+```solidity
+// 1st way
+Instructor instructor1;
+instructor1.age = 33;
+instructor1.first_name = "alice";
+instructor1.last_name = "ecila";
+
+// 2nd way
+Instructor instructor2 = Instructor(
+    {
+        age: 34,
+        first_name: "dan",
+        last_name: "nad"
+    }
+);
+
+// 3th way
+Instructor instructor3 = Instructor(35, "zebulon", "nolubez");
+```
+
+#### **`mapping`**
+
+Mapping types use the syntax `mapping(\_KeyType => \_ValueType)` and variables of mapping type are declared using the syntax `mapping(\_KeyType => \_ValueType) \_VariableName`. The \_KeyType can be any built-in value type, `bytes`, `string`, or any `contract` or `enum` type. Other user-defined or complex types, such as mappings, structs or array types are not allowed. \_ValueType can be any type, including mappings, arrays and structs.
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.0 <0.8.0;
+
+contract MappingExample {
+    mapping(address => uint) public balances;
+
+    function update(uint newBalance) public {
+        balances[msg.sender] = newBalance;
+    }
+}
+```
+
 ## **Structures de contrôle**
 
 Solidity supporte les structures de contrôle suivantes:
@@ -388,6 +552,8 @@ La syntaxe est là même que pour JavaScript à la différence de certaines exec
 - Il n'y a pas de conversions entre un non-booléen vers un booléen, le code suivant est invalide en Solidity `if (1) { ... }`.
 
 ## **Precedence of operators**
+
+https://solidity.readthedocs.io/en/v0.7.3/cheatsheet.html#order-of-precedence-of-operators
 
 ## **Ether and time units**
 
