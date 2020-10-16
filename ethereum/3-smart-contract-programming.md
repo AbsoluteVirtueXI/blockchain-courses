@@ -8,6 +8,7 @@ _FirstToken.sol_
 // SPDX-License-Identifier: MIT                 r
 pragma solidity >=0.6.0;
 
+// Contrat FistToken à améliorer dans les exercices
 contract FirstToken {
     mapping(address => uint256) public balances;
     address payable wallet;
@@ -150,3 +151,6 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 ```
+
+Dans ce même repository nous pouvons trouver une implémentation de cette interface par Openzepplin:
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol
