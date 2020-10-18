@@ -1,6 +1,6 @@
 # **Smart contracts programming**
 
-## First Token contract
+## **First Token contract**
 
 _FirstToken.sol_
 
@@ -8,7 +8,7 @@ _FirstToken.sol_
 // SPDX-License-Identifier: MIT                 r
 pragma solidity >=0.6.0;
 
-// Contrat FistToken à améliorer dans les exercices
+// Contrat FristToken à améliorer dans les exercices
 contract FirstToken {
     mapping(address => uint256) public balances;
     address payable wallet;
@@ -40,7 +40,7 @@ contract FirstToken {
 }
 ```
 
-## EIP: Ethereum Improvement Proposals
+## **EIP: Ethereum Improvement Proposals**
 
 EIPs website: https://eips.ethereum.org/
 
@@ -57,7 +57,7 @@ Le modèle de token `ERC-721` a été introduit dans l'`EIP-721`: https://eips.e
 Lors de la rédaction d'un `EIP` le créateur propose sa vision à la communauté, d'abord en tant que brouillon, créant ainsi un débat qui entraîne souvent une modification ou une amélioration de sa vision originale.
 Actuellement ce débat et les discussions relatives à la proposition d'un `EIP` s'effectue dans les `issues` de github: https://github.com/ethereum/EIPs/issues
 
-## ERC-20
+## **ERC-20**
 
 `EIP-20`: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md  
 L'`ERC-20` est le standard de token le plus utilisé sur Ethereum.
@@ -156,4 +156,4 @@ Dans ce même repository nous pouvons trouver une implémentation de cette inter
 **ERC-20 token by Openzepplin**:  
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol
 
-## Deep analysis of the ERC-20 interface
+## **Deep analysis of the ERC-20 interface and implementation**
