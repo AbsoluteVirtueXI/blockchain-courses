@@ -157,3 +157,136 @@ Dans ce même repository nous pouvons trouver une implémentation de cette inter
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol
 
 ## **Deep analysis of the ERC-20 interface and implementation**
+
+`EIP-20` décrit toutes les fonctions que notre smart contract doit implémenter pour être considérer comme un `ERC-20`. `EIP-20` définit une `interface` à laquelle doit adhérer notre smart contracts.  
+la définition d'une `interface` décrit uniquement les `function` et `event` à implémenter, la manière dont ils sont implémentés n'est pas décrite.  
+Dans une interface on ne retrouve que les signatures des `function` et des `event`:
+
+- le nom de la `function`/`event`.
+- les paramètres. C'est surtout le nombre et le type de ces paramètres qui est important, le nom de chacun des paramètres peut être différent lors de l'implémentation.
+- la visibilité (`public`, `private`, `external`, `internal`).
+- `view` or `pure` modifiers.
+- le modifier `payable` si cette fonction doit recevoir de l'`ether`.
+- le type de la valeur retournée par la fonction.
+
+Il peut aussi exister d'autres directives à respecter qui seront indiquer dans l'`EIP` qui décrit l'interface à implémenter.  
+Par exemple dans `EIP-20` on nous indique que les fonctions: `name`, `symbol` et `decimals` sont optionnelles, que la fonction `transfer` devra `throw`/`revert` si un sender essaye de transférer plus de fonds que ce qu'il possède et que les `function` `transfer` et `transferFrom` devront émettre l'`event` `Transfer`.
+
+```solidity
+// Name of the token
+string private _name;
+
+// Returns the name of the token
+function name() public view returns(string memory) {
+    return _name;
+}
+```
+
+```solidity
+// Symbol of the token
+string private _symbol;
+
+// Returns the symbol of the token
+function symbol() public view returns (string memory) {
+    return _symbol;
+}
+```
+
+```solidity
+// Number of decimals the token uses
+// for example 8, means to divide the token amount by 100000000 to get its user representation.
+uint8 private _decimals;
+
+// Return the nb of decimals the token uses
+function decimals() public view returns (uint8) {
+    return _decimals;
+}
+```
+
+```solidity
+// Total of the token supply
+uint256 private _totalSupply;
+
+// Returns the amount of tokens in existence
+function totalSupply() public view returns (uint256) {
+    return _totalSupply;
+}
+```
+
+```solidity
+// Mapping from account addresses to current balance.
+mapping (address => uint256) private _balances;
+
+// Returns the amount of tokens owned by `_account`.
+function balanceOf(address _account) public view returns (uint256 balance) {
+    return _balances[_account];
+}
+```
+
+```solidity
+// Emitted when `_value` tokens are moved from one account (`_from`) to another (`_to`)
+event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+// Moves `_amount` tokens from the caller's account to `_recipient`.
+// Returns a boolean value indicating whether the operation succeeded.
+function transfer(address _recipient, uint256 _amount) public returns (bool success) {
+    require(_balances[msg.sender] >= _amount, 'ERC20: transfer amount exceeds balance');
+    _balances[msg.sender] -= _amount;
+    _balances[_recipient] += _amount;
+    emit Transfer(msg.sender, _recipient, _amount);
+    return true;
+}
+```
+
+```solidity
+// Emitted when the allowance of a `_spender` for an `_owner` is set by
+// a call to `approve`. `_value` is the new allowance.
+event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+
+// Mapping from account addresses to a mapping of spender addresses to an amount of allowance.
+mapping (address => mapping (address => uint256)) private _allowances;
+
+// Sets `_amount` as the allowance of `_spender` over the caller's tokens.
+// Returns a boolean value indicating whether the operation succeeded.
+function approve(address _spender, uint256 _amount) public returns (bool) {
+    _allowances[msg.sender][_spender] = _amount;
+    emit Approval(msg.sender, _spender, _amount);
+    return true;
+}
+```
+
+```solidity
+// Returns the remaining number of tokens that `_spender` will be allowed
+// to spend on behalf of `_owner` through `transferFrom`. This is zero by default.
+// This value changes when `approve` or `transferFrom` are called.
+function allowance(address _owner, address _spender) public view returns (uint256) {
+    return _allowances[_owner][_spender];
+}
+```
+
+```solidity
+// Moves `_amount` tokens from `_sender` to `_recipient` using the
+// allowance mechanism. `_amount` is then deducted from the caller's allowance.
+// Returns a boolean value indicating whether the operation succeeded.
+// Emits a `Transfer` event.
+function transferFrom(address _sender, address _recipient, uint256 _amount) public returns (bool) {
+    require(
+        _balances[_sender] >= _amount,
+        "ERC20: transfer amount exceeds balance"
+    );
+    require(
+        _allowances[_sender][msg.sender] >= _amount,
+        "ERC20: transfer amount exceeds allowance"
+    );
+    _balances[_sender] -= _amount;
+    _balances[_recipient] += _amount;
+    _allowances[_sender][msg.sender] -= _amount;
+    emit Transfer(_sender, _recipient, _amount);
+}
+```
+
+## **Interactions between smart contracts**
+
+```
+
+```
