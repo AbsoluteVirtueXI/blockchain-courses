@@ -155,3 +155,5 @@ interface IERC20 {
 Dans ce même repository nous pouvons trouver une implémentation de cette interface par Openzepplin:  
 **ERC-20 token by Openzepplin**:  
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol
+
+## Deep analysis of the ERC-20 interface
