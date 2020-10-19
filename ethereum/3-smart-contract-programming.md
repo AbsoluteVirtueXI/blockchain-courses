@@ -282,11 +282,217 @@ function transferFrom(address _sender, address _recipient, uint256 _amount) publ
     _balances[_recipient] += _amount;
     _allowances[_sender][msg.sender] -= _amount;
     emit Transfer(_sender, _recipient, _amount);
+    return true;
 }
 ```
 
-## **Interactions between smart contracts**
+A basic implementation of ERC-20 interface:
 
+_FirstErc20.sol_:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract FirstErc20 {
+    // Mapping from account addresses to current balance.
+    mapping (address => uint256) private _balances;
+
+    // Mapping from account addresses to a mapping of spender addresses to an amount of allowance.
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    // Name of the token
+    string private _name;
+
+    // Symbol of the token
+    string private _symbol;
+
+    // Number of decimals the token uses
+    // for example 8, means to divide the token amount by 100000000 to get its user representation.
+    uint8 private _decimals;
+
+    // Total of the token supply
+    uint256 private _totalSupply;
+
+    constructor(string memory name, string memory symbol, uint8 decimals) public {
+        _name = name;
+        _symbol = symbol;
+        _decimals = decimals;
+    }
+
+    // Returns the name of the token
+    function name() public view returns(string memory) {
+        return _name;
+    }
+
+    // Returns the symbol of the token
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+
+    // Return the nb of decimals the token uses
+    function decimals() public view returns (uint8) {
+        return _decimals;
+    }
+
+    // Returns the amount of tokens in existence
+    function totalSupply() public view returns (uint256) {
+        return _totalSupply;
+    }
+
+    // Returns the amount of tokens owned by `_account`.
+    function balanceOf(address _account) public view returns (uint256 balance) {
+        return _balances[_account];
+    }
+
+    // Moves `_amount` tokens from the caller's account to `_recipient`.
+    // Returns a boolean value indicating whether the operation succeeded.
+    function transfer(address _recipient, uint256 _amount) public returns (bool success) {
+        require(_balances[msg.sender] >= _amount, 'ERC20: transfer amount exceeds balance');
+        _balances[msg.sender] -= _amount;
+        _balances[_recipient] += _amount;
+        emit Transfer(msg.sender, _recipient, _amount);
+        return true;
+    }
+
+    // Sets `_amount` as the allowance of `_spender` over the caller's tokens.
+    // Returns a boolean value indicating whether the operation succeeded.
+    function approve(address _spender, uint256 _amount) public returns (bool) {
+        _allowances[msg.sender][_spender] = _amount;
+        emit Approval(msg.sender, _spender, _amount);
+        return true;
+    }
+
+    // Returns the remaining number of tokens that `_spender` will be allowed
+    // to spend on behalf of `_owner` through `transferFrom`. This is zero by default.
+    // This value changes when `approve` or `transferFrom` are called.
+    function allowance(address _owner, address _spender) public view returns (uint256) {
+        return _allowances[_owner][_spender];
+    }
+
+    // Moves `_amount` tokens from `_sender` to `_recipient` using the
+    // allowance mechanism. `_amount` is then deducted from the caller's allowance.
+    // Returns a boolean value indicating whether the operation succeeded.
+    // Emits a `Transfer` event.
+    function transferFrom(address _sender, address _recipient, uint256 _amount) public returns (bool) {
+        require(
+            _balances[_sender] >= _amount,
+            "ERC20: transfer amount exceeds balance"
+        );
+        require(
+            _allowances[_sender][msg.sender] >= _amount,
+            "ERC20: transfer amount exceeds allowance"
+        );
+        _balances[_sender] -= _amount;
+        _balances[_recipient] += _amount;
+        _allowances[_sender][msg.sender] -= _amount;
+        emit Transfer(_sender, _recipient, _amount);
+        return true;
+    }
+
+    // Emitted when `_value` tokens are moved from one account (`_from`) to another (`_to`)
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    // Emitted when the allowance of a `_spender` for an `_owner` is set by
+    // a call to `approve`. `_value` is the new allowance.
+    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+}
 ```
 
+## **Customize our first ERC-20 token**
+
+On peut ajouter un maximum de tokens que le smart contracts pourra créer, ainsi qu'une fonction pour créer de nouveaux tokens.
+
+```solidity
+// Maximum amount of the token supply
+uint256 private _cap;
+
+// Address of the owner, used for administrative and sensitive function.
+address payable _ownerAddress;
+
+constructor(string memory name,
+            string memory symbol,
+            uint8 decimals,
+            uint256 amount2Owner,
+            uint256 cap) public
+{
+    require(cap >= amount2Owner, 'ERC20: amount exceeds cap');
+    _name = name;
+    _symbol = symbol;
+    _decimals = decimals;
+    _cap = cap;
+    _totalSupply = amount2Owner;
+    _balances[msg.sender] = _totalSupply;
+    _ownerAddress = msg.sender;
+}
+```
+
+```solidity
+// A modifier for checking if the `msg.sender` is the owner.
+modifier onlyOwner() {
+    require(msg.sender == _ownerAddress, "ERC20: Only owner can perform this action");
+    _;
+}
+
+// Creates `_amount` tokens and assigns them to `_account`, increasing
+// the total supply.
+// Emits a `Transfer` event with `_from` set to the zero address.
+function mint(address _account, uint256 _amount) public onlyOwner returns(bool) {
+    require(_totalSupply + _amount <= _cap, "ERC20: cap exceeded");
+    _totalSupply += _amount;
+    _balances[_account] += _amount;
+    emit Transfer(address(0), _account, _amount);
+    return true;
+}
+```
+
+## **Inherit from Openzepplin contracts**
+
+Implémenter des standards manuellement n'est pas recommander.
+Il est préférable d'hériter de code déjà existant, du code testé et utilisé par l'ensemble de la communauté.
+
+## **Interactions between smart contracts**
+
+Un smart contract peut appeler les fonctions d'un autre smart contract.
+Une fois notre ERC-20 déployé, d'autres smart contracts peuvent interagir avec.  
+Des smart contracts d'exchanges qui souhaiteraient effectuer des `transferFrom` et bouger des fonds, un smart contracts d'ICO qui effectueraient une vente de nos tokens, ou encore un smart contract d'une application.  
+Afin d'interagir avec notre smart contract il faut fournir:
+
+- l'interface de notre smart contracts (ou le code complet). Dans le cas d'un ERC-20 l'interface est connue de tous.
+- l'adresse ou a été déployé notre smart contract.
+
+Un smart contract d'ICO pour notre token:
+
+_FirstIco.sol_:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+import "./FirstErc20.sol"; // import the code from our token contract
+contract FirstIco {
+    // Declare a FirstErc20 contract deployed at 0xac5F7C280cC297C8529d48609188ED7f96974d52
+    FirstErc20 token = FirstErc20(0xac5F7C280cC297C8529d48609188ED7f96974d52);
+
+    // The price of 1 unit of our token in wei;
+    uint256 public _price;
+
+    // Address of token seller
+    address payable private _seller;
+
+    constructor(uint256 price, address payable seller ) public {
+        _price = price;
+        _seller = seller;
+    }
+
+    function buy(uint256 nbTokens) public payable returns(bool){
+        require(msg.value >= 0, "ICO: Price is not 0 ether");
+        require(nbTokens * _price <= msg.value, "ICO: Not enough Ether for purchase");
+        uint256 _realPrice = nbTokens * _price;
+        uint256 _remaining = msg.value - _realPrice;
+        token.transferFrom(_seller, msg.sender, nbTokens * _price);
+        _seller.transfer(_realPrice);
+        msg.sender.transfer(_remaining);
+        return true;
+    }
+}
 ```
