@@ -551,6 +551,35 @@ La syntaxe est là même que pour JavaScript à la différence de certaines exec
 - Les points virgules sont obligatoires.
 - Il n'y a pas de conversions entre un non-booléen vers un booléen, le code suivant est invalide en Solidity `if (1) { ... }`.
 
+## **Visibilité**
+
+Les variables et les fonctions ont une visibilité. Par défaut, si aucune visibilité est indiquée, la visibilité est `private`;
+Les fonctions peuvent être déclarées avec l'une des visibilités: `public`, `private`, `internal` ou `external`.  
+Les variables ne peuvent être déclarées qu'avec l'une des visibilités: `public`, `private` ou `internal`.
+
+- `public`: Toutes les fonctions et variables qui sont déclarées `public` composent l'interface de notre smart contract.  
+  Ces fonctions peuvent ête appellées depuis l'extérieur par une transaction ou par des appels internes depuis le smart contract ou un smart contract qui hériterait de celui ou est déclaré cette fonction.  
+  C'est la visibilité la moins restrictive.
+- `private`: Toutes les fonctions et variables qui sont déclarées `private` sont visibles uniquement depuis le contrat où elles sont définies et pas depuis l'extérieur et ni depuis des contrats dérivés/enfants.  
+  C'est la visibilité la plus restrictive.
+- `external`: Les fonctions qui sont déclarées `external` composent aussi l'interface de notre smart contract. Uniquement les fonctions peuvent être déclarées `external`.
+  Ces fonctions ne peuvent ête appellées que par d'autres smart contracts ou par des transactions.
+- `internal`: Les fonctions et variables qui sont déclarées `internal` ne sont visibles que depuis le smart contract courant ou les smart contracts dérivés/enfants.
+
+## **Fonctionnalités de programmation objet en Solidity**
+
+### **`interface`**
+
+`interface` keyword.
+
+### **Heritage**
+
+`is` keyworld.
+
+### **`library`**
+
+`library` keyword.
+
 ## **Precedence of operators**
 
 https://solidity.readthedocs.io/en/v0.7.3/cheatsheet.html#order-of-precedence-of-operators
