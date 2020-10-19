@@ -521,13 +521,13 @@ contract FirstErc20 {
     }
 
     // Returns the amount of tokens owned by `_account`.
-    function balanceOf(address _account) public view returns (uint256 balance) {
+    function balanceOf(address _account) public view returns (uint256) {
         return _balances[_account];
     }
 
     // Moves `_amount` tokens from the caller's account to `_recipient`.
     // Returns a boolean value indicating whether the operation succeeded.
-    function transfer(address _recipient, uint256 _amount) public returns (bool success) {
+    function transfer(address _recipient, uint256 _amount) public returns (bool) {
         require(_balances[msg.sender] >= _amount, 'ERC20: transfer amount exceeds balance');
         _balances[msg.sender] -= _amount;
         _balances[_recipient] += _amount;
