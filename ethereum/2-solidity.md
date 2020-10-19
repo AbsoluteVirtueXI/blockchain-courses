@@ -568,6 +568,10 @@ Les variables ne peuvent être déclarées qu'avec l'une des visibilités: `publ
 
 ## **Fonctionnalités de programmation objet en Solidity**
 
+### **`abstract`contracts**
+
+`abstract` keyword.
+
 ### **`interface`**
 
 `interface` keyword.
