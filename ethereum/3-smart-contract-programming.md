@@ -218,7 +218,7 @@ function totalSupply() public view returns (uint256) {
 mapping (address => uint256) private _balances;
 
 // Returns the amount of tokens owned by `_account`.
-function balanceOf(address _account) public view returns (uint256 balance) {
+function balanceOf(address _account) public view returns (uint256) {
     return _balances[_account];
 }
 ```
@@ -229,7 +229,7 @@ event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
 // Moves `_amount` tokens from the caller's account to `_recipient`.
 // Returns a boolean value indicating whether the operation succeeded.
-function transfer(address _recipient, uint256 _amount) public returns (bool success) {
+function transfer(address _recipient, uint256 _amount) public returns (bool) {
     require(_balances[msg.sender] >= _amount, 'ERC20: transfer amount exceeds balance');
     _balances[msg.sender] -= _amount;
     _balances[_recipient] += _amount;
@@ -448,7 +448,7 @@ function mint(address _account, uint256 _amount) public onlyOwner returns(bool) 
 
 ## **Inherit from Openzepplin contracts**
 
-Implémenter des standards manuellement n'est pas recommander.
+Implémenter des standards manuellement n'est pas recommandé.
 Il est préférable d'hériter de code déjà existant, du code testé et utilisé par l'ensemble de la communauté.
 
 ## **Interactions between smart contracts**
