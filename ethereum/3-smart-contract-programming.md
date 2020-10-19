@@ -467,7 +467,6 @@ contract FirstErc20 {
     // Number of decimals the token uses
     // for example 8, means to divide the token amount by 100000000 to get its user representation.
     uint8 private _decimals;
-    uint256 private _userReprensation = 10 ** _decimals;
 
     // Total of the token supply
     uint256 private _totalSupply;
@@ -490,7 +489,7 @@ contract FirstErc20 {
         _decimals = decimals;
         _cap = cap;
         _totalSupply = amount2Owner;
-        _balances[msg.sender] = _totalSupply;
+        _balances[msg.sender] = amount2Owner;
         _ownerAddress = msg.sender;
     }
 
@@ -520,8 +519,13 @@ contract FirstErc20 {
         return _totalSupply;
     }
 
+    // Returns the max amount of tokens in existence
+    function cap() public view returns(uint256) {
+        return _cap;
+    }
+
     // Returns the amount of tokens owned by `_account`.
-    function balanceOf(address _account) public view returns (uint256) {
+    function balanceOf(address _account) public view returns (uint256 ) {
         return _balances[_account];
     }
 
@@ -588,8 +592,6 @@ contract FirstErc20 {
     // a call to `approve`. `_value` is the new allowance.
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 }
-
-
 ```
 
 ## **Inherit from Openzepplin contracts**
