@@ -459,7 +459,7 @@ Des smart contracts d'exchanges qui souhaiteraient effectuer des `transferFrom` 
 Afin d'interagir avec notre smart contract il faut fournir:
 
 - l'interface de notre smart contracts (ou le code complet). Dans le cas d'un ERC-20 l'interface est connue de tous.
-- l'adresse ou a été déployé notre smart contract.
+- l'adresse ou a été déployée notre smart contract.
 
 Un smart contract d'ICO pour notre token:
 
