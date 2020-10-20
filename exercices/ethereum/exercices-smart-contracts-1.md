@@ -35,3 +35,27 @@ le nombre de token en fonction du nombre d'ethers envoyés.
 Les ethers seront toujours transférés à l'adresse de l'owner qui a déployé le contrat.
 Les tokens seront toujours transférés depuis `_seller` vers l'acheteur.
 Il faudra donc que l'adresse du `_seller` `approve` l'adresse du smart contract `FirstIco`.
+
+## 5 _TransactionCount.sol_
+
+Créer un smart contract `TransactionCounter`
+qui possédera cette interface:
+
+```solidity
+// Increments the counter by 1, and return the new counter value
+function tick() public returns(uint256);
+
+// Returns the current value of the counter:
+function getCount() public view returns(uint256);
+```
+
+## 5 _TransactionCounter.sol_
+
+Ajouter un système de contrôle afin que uniquement certaines adresses puissent exécuter la fonction `tick`. Il faudra utiliser un mapping contenant les adresses autorisés ainsi qu'un modifier.
+Il faudra ajouter une fonction `addTicker(address _ticker)`et `delTicker(address _ticker)` afin d'ajouter des adresses autorisées à appeler la fonction `tick`. Ces 2 fonctions `addTicker` et `delTicker` ne pourront ête exécutées par que un admin, qui sera l'owner du smart contract, qui aura été définit lors de déploiement du smart contract `TransactionCounter`
+
+## 5 **FirstErc20.sol**
+
+Ajouter un appel à la fonction `tick()` du smart contract déployé `TransactionCounter`, a chaque fois que les fonctions `mint`, `burn`, `transfer` et `transferFrom` sont appelées.
+Créer également une fonction `getCount()`qui retournera le nombre de transactions effectuées.  
+Il faudra donc ajouter notre smart contract `FirstErc20` dans les adresses autorisés a effectuer un appel à la fonction `tick` de `TransactionCounter`.
