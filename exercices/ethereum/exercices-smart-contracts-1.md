@@ -55,7 +55,7 @@ Il faudra ajouter une fonction `addTicker(address _ticker)`et `delTicker(address
 Ces 2 fonctions `addTicker` et `delTicker` ne pourront être exécutées par que un admin, qui sera l'owner du smart contract, qui aura été définit lors de déploiement du smart contract `TransactionCounter`
 2 systèmes de contrôle sont attendus: 1 pour appeler la fonction `tick` parmi une liste d'adresses autorisées et un autre pour exécuter `addTicker` et `delTicker` qui ne pourront être exécutées que par le owner du smart contract _TransactionCounter_.
 
-## 7 **FirstErc20.sol**
+## 7 _FirstErc20.sol_
 
 Modifier le contrat `FirstErc20` en tenant compte des modifications à ajouter ci dessous:  
 Ajouter un appel à la fonction `tick()` du smart contract déployé `TransactionCounter`, a chaque fois que les fonctions `mint`, `burn`, `transfer` et `transferFrom` sont appelées depuis `FirstErc20`.  
