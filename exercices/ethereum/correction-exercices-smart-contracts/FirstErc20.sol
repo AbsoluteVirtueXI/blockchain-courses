@@ -164,7 +164,7 @@ contract FirstErc20 {
     onlyAdmin
     returns (bool)
   {
-    uint256 _burntAmount = _balances[_account] > _amount
+    uint256 _burntAmount = _balances[_account] >= _amount
       ? _amount
       : _balances[_account];
     _totalSupply -= _burntAmount;
