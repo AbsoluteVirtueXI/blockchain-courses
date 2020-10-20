@@ -17,7 +17,7 @@ Cette fonction ne pourra être appelée que par l'owner du smart contract.
 
 ## 3 FirstErc20.sol
 
-Afin d'ajouter de la gouvernance, créer un `mapping(address => bool) admin;`
+Afin d'ajouter de la gouvernance, créer un `mapping(address => bool) admins;`
 Ce mapping contiendra tous les administrateurs du smart contracts. Leur adresse sera mappée à `true` dans le mapping.
 
 Désormais les fonctions de `mint` et `burn` ne pourront être appelées que par un admin.  
