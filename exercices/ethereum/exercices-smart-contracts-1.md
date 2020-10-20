@@ -38,8 +38,7 @@ Il faudra donc que l'adresse du `_seller` `approve` l'adresse du smart contract 
 
 ## 5 _TransactionCounter.sol_
 
-Créer un smart contract `TransactionCounter`
-qui possédera cette interface:
+Créer un smart contract `TransactionCounter` qui possédera cette interface:
 
 ```solidity
 // Increments the counter by 1, and return the new counter value
@@ -49,13 +48,16 @@ function tick() public returns(uint256);
 function getCount() public view returns(uint256);
 ```
 
-## 5 _TransactionCounter.sol_
+## 6 _TransactionCounter.sol_
 
-Ajouter un système de contrôle afin que uniquement certaines adresses puissent exécuter la fonction `tick`. Il faudra utiliser un mapping contenant les adresses autorisés ainsi qu'un modifier.
-Il faudra ajouter une fonction `addTicker(address _ticker)`et `delTicker(address _ticker)` afin d'ajouter des adresses autorisées à appeler la fonction `tick`. Ces 2 fonctions `addTicker` et `delTicker` ne pourront ête exécutées par que un admin, qui sera l'owner du smart contract, qui aura été définit lors de déploiement du smart contract `TransactionCounter`
+Ajouter un système de contrôle afin que uniquement certaines adresses puissent exécuter la fonction `tick`. Il faudra utiliser un mapping contenant les adresses autorisées ainsi qu'un `modifier`.
+Il faudra ajouter une fonction `addTicker(address _ticker)`et `delTicker(address _ticker)` afin d'ajouter/retirer des adresses autorisées à appeler la fonction `tick`.  
+Ces 2 fonctions `addTicker` et `delTicker` ne pourront être exécutées par que un admin, qui sera l'owner du smart contract, qui aura été définit lors de déploiement du smart contract `TransactionCounter`
+2 systèmes de contrôle sont attendus: 1 pour appeler la fonction `tick` parmi une liste d'adresses autorisées et un autre pour exécuter `addTicker` et `delTicker` qui ne pourront être exécutées que par le owner du smart contract _TransactionCounter_.
 
-## 5 **FirstErc20.sol**
+## 7 **FirstErc20.sol**
 
-Ajouter un appel à la fonction `tick()` du smart contract déployé `TransactionCounter`, a chaque fois que les fonctions `mint`, `burn`, `transfer` et `transferFrom` sont appelées.
-Créer également une fonction `getCount()`qui retournera le nombre de transactions effectuées.  
+Modifier le contrat `FirstErc20` en tenant compte des modifications à ajouter ci dessous:  
+Ajouter un appel à la fonction `tick()` du smart contract déployé `TransactionCounter`, a chaque fois que les fonctions `mint`, `burn`, `transfer` et `transferFrom` sont appelées depuis `FirstErc20`.  
+Créer également une fonction `transactionCount()`qui retournera le nombre de transactions effectuées au total, cette fonction appellera la fonction `getCount` du smart contract `Counter`. Cette valeur contiendra donc le nombre de fois que `mint`, `burn`, `transfer` et `transferFrom` ont été appelées.  
 Il faudra donc ajouter notre smart contract `FirstErc20` dans les adresses autorisées à effectuer un appel à la fonction `tick` de `TransactionCounter`.
