@@ -4,6 +4,8 @@ Vous devez mettre tous les exercices dans 1 unique repository qui est accessible
 Créez un nouveau repo sur github et créer le repo en local sur votre machine:  
 **LE PROJET CONTENANT VOS EXERCICES NE DOIT PAS ÊTRE CREE AVEC DJINIT**
 
+Les exercices suivant sont une amélioration des exemples du cours.
+
 ## 1 FirstErc20.sol
 
 Ajouter une fonction `cap()`qui retournera le maximum de tokens qui pourront être créés.
