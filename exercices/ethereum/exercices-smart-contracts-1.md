@@ -36,7 +36,7 @@ Les ethers seront toujours transférés à l'adresse de l'owner qui a déployé 
 Les tokens seront toujours transférés depuis `_seller` vers l'acheteur.
 Il faudra donc que l'adresse du `_seller` `approve` l'adresse du smart contract `FirstIco`.
 
-## 5 _TransactionCount.sol_
+## 5 _TransactionCounter.sol_
 
 Créer un smart contract `TransactionCounter`
 qui possédera cette interface:
@@ -58,4 +58,4 @@ Il faudra ajouter une fonction `addTicker(address _ticker)`et `delTicker(address
 
 Ajouter un appel à la fonction `tick()` du smart contract déployé `TransactionCounter`, a chaque fois que les fonctions `mint`, `burn`, `transfer` et `transferFrom` sont appelées.
 Créer également une fonction `getCount()`qui retournera le nombre de transactions effectuées.  
-Il faudra donc ajouter notre smart contract `FirstErc20` dans les adresses autorisés a effectuer un appel à la fonction `tick` de `TransactionCounter`.
+Il faudra donc ajouter notre smart contract `FirstErc20` dans les adresses autorisées à effectuer un appel à la fonction `tick` de `TransactionCounter`.
