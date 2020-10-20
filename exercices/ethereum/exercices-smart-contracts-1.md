@@ -32,7 +32,7 @@ Il faudra remplacer le modifier `onlyOwner` par `onlyAdmin`.
 
 Ajouter la fonction `receive` qui transférera au sender
 le nombre de token en fonction du nombre d'ethers envoyés.
-Les ethers seront toujours transférés à l'adresse de l'owner qui a déployé le contrat.
+Les ethers seront toujours transférés à l'adresse de du vendeur qui a été indiquée lors du déploiement.
 Les tokens seront toujours transférés depuis `_seller` vers l'acheteur.
 Il faudra donc que l'adresse du `_seller` `approve` l'adresse du smart contract `FirstIco`.
 
