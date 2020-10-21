@@ -271,7 +271,7 @@ pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
 
 contract MyContract {
-    address private owner = 0x57D401B8502bC5CBBaAfD2564236dE4571165051 ;
+    address private owner = 0x57D401B8502bC5CBBaAfD2564236dE4571165051;
     uint public  max = 999999;
 }
 ```
@@ -294,7 +294,7 @@ contract SimpleStorage {
 
 Ces variables sont stockées de manière permanente dans le smart contract et elles sont accessibles depuis tout le smart contract et ses fonctions.
 Si des données doivent rester persistantes entre les différents appels à notre smart contract, c'est dans ces variables qu'il faut les enregistrer.
-Un cas concret c'est le tracking du nombre de tokens que possède une addresse ethereum.
+Un cas concret c'est le tracking du nombre de tokens que possède une addresse ethereum le contrat d'un token ERC-20.
 
 ```solidity
 mapping (address => uint256) private _balances;
@@ -337,7 +337,7 @@ function add(uint256 nb1, uint256) public pure returns(uint256) {
 }
 ```
 
-Les paramètres sont declarés comme des variables et sont stockés dans la zone `memory`, ce sont des variables temporaires.
+Les paramètres sont declarées comme des variables et sont stockés dans la zone `memory`, ce sont des variables temporaires.
 
 ```solidity
 function f(uint _a, uint _b) {}
