@@ -228,18 +228,18 @@ contract MyContract {
 le mot clé `contract` suivit du nom du contract et entre les 2 accolades le contenu du contract.
 Un contract peut contenir les déclarations suivantes:
 
-- un `constructor`
-- variables d'état
-- `function`s
-- `modifier`s
-- `event`s
-- types `struct`
-- types `enum`
+- un [`constructor`](#constructor)
+- des déclartions de [structures](#structures)
+- des déclarations d'[énumérations](#énumérations)
+- des [variables d'états](#state-variables)
+- des [fonctions](#fonctions)
+- des [modifiers](#modifier)
+- des [events](#event)
 
 ### **constructor**
 
 Le `constructor` est la première fonction apppelée lors du déploiment d'un contract.  
-Il est optionnel mais il est très utile lorsqu'il faut initialiser les variables d'état, et particluièrement lorsque cette initialisation dépend de `global variables`.
+Il est optionnel mais il est très utile lorsqu'il faut initialiser les variables d'états, et particluièrement lorsque cette initialisation dépend de [variables globales](#variables-globales) ou de paramètres.
 Un contrat sans `constructor` possédera le `constructor` par défaut: `constructor() {}`
 
 ```solidity
@@ -262,7 +262,7 @@ Les variables d'états peuvent aussi être initialisées hors du `constructor`, 
 
 ### **State variables**
 
-Par défaut ces variables sont initialisées
+Par défaut ces variables sont initialisées à une valeur correspondera à ` selon leur type.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -275,9 +275,11 @@ contract SimpleStorage {
 ```
 
 Ces variables sont stockées de manière permanente dans le smart contract.  
-Sa `data location` est le `storage`.
+Leur `data location` est le `storage`.
 
-### **function**
+Pour avoir plus de précision sur le type de ces variables: [Types des variables](#types-des-variables)
+
+### **functions**
 
 Tout code exécutable se trouve dans une fonction.
 
@@ -297,7 +299,8 @@ function helper(uint x) pure returns (uint) {
 }
 ```
 
-Les fonctions peuvent également être définie à l'extérieur d'un smart contract.
+Les fonctions peuvent également être définie à l'extérieur d'un smart contract.  
+Pour avoir plus de précisions sur les fonctions: (function-types)
 
 ### **modifier**
 
@@ -324,7 +327,7 @@ contract Purchase {
 }
 ```
 
-### **event**
+### **Events**
 
 Les events servent à écrire dans le journal de l'`EVM`.
 C'est un moyen efficace de vérifier si un évenement s'est produit depuis notre Dapp.
@@ -343,7 +346,7 @@ contract SimpleAuction {
 }
 ```
 
-### **struct**
+### **Structures**
 
 Les `struct` sont l'équivalent des objets en Javascript.
 Nous pouvons définir une `struct` qui contient plusieurs variables.
@@ -362,7 +365,7 @@ contract Ballot {
 }
 ```
 
-### **enum**
+### **énumérations**
 
 Les `enum`est un type de données qui consiste en un ensemble de valeurs constantes. Ces différentes valeurs représentent différents cas.  
 Lorsqu'une variable est de type énuméré, elle peut avoir comme valeur n'importe quel cas de ce type énuméré.
@@ -376,7 +379,7 @@ contract Purchase {
 }
 ```
 
-## **Types de données**
+## **Types des variables**
 
 ### **Value Types**
 
@@ -527,7 +530,7 @@ Instructor instructor3 = Instructor(35, "zebulon", "nolubez");
 
 #### **`mapping`**
 
-Mapping types use the syntax `mapping(\_KeyType => \_ValueType)` and variables of mapping type are declared using the syntax `mapping(\_KeyType => \_ValueType) \_VariableName`. The \_KeyType can be any built-in value type, `bytes`, `string`, or any `contract` or `enum` type. Other user-defined or complex types, such as mappings, structs or array types are not allowed. \_ValueType can be any type, including mappings, arrays and structs.
+Mapping types use the syntax `mapping( KeyType => ValueType)` and variables of mapping type are declared using the syntax `mapping( KeyType => ValueType) VariableName`. The KeyType can be any built-in value type, `bytes`, `string`, or any `contract` or `enum` type. Other user-defined or complex types, such as mappings, structs or array types are not allowed. ValueType can be any type, including mappings, arrays and structs.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
