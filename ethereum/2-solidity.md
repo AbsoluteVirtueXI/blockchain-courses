@@ -233,14 +233,16 @@ Un contract peut contenir les déclarations suivantes:
 - des déclarations d'[énumérations](#énumérations)
 - des [variables d'états](#state-variables)
 - des [fonctions](#fonctions)
-- des [modifiers](#modifier)
-- des [events](#event)
+- des [modifiers](#modifiers)
+- des [events](#events)
 
 ### **constructor**
 
 Le `constructor` est la première fonction apppelée lors du déploiment d'un contract.  
-Il est optionnel mais il est très utile lorsqu'il faut initialiser les variables d'états, et particluièrement lorsque cette initialisation dépend de [variables globales](#variables-globales) ou de paramètres.
-Un contrat sans `constructor` possédera le `constructor` par défaut: `constructor() {}`
+Il est optionnel mais il est très utile lorsqu'il faut initialiser les variables d'états, et particluièrement lorsque cette initialisation dépend de paramètres qui ne sont pas encore connus à l'écriture du contrat, mais le seront au moment du déploiement du contrat.
+Un contrat sans `constructor` possédera le `constructor` par défaut: `constructor() {}`.
+
+Contrat avec un constructor:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -258,7 +260,22 @@ contract MyContract {
 }
 ```
 
-Les variables d'états peuvent aussi être initialisées hors du `constructor`, si elle ne sont pas initialisées elles prenderont une valeur par défaut qui correspondera à `0` selon leur type.
+Les variables d'états peuvent aussi être initialisées hors du `constructor`, mais les valeurs de ces variables devront ête connues au moment de l'écriture du contrat.
+
+Contrat sans `constructor`:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+pragma experimental ABIEncoderV2;
+
+contract MyContract {
+    address private owner = 0x57D401B8502bC5CBBaAfD2564236dE4571165051 ;
+    uint public  max = 999999;
+}
+```
+
+Si les variables d'états ne sont pas initialisées elles prenderont une valeur par défaut qui correspondera à `0` selon leur type.
 
 ### **State variables**
 
@@ -279,7 +296,7 @@ Leur `data location` est le `storage`.
 
 Pour avoir plus de précision sur le type de ces variables: [Types des variables](#types-des-variables)
 
-### **functions**
+### **fonctions**
 
 Tout code exécutable se trouve dans une fonction.
 
