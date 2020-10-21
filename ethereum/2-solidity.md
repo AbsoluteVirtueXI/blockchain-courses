@@ -586,12 +586,6 @@ Members:
 
 - `length` yields the fixed length of the byte array (read-only).
 
-#### **`function`**
-
-```solidity
-function (<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
-```
-
 ### **Reference Types**
 
 Values of reference type can be modified through multiple different names.
