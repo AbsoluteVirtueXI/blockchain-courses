@@ -337,7 +337,7 @@ function add(uint256 nb1, uint256) public pure returns(uint256) {
 }
 ```
 
-Les paramètres sont declarées comme des variables et sont stockés dans la zone `memory`, ce sont des variables temporaires.
+Les paramètres sont declarés comme des variables et sont stockés dans la zone `memory`, ce sont des variables temporaires.
 
 ```solidity
 function f(uint _a, uint _b) {}
