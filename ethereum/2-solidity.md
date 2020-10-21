@@ -129,6 +129,7 @@ Il existe actuellement 2 features expérimentales sur Solidity:
 
 ```solidity
 // Offre la possibilité d'encoder et decoder des structures de données complexes.
+// Nous pouvons ainsi retourner des structures ou des tableaux depuis nos fonctions.
 // Cette fonctionnalité est très utile, et vous devrez probablement l'activer.
 // Depuis 0.6.0 cette feature n'est plus considérée comme experimentale en réalité.
 pragma experimental ABIEncoderV2;
@@ -323,8 +324,11 @@ function helper(uint x) pure returns (uint) {
 }
 ```
 
-Les fonctions peuvent également être définies à l'extérieur d'un smart contract.  
-Pour avoir plus de précisions sur les fonctions: [`function`](#function)
+Les fonctions peuvent également être définies à l'extérieur d'un smart contract.
+
+La déclaration d'une fonction suit les règles de grammaire suivantes:
+`function (<parameter types>) {internal|external|public|private} [pure|constant|view|payable] [returns (<return types>)]`
+Pour avoir plus de précisions sur la visibilité fonctions: [`function`](#function)
 
 ### **Modifiers**
 
@@ -664,6 +668,10 @@ function f(uint start, uint daysAfter) public {
 ```
 
 ## **Variables globales**
+
+Solidity nous offre la possibilité d'utiliser des variables et fonctions globales.
+Certaines très utiles nous donnent accès au contexte de la transaction comme `msg.sender` pour récupérer l'adresse qui à initier la transaction, `msg.value` pour récupérer le nombre de `wei` envoyé avec le message, ou des informations relatives au block courrant comme `block.number` ou `block.timestamp`.
+Voici une liste de toutes les variables globales accessibles depuis un smart contract:
 
 - `abi.decode(bytes memory encodedData, (...)) returns (...)`: ABI-decodes the provided data. The types are given in parentheses as second argument.  
   Example: `(uint a, uint[2] memory b, bytes memory c) = abi.decode(data, (uint, uint[2], bytes))
