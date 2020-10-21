@@ -332,7 +332,7 @@ La déclaration d'une fonction suit les règles de grammaire suivantes:
 exemple d'une déclaration de fonction:
 
 ```solidity
-function add(uint256 nb1, uint256) public pure returns(uint256) {
+function add(uint256 nb1, uint256 nb2) public pure returns(uint256) {
     return nb1 + nb2;
 }
 ```

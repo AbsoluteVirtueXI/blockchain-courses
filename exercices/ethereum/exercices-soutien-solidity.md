@@ -26,7 +26,7 @@ Une fonction `set(uint256 value)` modifiera la valeur de `storedData` par `value
 ## 3 _CheckOdd.sol_
 
 Ecrivez un contrat `CheckOdd`.
-Ce contrat devra posséder une fonction `check` qui prendra en paramètre un `uint` et qui retournera
+Ce contrat devra posséder une fonction `check` qui prendra en paramètre un `uint` et qui retournera `true` si le nombre passé en paramètre à `check`est impair sinon elle retournera false.
 
 ## 4 _mapToMap.sol_
 
