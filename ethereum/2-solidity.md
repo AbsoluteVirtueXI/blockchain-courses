@@ -275,11 +275,11 @@ contract MyContract {
 }
 ```
 
-Si les variables d'états ne sont pas initialisées elles prenderont une valeur par défaut qui correspondera à `0` selon leur type.
+Si les variables d'états ne sont pas initialisées elles prenderont une valeur par défaut qui correspondera à `0` selon leur [type](#types-des-variables).
 
 ### **State variables**
 
-Par défaut ces variables sont initialisées à une valeur correspondera à ` selon leur type.
+Par défaut ces variables sont initialisées à une valeur qui correspondera à `0` selon leur type.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -317,11 +317,11 @@ function helper(uint x) pure returns (uint) {
 ```
 
 Les fonctions peuvent également être définie à l'extérieur d'un smart contract.  
-Pour avoir plus de précisions sur les fonctions: (function-types)
+Pour avoir plus de précisions sur les fonctions: [`function`](#function)
 
 ### **Modifiers**
 
-Les `modifier`s ajoutent un contrôle sur l'exécution d'une fonction. Ils vérifient la condition d'exécution ou non de la fonction à laquelle est appliqué le `modifier`s.
+Les `modifier` ajoutent un contrôle sur l'exécution d'une fonction. Ils vérifient la condition d'exécution ou non de la fonction à laquelle est appliqué le `modifier`.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -347,18 +347,22 @@ contract Purchase {
 ### **Events**
 
 Les events servent à écrire dans le journal de l'`EVM`.
-C'est un moyen efficace de vérifier si un évenement s'est produit depuis notre Dapp.
+C'est un moyen efficace de vérifier si un évenement s'est produit depuis notre Dapp qui écouterait pour des évenements spécifiques.  
+Jusqu'a 3 paramètres de l'`event` peuvent recevoir l'attribut `indexed`. Un filtre de recherche pourra ainsi être appliqué sur ces paramètres `indexed`.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.21 <0.8.0;
 
-contract SimpleAuction {
-    event HighestBidIncreased(address bidder, uint amount); // Event
+contract ClientReceipt {
+    event Deposit(
+        address indexed _from,
+        bytes32 indexed _id,
+        uint _value
+    );
 
-    function bid() public payable {
-        // ...
-        emit HighestBidIncreased(msg.sender, msg.value); // Triggering event
+    function deposit(bytes32 _id) payable {
+        emit Deposit(msg.sender, _id, msg.value);
     }
 }
 ```
@@ -382,6 +386,8 @@ contract Ballot {
 }
 ```
 
+Pour plus d'information sur les structures: [`struct`](#struct).
+
 ### **Enumérations**
 
 Les `enum`est un type de données qui consiste en un ensemble de valeurs constantes. Ces différentes valeurs représentent différents cas.  
@@ -396,17 +402,18 @@ contract Purchase {
 }
 ```
 
+Pour plus d'informations sur les énumérations: [`enum`](#enum)
+
 ## **Types des variables**
 
 ### **Value Types**
 
 `Value types` car les types suivants sont passés par valeurs, cad qu'ils sont copiés quand ils sont utilisés comme arguments de fonctions ou lors d'asignements vers une autre valeurs.
 
-#### **Booleans**
+#### **`bool`**
 
-`bool`: The possible values are constants true and false.
-
-Operators:
+`bool`: `true` ou `false`.  
+Les opérateurs qui peuvent s'appliquer à une variable de type `bool`:
 
 - `!`: (logical negation)
 - `&&`: (logical conjunction, “and”)
@@ -416,16 +423,18 @@ Operators:
 
 #### **Integers**
 
-`int` / `uint`: Signed and unsigned integers of various sizes. Keywords uint8 to uint256 in steps of 8 (unsigned of 8 up to 256 bits) and int8 to int256. uint and int are aliases for uint256 and int256, respectively.
+Unsigned : `uint8 | uint16 | uint32 | uint64 | uint128 | uint256`
+Signed : `int8 | int16 | int32 | int64 | int128 | int256``
 
-Operators:
+`uint` est alias pour `uint256`.
+`int` est un alias pour `int256`.
+
+Les opérateurs qui peuvent s'appliquer à des entiers:
 
 - Comparisons: <=, <, ==, !=, >=, > (evaluate to bool)
 - Bit operators: &, |, ^ (bitwise exclusive or), ~ (bitwise negation)
 - Shift operators: << (left shift), >> (right shift)
 - Arithmetic operators: +, -, unary -, \*, /, % (modulo), \*\* (exponentiation)
-
-For an integer type X, you can use type(X).min and type(X).max to access the minimum and maximum value representable by the type.
 
 #### **Address**
 
@@ -463,7 +472,7 @@ Members:
 
 - `length` yields the fixed length of the byte array (read-only).
 
-#### **Function Types**
+#### **`function`**
 
 ```solidity
 function (<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
@@ -515,6 +524,8 @@ function nbAddress() public view returns(uint) {
 
 #### **`struct`**
 
+`struct` ne déclare pas une variable, mais un nouveau type.
+
 ```solidity
 struct Instructor {
     uint age;
@@ -523,7 +534,8 @@ struct Instructor {
 }
 ```
 
-3 facons de déclarer une variable de type `struct`:
+Ce nouveau type pourra ensuite être utilisé lorsqu'on déclare nos variables.  
+Ci dessous 3 facons de déclarer une variable de type `struct Instructor`:
 
 ```solidity
 // 1st way
