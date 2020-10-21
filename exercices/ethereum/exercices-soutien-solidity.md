@@ -7,26 +7,39 @@ Créez un nouveau repo sur github et créer le repo en local sur votre machine:
 **Pour tous les exercices suivants vous devrez spécifier les bonnes visibilités et modifier les plus pertinents en fonction du contexte.**  
 **Lorsqu'il faudra fournir l'adresse d'un contrat déployé ce sera indiqué dans l'énoncé de l'exercice.**
 
-## 1 _TheOne.sol_
+## 0 _TheOne.sol_
 
 Ecrivez un contrat `TheOne`.
 Ce contrat devra posséder une fonction `one` qui retournera le nombre 1 lorsqu'elle sera appelée.
 
-## 2 _HelloWorld.sol_
+## 1 _HelloWorld.sol_
 
 Ecrivez un contrat `HelloWorld`.  
 Ce contrat devra posséder une fonction `hello` qui retournera la string "Hello world!" lorsqu'elle sera appelée.
 
-## 3 _SimpleStorage.sol_
+## 2 _SimpleStorage.sol_
 
 Ecrivez un contrat `SimpleStorage` qui modifiera/affichera le contenu d'une variable `uint256 private storedData`.  
 Une fonction `get()` retournera la valeur de `storedData`;
-Une fonction `set(uint256 value)` modifiera la valeur de `storedData`
+Une fonction `set(uint256 value)` modifiera la valeur de `storedData` par `value` passé en paramètre. '
 
-## 4 _CheckOdd.sol_
+## 3 _CheckOdd.sol_
 
 Ecrivez un contrat `CheckOdd`.
 Ce contrat devra posséder une fonction `check` qui prendra en paramètre un `uint` et qui retournera
+
+## 4 _mapToMap.sol_
+
+Ecrivez un contrat `mapToMap`.
+Ce contrat possédera une variable d'état `earth` `public` qui sera un mapping de `string` (des continents) vers un mapping de `string` (des pays de ce continent) vers une `string` (la capitale de ce pays);
+Renseigner directement dans le constructeur certaines valeurs comme:
+
+```solidity
+earth["europe"]["france"] = "paris";
+earth["amerique du sud"]["argentine"] = "buenos aires"
+```
+
+Ainsi pour récupérer la capitale de la France nous pourrions directement y avoir accès via remix en passant "europe" et "france" en paramètres.
 
 ## 5 _Contact.sol_
 
