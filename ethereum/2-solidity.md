@@ -291,7 +291,14 @@ contract SimpleStorage {
 }
 ```
 
-Ces variables sont stockées de manière permanente dans le smart contract.  
+Ces variables sont stockées de manière permanente dans le smart contract et elles sont accessibles depuis tout le smart contract et ses fonctions.
+Si des données doivent rester persistantes entre les différents appels à notre smart contract, c'est dans ces variables qu'il faut les enregistrer.
+Un cas concret c'est le tracking du nombre de tokens que possède une addresse ethereum.
+
+```solidity
+mapping (address => uint256) private _balances;
+```
+
 Leur `data location` est le `storage`.
 
 Pour avoir plus de précision sur le type de ces variables: [Types des variables](#types-des-variables)
@@ -316,7 +323,7 @@ function helper(uint x) pure returns (uint) {
 }
 ```
 
-Les fonctions peuvent également être définie à l'extérieur d'un smart contract.  
+Les fonctions peuvent également être définies à l'extérieur d'un smart contract.  
 Pour avoir plus de précisions sur les fonctions: [`function`](#function)
 
 ### **Modifiers**
@@ -585,7 +592,7 @@ La syntaxe est là même que pour JavaScript à la différence de certaines exec
 
 ## **Visibilité**
 
-Les variables et les fonctions ont une visibilité. Par défaut, si aucune visibilité est indiquée, la visibilité est `private`;
+Les variables et les fonctions ont une visibilité. Par défaut, si aucune visibilité est indiquée, la visibilité est `private`.  
 Les fonctions peuvent être déclarées avec l'une des visibilités: `public`, `private`, `internal` ou `external`.  
 Les variables ne peuvent être déclarées qu'avec l'une des visibilités: `public`, `private` ou `internal`.
 
@@ -664,18 +671,21 @@ function f(uint start, uint daysAfter) public {
 - `abi.encodePacked(...) returns (bytes memory)`: Performs packed encoding of the given arguments. Note that this encoding can be ambiguous!
 - `abi.encodeWithSelector(bytes4 selector, ...) returns (bytes memory)`: ABI-encodes the given arguments starting from the second and prepends the given four-byte selector -`abi.encodeWithSignature(string memory signature, ...) returns (bytes memory)`: Equivalent to abi.encodeWithSelector(bytes4(keccak256(bytes(signature)), ...)
 - `block.coinbase (address payable)`: current block miner’s address block.
-- ` difficulty (uint)`: current block difficulty `block.gaslimit (uint): current block gaslimit
+- `difficulty (uint)`: current block difficulty `block.gaslimit (uint): current block gaslimit
 - `block.number (uint)`: current block number
 - `block.timestamp (uint)`: current block timestamp
 - `gasleft() returns (uint256)`: remaining gas
 - `msg.data (bytes)`: complete calldata
-- `msg.sender (address payable)`: sender of the message (current call) msg.value (uint): number of wei sent with the message
-- `tx.gasprice (uint): gas price of the transaction `tx.origin (address payable): sender of the transaction (full call chain)
-- `assert(bool condition): abort execution and revert state changes if condition is `false (use for internal error)
-- `require(bool condition): abort execution and revert state changes if condition is false (use for malformed input or error in external component) `require(bool condition, string memory message): abort execution and revert state changes if condition is false (use for malformed input or error in external component). Also provide error message.
+- `msg.sender (address payable)`: sender of the message (current call)
+- `msg.value (uint)`: number of wei sent with the message
+- `tx.gasprice (uint)`: gas price of the transaction
+- `tx.origin (address payable)`: sender of the transaction (full call chain)
+- `assert(bool condition)`: abort execution and revert state changes if condition is false (use for internal error)
+- `require(bool condition)`: abort execution and revert state changes if condition is false (use for malformed input or error in external component)
+- `require(bool condition, string memory message)`: abort execution and revert state changes if condition is false (use for malformed input or error in external component). Also provide error message.
 - `revert()`: abort execution and revert state changes
 - `revert(string memory message)`: abort execution and revert state changes providing an explanatory string
-- `blockhash(uint blockNumber) returns (bytes32): hash of the given block - only works for 256 most recent blocks `
+- `blockhash(uint blockNumber) returns (bytes32)`: hash of the given block - only works for 256 most recent blocks `
 - `keccak256(bytes memory) returns (bytes32)`: compute the Keccak-256 hash of the input
 - `sha256(bytes memory) returns (bytes32)`: compute the SHA-256 hash of the input
 - `ripemd160(bytes memory) returns (bytes20)`: compute the RIPEMD-160 hash of the input
