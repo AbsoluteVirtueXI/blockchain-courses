@@ -230,7 +230,7 @@ Un contract peut contenir les déclarations suivantes:
 
 - un [`constructor`](#constructor)
 - des déclartions de [structures](#structures)
-- des déclarations d'[énumérations](#énumérations)
+- des déclarations d'[énumérations](#enumérations)
 - des [variables d'états](#state-variables)
 - des [fonctions](#fonctions)
 - des [modifiers](#modifiers)
@@ -296,7 +296,7 @@ Leur `data location` est le `storage`.
 
 Pour avoir plus de précision sur le type de ces variables: [Types des variables](#types-des-variables)
 
-### **fonctions**
+### **Fonctions**
 
 Tout code exécutable se trouve dans une fonction.
 
@@ -319,7 +319,7 @@ function helper(uint x) pure returns (uint) {
 Les fonctions peuvent également être définie à l'extérieur d'un smart contract.  
 Pour avoir plus de précisions sur les fonctions: (function-types)
 
-### **modifier**
+### **Modifiers**
 
 Les `modifier`s ajoutent un contrôle sur l'exécution d'une fonction. Ils vérifient la condition d'exécution ou non de la fonction à laquelle est appliqué le `modifier`s.
 
@@ -382,7 +382,7 @@ contract Ballot {
 }
 ```
 
-### **énumérations**
+### **Enumérations**
 
 Les `enum`est un type de données qui consiste en un ensemble de valeurs constantes. Ces différentes valeurs représentent différents cas.  
 Lorsqu'une variable est de type énuméré, elle peut avoir comme valeur n'importe quel cas de ce type énuméré.
