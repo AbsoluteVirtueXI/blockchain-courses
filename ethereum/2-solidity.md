@@ -506,7 +506,7 @@ Pour plus d'information sur les structures: [`struct`](#struct).
 
 ### **Enumérations**
 
-Les `enum`est un type de données qui consiste en un ensemble de valeurs constantes. Ces différentes valeurs représentent différents cas.  
+Les `enum` est un type de données qui consiste en un ensemble de valeurs constantes. Ces différentes valeurs représentent différents cas.  
 Lorsqu'une variable est de type énuméré, elle peut avoir comme valeur n'importe quel cas de ce type énuméré.
 
 ```solidity
@@ -517,8 +517,6 @@ contract Purchase {
     enum State { Created, Locked, Inactive } // Enum
 }
 ```
-
-Pour plus d'informations sur les énumérations: [`enum`](#enum)
 
 ## **Types des variables**
 
