@@ -19,11 +19,16 @@ Ce contrat devra posséder une fonction `hello` qui retournera la string "Hello 
 
 ## 3 _SimpleStorage.sol_
 
-Ecrivez un contrat `SimpleStorage` qui modifiera/affichera une variable `uint256 private storedData`.  
+Ecrivez un contrat `SimpleStorage` qui modifiera/affichera le contenu d'une variable `uint256 private storedData`.  
 Une fonction `get()` retournera la valeur de `storedData`;
 Une fonction `set(uint256 value)` modifiera la valeur de `storedData`
 
-## 2 _Contact.sol_
+## 4 _CheckOdd.sol_
+
+Ecrivez un contrat `CheckOdd`.
+Ce contrat devra posséder une fonction `check` qui prendra en paramètre un `uint` et qui retournera
+
+## 5 _Contact.sol_
 
 Ecrivez un contrat `Contact` qui permettra d'enregistrer ou de récupérer des info sur un contact en fonction de son adresse Ethereum.
 Les informations pour chaque contact seront stockées dans une `struct` avec les champs suivants: `string name`, `string email`, `string phone`.  
@@ -32,7 +37,7 @@ Une fonction `addContact` nous permettra d'ajouter un nouveau contact avec l'adr
 Une fonction `getContact(address _addr)` nous permettra de récupérer les informations d'un contact en fonction d'une addresse Ethereum.
 Pour que la fonction `getContact(address _addr)` fonctionne il faudra ajouter `pragma experimental ABIEncoderV2;` comme directive de pragma.
 
-## 3 _FirstErc20.sol_
+## 6 _FirstErc20.sol_
 
 Lisez entièrement l'exercice avant de commencer.
 
@@ -53,24 +58,24 @@ Pour justifier de la réussite de l'exercice vous devrez fournir:
 - un lien vers etherscan qui contiendra les détails de la transaction de `transfer`
 - un lien vers etherscan qui contiendra les détails de la transaction de `approve`
 
-## 4 _Adder.sol_
+## 7 _Adder.sol_
 
 Ecrivez un contrat `Adder`.  
 Ce contrat devra posséder une fonction `add(uint256 nb1, uint256 nb2)` qui retournera la somme des 2 arguments passés à la fonction.
 
-## 5 _Suber.sol_
+## 8 _Suber.sol_
 
 Même principe mais pour une soustraction.
 
-## 6 _Multiplier.sol_
+## 9 _Multiplier.sol_
 
 Même principe mais pour une multiplication.
 
-## 7 _Divisor.sol_
+## 10 _Divisor.sol_
 
 Même principe mais pour une division.
 
-## 8 _Calculator.sol_
+## 11 _Calculator.sol_
 
 Créer un contrat `Calculator`.  
 Ce contrat devra posséder 4 fonctions: `add`, `sub`, `mul`, `div`.  
@@ -80,20 +85,20 @@ Il faudra penser à importer le code/interface des différents contrats des exer
 Par exemple pour déclarer le contrat `Adder` dans _Calculator.sol_:  
 `Adder adderContract = Adder(ADRESSE_ETHEREUM_DE_ADDER);`
 
-## 9 _CalcToken.sol_
+## 12 _CalcToken.sol_
 
 Déployer un token CalcToken qui possédera le même code que:
 https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/ethereum/correction-exercices-smart-contracts/FirstErc20.sol  
 Le nom du token sera `CalcToken`, le symbole `CALK`, `decimals` de 18 et le cap de 1 millions.  
 Fournir également l'adresse de ce contrat.
 
-## 10 _CALKIco.sol_
+## 13 _CALKIco.sol_
 
 Réaliser un contrat d'ICO, `CALKIco` pour vendre vos propres tokens CALK.
 1 CALK sera vendu pour 0.1 ether.  
 Déployer ce contrat.
 
-## 11 _Calculator.sol_
+## 14 _Calculator.sol_
 
 Lisez entièrement l'exercice avant de commencer.
 
@@ -105,7 +110,7 @@ Il faudra ajouter une fonction `withdraw` qui fera un `transfer` des tokens que 
 Le bénéficiaire sera le seul à pouvoir appeler cette fonction `withdraw`.  
 Il faudra créer un bénéficiaire qui sera le seul à pouvoir `withdraw` les tokens et ainsi les recevoir.
 
-## 12 Faille
+## 15 Faille
 
 Lisez entièrement l'exercice avant de commencer.
 
