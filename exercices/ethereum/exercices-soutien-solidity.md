@@ -45,7 +45,8 @@ Votre ERC-20 devra avoir un nom, un symbole, `decimals` devra être de 18 et le 
 2. Par une opération de `mint` créer 1000 tokens pour le compte `0x57D401B8502bC5CBBaAfD2564236dE4571165051`.
 3. Par une opération de `transfer` (via remix ou metamask) envoyer à `0x57D401B8502bC5CBBaAfD2564236dE4571165051` 500 tokens.
 4. Par une opération d'`approve` autoriser `0x57D401B8502bC5CBBaAfD2564236dE4571165051` à déplacer un maximum de 500 000 tokens en votre nom.
-   Pour justifier de la réussite de l'exercice vous devrez fournir:
+
+Pour justifier de la réussite de l'exercice vous devrez fournir:
 
 - L'adresse du contrat déployé
 - un lien vers etherscan qui contiendra les détails de la transaction de `mint`
@@ -76,6 +77,8 @@ Ce contrat devra posséder 4 fonctions: `add`, `sub`, `mul`, `div`.
 Ces 4 fonctions prennent chacune en paramètres 2 `uint`.  
 Ces fonctions devront effectuer l'opération de calcul correspondante par les contrats déployés précédemment et retourner la valeur de l'opération. Par exemple la fonction `add` du contrat `Calculator` devra appeler la fonction `add` du contrat `Adder` déployé précédemment.
 Il faudra penser à importer le code/interface des différents contrats des exercices précédents dans _Calculator.sol_ afin que l'interface de chacun des contrats soient connues par le contrat `Calculator` et déclarer les contrats `Adder`, `Suber`, `Multiplier`, `Divisor` dans notre contrat `Calculator`.
+Par exemple pour déclarer le contrat `Adder` dans _Calculator.sol_:  
+`Adder adderContract = Adder(ADRESSE_ETHEREUM_DE_ADDER);`
 
 ## 9 _CalcToken.sol_
 
@@ -89,7 +92,6 @@ Fournir également l'adresse de ce contrat.
 Réaliser un contrat d'ICO, `CALKIco` pour vendre vos propres tokens CALK.
 1 CALK sera vendu pour 0.1 ether.  
 Déployer ce contrat.
-Fournir également l'adresse de ce contrat.
 
 ## 11 _Calculator.sol_
 
@@ -98,7 +100,7 @@ Lisez entièrement l'exercice avant de commencer.
 Rentabiliser le contrat `Calculator`, toutes les opérations de calculs, cad l'appel des fonctions `add`, `sub`, `mul`, `div` du contrat `Calculator`, couteront désormais 0.01 CALK.  
 Pour cela il faudra que l'utilisateur `approve` l'adresse du contrat `Calculator` dans `CalcToken`.
 Ainsi lors d'une opération de calcul un `transferFrom` sera effectué par le contrat `Calculator` de 0.01 CALK de la balance de l'utilisateur vers la balance du contrat `Calculator` (et non pas celle du bénéficiaire, car oui! un contrat peut aussi posséder des tokens).
-Pour info nn contrat peut récupérer sa propre adresse avec `address(this)`;
+Pour info un contrat peut récupérer sa propre adresse avec `address(this)`;
 Il faudra ajouter une fonction `withdraw` qui fera un `transfer` des tokens que possèdent le contrat vers un bénéficiaire.
 Le bénéficiaire sera le seul à pouvoir appeler cette fonction `withdraw`.  
 Il faudra créer un bénéficiaire qui sera le seul à pouvoir `withdraw` les tokens et ainsi les recevoir.
@@ -118,9 +120,7 @@ L'ordre des déploiements et opérations sera:
 4. Déployer `Diviser`
 5. Déployer `Calculator` avec les adresses connues des précédents contrats déployés.
 6. Récupérer l'adresse de `Calculator`
-7. Exécuter `setCalculatorAddress` avec l'adresse de `Calcultor` connue sur chacun des contrats `Adder`, `Suber`, `Multiplier`, `Diviser`.
+7. Exécuter `setCalculatorAddress` avec l'adresse de `Calculator` connue sur chacun des contrats `Adder`, `Suber`, `Multiplier`, `Diviser`.
 8. Déployer le contrat d'ICO `CALKIco`
 
 Fournir les adresses des contrats `Adder`, `Suber`, `Multiplier`, `Diviser`, `Calculator`, `CALKIco`.
-
-## 13
