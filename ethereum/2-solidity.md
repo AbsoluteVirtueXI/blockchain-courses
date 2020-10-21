@@ -326,9 +326,114 @@ function helper(uint x) pure returns (uint) {
 
 Les fonctions peuvent également être définies à l'extérieur d'un smart contract.
 
-La déclaration d'une fonction suit les règles de grammaire suivantes:
-`function (<parameter types>) {internal|external|public|private} [pure|constant|view|payable] [returns (<return types>)]`
-Pour avoir plus de précisions sur la visibilité fonctions: [`function`](#function)
+La déclaration d'une fonction suit les règles de grammaire suivantes:  
+`function functionName (<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]`
+
+exemple d'une déclaration de fonction:
+
+```solidity
+function add(uint256 nb1, uint256) public pure returns(uint256) {
+    return nb1 + nb2;
+}
+```
+
+Les paramètres sont declarés comme des variables et sont stockés dans la zone `memory`, ce sont des variables temporaires.
+
+```solidity
+function f(uint _a, uint _b) {}
+```
+
+Les valeurs de retour sont déclarés après le mot clé `returns`.
+
+```solidity
+function f(uint _a, uint _b) returns (uint) {
+   return _a + _b;
+}
+```
+
+Une fonction peut aussi retourner plusieures valeurs et de types différents.
+
+```solidity
+contract foo {
+    function myFunction1() public view returns (uint i, string s, address a){
+        return (10, "Hello", msg.sender);
+    }
+    function myFunction2() private{
+
+        var (i,s,a) = myFunction1();
+    }
+}
+```
+
+Des modifiers peuvent s'appliquer à une fonction pour vérifier une condition qui permettra d'exécuter la fonction ou pas.
+
+```solidity
+modifier onlyOwner() {
+    require(msg.sender == ownerAddress, 'Only Owner can do this');
+    _;
+}
+function withdraw() public onlyOwner {
+    // Execute only if msg.sender == ownerAddress
+}
+```
+
+Si une fonction ne modifie pas les variables d'états, et ne fait que lire les variables d'états du contrat ou les variables globales tel que `msg.sender` ou `msg.value`, on peut lui attribuer à sa déclaration le mot clé `view`.
+
+```solidity
+function balanceOf(address account) public view returns (uint256) {
+    return _balances[account];
+}
+```
+
+Si une fonction ne modifie pas les variables d'états du contrat, et qu'en plus de cela elle n'a pas besoin d'avoir accès en lecture aux variables d'états du contrat ou aux variables globales, on peut lui attribuer à sa déclaration le mot clé `pure`.
+Ces fonctions n'ont besoin que de leurs arguments pour s'exécuter.
+
+```solidity
+function f(uint a) public pure returns (uint) {
+    return a * 42;
+}
+```
+
+De plus on peut ajouter un `modifier` de visibilité à une fonction, afin de contrôler de quelle manière on pourra accéder à cette fonction: `public`, `private`, `internal`, `external`.  
+Pour avoir plus de précisions sur la visibilité: [`visibilité dans solidity`](#visibilité)
+
+#### **payable functions**
+
+Pour qu'une fonction puisse recevoir de l'ether (calculé en `wei`) il faut appliquer le modifier `payable` à la fonction. Ainsi les `wei` recus seront accessibles via la variable globale `msg.value` en plus des arguments.
+
+```solidity
+function buyTokens(uint256 _nbTokens) public payable {
+    require(msg.value >= 100 wei, "Minimum price is 100 wei");
+    // do stuff here
+}
+```
+
+#### **fonctions spéciales pour recevoir de l'ether**
+
+##### **receive**
+
+Cette fonction ne peut pas avoir d'arguments et ne retourne rien.  
+Si de l'ether est envoyé directement à notre contrat, depuis un autre contrat ou depuis MetaMask, c'est cette fonction qui sera appelée.
+Le nombre de `wei` reçu par notre contrat sera accessible via la variable globale `msg.value`.
+
+```solidity
+receive() external payable {
+    // do stuff here with msg.value
+}
+```
+
+##### **fallback**
+
+Cette fonction ne peut pas avoir d'arguments et ne retourne rien.  
+Cette fonction est exécutée si aucune des fonctions du contrat ne correspond à ce qui a été demandé, par exemple appeler une fonction qui n'existe pas dans notre contrat.
+Si une fonction `receive` n'est pas déclarée et que de l'ether est envoyé à notre contrat, c'est cette fonction qui serait executée.  
+Elle porte le nom `fallback` qui veut dire "dernier recours" ou "plan de secours".
+
+```solidity
+fallback() external payable {
+    // do stuff here...
+}
+```
 
 ### **Modifiers**
 
@@ -578,9 +683,13 @@ pragma solidity >=0.4.0 <0.8.0;
 
 contract MappingExample {
     mapping(address => uint) public balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
 
     function update(uint newBalance) public {
         balances[msg.sender] = newBalance;
+    }
+    function allowance(address owner, address spender) public view virtual override returns (uint256) {
+        return _allowances[owner][spender];
     }
 }
 ```
@@ -637,10 +746,10 @@ https://solidity.readthedocs.io/en/v0.7.3/cheatsheet.html#order-of-precedence-of
 
 A literal number can take a suffix of wei, gwei or ether to specify a subdenomination of Ether, where Ether numbers without a postfix are assumed to be Wei.
 
-```solidity
-assert(1 wei == 1);
-assert(1 gwei == 1e9);
-assert(1 ether == 1e18);
+```text
+1 wei = 1
+1 gwei = 1e9
+1 ether = 1e18
 ```
 
 The only effect of the subdenomination suffix is a multiplication by a power of ten.
@@ -649,11 +758,13 @@ The only effect of the subdenomination suffix is a multiplication by a power of 
 
 Suffixes like `seconds`, `minutes`, `hours`, `days` and `weeks` after literal numbers can be used to specify units of time where seconds are the base unit and units are considered naively in the following way:
 
-        1 == 1 seconds
-        1 minutes == 60 seconds
-        1 hours == 60 minutes
-        1 days == 24 hours
-        1 weeks == 7 days
+```text
+1 = 1 seconds
+1 minutes = 60 seconds
+1 hours = 60 minutes
+1 days = 24 hours
+1 weeks = 7 days
+```
 
 Take care if you perform calendar calculations using these units, because not every year equals 365 days and not even every day has 24 hours because of leap seconds. Due to the fact that leap seconds cannot be predicted, an exact calendar library has to be updated by an external oracle.
 
