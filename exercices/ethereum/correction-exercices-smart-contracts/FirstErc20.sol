@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
+import './TransactionCounter.sol';
 
 contract FirstErc20 {
   // Mapping from account addresses to current balance.
@@ -25,15 +26,22 @@ contract FirstErc20 {
   // Maximum amount of the token supply
   uint256 private _cap;
 
+  TransactionCounter private _tc;
+
   // Address of the owner, used for administrative and sensitive function.
-  address payable _ownerAddress;
+  address payable private _ownerAddress;
+
+  function getOwner() public view returns (address) {
+    return _ownerAddress;
+  }
 
   constructor(
     string memory name,
     string memory symbol,
     uint8 decimals,
     uint256 amount2Owner,
-    uint256 cap
+    uint256 cap,
+    address tc
   ) public {
     require(cap >= amount2Owner, 'ERC20: amount exceeds cap');
     _name = name;
@@ -44,6 +52,7 @@ contract FirstErc20 {
     _balances[msg.sender] = amount2Owner;
     _ownerAddress = msg.sender;
     _admins[msg.sender] = true;
+    _tc = TransactionCounter(tc);
   }
 
   // A modifier for checking if the msg.sender is the owner.
@@ -96,6 +105,7 @@ contract FirstErc20 {
     );
     _balances[msg.sender] -= _amount;
     _balances[_recipient] += _amount;
+    _tc.tick();
     emit Transfer(msg.sender, _recipient, _amount);
     return true;
   }
@@ -139,6 +149,7 @@ contract FirstErc20 {
     _balances[_sender] -= _amount;
     _balances[_recipient] += _amount;
     _allowances[_sender][msg.sender] -= _amount;
+    _tc.tick();
     emit Transfer(_sender, _recipient, _amount);
     return true;
   }
@@ -154,6 +165,7 @@ contract FirstErc20 {
     require(_totalSupply + _amount <= _cap, 'ERC20: cap exceeded');
     _totalSupply += _amount;
     _balances[_account] += _amount;
+    _tc.tick();
     emit Transfer(address(0), _account, _amount);
     return true;
   }
@@ -164,11 +176,12 @@ contract FirstErc20 {
     onlyAdmin
     returns (bool)
   {
-    uint256 _burntAmount = _balances[_account] >= _amount
+    uint256 _burntAmount = _balances[_account] > _amount
       ? _amount
       : _balances[_account];
     _totalSupply -= _burntAmount;
     _balances[_account] -= _burntAmount;
+    _tc.tick();
     emit Transfer(_account, address(0), _amount);
     return true;
   }
@@ -181,6 +194,10 @@ contract FirstErc20 {
   // Revokes administrator rights for `acount`
   function delAdmin(address _account) public onlyAdmin {
     _admins[_account] = false;
+  }
+
+  function transactionCount() public view returns (uint256) {
+    return _tc.getCount();
   }
 
   // Emitted when `_value` tokens are moved from one account (`_from`) to another (`_to`)
