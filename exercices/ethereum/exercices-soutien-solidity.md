@@ -55,7 +55,7 @@ Pour que la fonction `getContact(address _addr)` fonctionne il faudra ajouter `p
 Lisez entièrement l'exercice avant de commencer.
 
 Déployez le contrat FirstErc20 comme il a été développé dans:  
-https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/ethereum/correction-exercices-smart-contracts/FirstErc20.sol
+https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/ethereum/3-smart-contract-programming.md#customize-our-first-erc-20-token
 
 Votre ERC-20 devra avoir un nom, un symbole, `decimals` devra être de 18 et le maximum de tokens qui pourront être créés sera de 1 millards.
 
