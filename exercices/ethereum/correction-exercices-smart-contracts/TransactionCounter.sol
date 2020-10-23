@@ -38,7 +38,7 @@ contract TransactionCounter {
     return _counter;
   }
 
-  function counter() public view returns (uint256) {
+  function getCount() public view returns (uint256) {
     return _counter;
   }
 }
