@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-// Deployed at address: 0xc311D39FbD47F122ba89Cb4EBdB9b06bc3deEf77
+// Deployed at address 0x3e34cf7C6347dA5CBa804188075F8D5CC6B6A73f
 contract FirstErc20 {
   // Mapping from account addresses to current balance.
   mapping(address => uint256) private _balances;

@@ -112,6 +112,7 @@ Fournir également l'adresse de ce contrat.
 Réaliser un contrat d'ICO, `CALKIco` pour vendre vos propres tokens CALK.
 1 CALK sera vendu pour 0.1 ether.  
 Déployer ce contrat.
+Fournir également l'adresse de ce contrat.
 
 ## 14 _Calculator.sol_
 
@@ -141,6 +142,5 @@ L'ordre des déploiements et opérations sera:
 5. Déployer `Calculator` avec les adresses connues des précédents contrats déployés.
 6. Récupérer l'adresse de `Calculator`
 7. Exécuter `setCalculatorAddress` avec l'adresse de `Calculator` connue sur chacun des contrats `Adder`, `Suber`, `Multiplier`, `Diviser`.
-8. Déployer le contrat d'ICO `CALKIco`
 
-Fournir les adresses des contrats `Adder`, `Suber`, `Multiplier`, `Diviser`, `Calculator`, `CALKIco`.
+Fournir les adresses des contrats `Adder`, `Suber`, `Multiplier`, `Diviser`, `Calculator`.
