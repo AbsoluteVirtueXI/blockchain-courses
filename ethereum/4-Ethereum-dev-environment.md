@@ -253,8 +253,25 @@ We call these scripts `migrations`.
 To run all migrations, run the following:
 
 ```zsh
+% truffle migrate --network NETWORK_NAME
+```
+
+Networks are configured in `truffle-config.js`.  
+If no `--network` option is provided, the default one will be `development`,
+so the command:
+
+```zsh
 % truffle migrate
 ```
+
+is an alias for:
+
+```zsh
+truffle migrate --network development
+```
+
+A `development` network has to be configured in `truffle-config.js`.  
+Often the `development` network is the Ethereum blockchain running on a `ganache` node.
 
 Running a migration triggers 2 processes:
 
