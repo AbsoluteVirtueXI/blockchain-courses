@@ -28,7 +28,7 @@ Les administrateurs sont des citoyens qui peuvent effectuer des tâches d'admini
 ## **Tribunaux populaires**
 
 Dans cet état les peines consistent à se faire retirer du `CITIZEN`.
-3 types de peines:
+4 types de peines:
 
 - légère: retire 5 `CITIZEN` au citoyen qui passe en jugement.
 - lourde: retire 50 `CITIZEN` au citoyen qui passe en jugement.
