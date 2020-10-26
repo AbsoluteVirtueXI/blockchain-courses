@@ -7,7 +7,7 @@ Vous devrez créer une suite de smart contracts qui géreront un état et ses ci
 Un token le `CITIZEN`, symbole `CTZ`, servira de monnaie et de point de citoyenneté dans cet état.  
 100 `CITIZEN` sont automatiquement attribués à qui souhaite devenir citoyen.
 Lorsqu'un citoyen ne possède plus de `CITIZEN` il ne peut plus voter.
-L'entité qui sera l'état, (l'addresse d'un smart contract), devra posséder 50% du `cap` de `CITIZEN`.
+L'entité qui sera l'état, (l'adresse d'un smart contract), devra posséder 50% du `cap` de `CITIZEN`.
 
 ## **Acheter du `CITIZEN`**
 
