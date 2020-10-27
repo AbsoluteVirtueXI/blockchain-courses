@@ -383,4 +383,4 @@ We will use the Openzepplin test helpers and test environment
 
 Official website: https://infura.io/
 
-Register on `Infura` and create an Ethereum project
+Register on `Infura` and create an Ethereum project.
