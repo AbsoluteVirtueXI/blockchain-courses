@@ -394,12 +394,12 @@ When a project is created, in the `SETTINGS` you have access to:
 ## **Linters and code formatters**
 
 You may need to restart your VSCode for applying linters and code formatters.  
-[solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity), [eslint][https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-eslint] and [prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions for VSCode are needed before installing the tools below.
+[solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity), [eslint](https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-eslint) and [prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions for VSCode are needed before installing the tools below.
 
 ### **solhint**
 
 `solhint`: https://protofire.github.io/solhint/  
-`solhint` is a linter and perform static analysis of solidity files for finding errors and bad code practice.
+`solhint` is a linter and perform static analysis of solidity files for finding errors and bad code practice.  
 Inside your project directory:  
 install `solhint` as dev dependency:
 
@@ -427,7 +427,7 @@ and create a _.solhint.json_ config file:
 
 `eslint`: https://eslint.org/docs/user-guide/getting-started  
 As our migration and test files are written in JavaScript, we also need a linter for JS files.  
-`eslint` is a linter and perform static analysis of solidity files for finding errors and bad code practice.
+`eslint` is a linter and perform static analysis of solidity files for finding errors and bad code practice.  
 Inside your project directory:  
 install `eslint` and its plugins as dev dependency:
 
@@ -437,7 +437,7 @@ yarn add --dev eslint eslint-config-standard eslint-plugin-import eslint-plugin-
 
 and create a _.eslintrc_ config file:
 
-```json
+```js
 {
   "extends": ["standard", "plugin:promise/recommended"],
   "plugins": ["mocha-no-only", "promise"],
@@ -506,7 +506,7 @@ yarn add --dev prettier prettier-plugin-solidity
 
 and create a _.prettierrc_ config file:
 
-```json
+```js
 {
   "overrides": [
     {
