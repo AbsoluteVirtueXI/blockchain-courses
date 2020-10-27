@@ -93,6 +93,8 @@ RIGHT CLICK on a `.sol` file -> Solidity: Change global compiler version(remote)
 `Truffle` is a development environment, testing framework and deployment pipeline for Ethereum smart contracts.  
 While we were working on `remix` since the beginning we will now switch to `Truffe` and write our code on `vscode`.
 
+Official documentation: https://www.trufflesuite.com/docs/truffle/overview
+
 ### **Install Truffle**
 
 Install truffle globally.
@@ -116,8 +118,8 @@ Web3.js v1.2.9
 Create a directory for your project and `cd` inside:
 
 ```zsh
-% mkdir HelloWorld
-% cd HelloWorld
+% mkdir Calculator
+% cd Calculator
 ```
 
 Initialize a Truffle project, the git repository and a nodejs project:
@@ -343,12 +345,38 @@ module.exports = async (deployer) => {
 }
 ```
 
+### **Configuration of `truffle-config.js`**
+
+Official documentation on `truffle-config.js`: https://www.trufflesuite.com/docs/truffle/reference/configuration  
+This file is a Javascript file and can execute any code necessary to create your configuration. It must export an object representing your project configuration like the example below:
+
+```js
+module.exports = {
+  // Configure networks
+  networks: {
+    development: {
+      host: '127.0.0.1',
+      port: 8545,
+      network_id: '*', // Match any network id
+    },
+  },
+  // Configure MochaJS testing framework
+  mocha: {
+    // timeout: 100000
+  },
+  // Configure your compilers
+  compilers: {
+    solc: {
+      version: 'native',
+    },
+  },
+}
+```
+
 ### **Directory `test/`**:
 
 #### **Openzepplin test helpers**
 
 We will use the Openzepplin test helpers
-
-### **Configuration file `truffle-config.js`**
 
 ## **Infura**
