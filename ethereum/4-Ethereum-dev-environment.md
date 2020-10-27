@@ -390,3 +390,182 @@ When a project is created, in the `SETTINGS` you have access to:
 - Project ID: Identifier of your project.
 - Project Secret: The api key of your project, keep it secret.
 - Endpoints: HTTPS/WS link to access the `Infura` API for your project.
+
+## **Linters and code formatters**
+
+You may need to restart your VSCode for applying linters and code formatters.  
+[solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity), [eslint][https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-eslint] and [prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions for VSCode are needed before installing the tools below.
+
+### **solhint**
+
+`solhint`: https://protofire.github.io/solhint/  
+`solhint` is a linter and perform static analysis of solidity files for finding errors and bad code practice.
+Inside your project directory:  
+install `solhint` as dev dependency:
+
+```zsh
+yarn add —dev solhint
+```
+
+and create a _.solhint.json_ config file:
+
+```json
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "func-order": "off",
+    "mark-callable-contracts": "off",
+    "no-empty-blocks": "off",
+    "compiler-version": ["error", "^0.6.0"],
+    "private-vars-leading-underscore": "error",
+    "reason-string": "off"
+  }
+}
+```
+
+### **eslint**
+
+`eslint`: https://eslint.org/docs/user-guide/getting-started  
+As our migration and test files are written in JavaScript, we also need a linter for JS files.  
+`eslint` is a linter and perform static analysis of solidity files for finding errors and bad code practice.
+Inside your project directory:  
+install `eslint` and its plugins as dev dependency:
+
+```zsh
+yarn add --dev eslint eslint-config-standard eslint-plugin-import eslint-plugin-mocha-no-only eslint-plugin-node eslint-plugin-promise eslint-plugin-standard
+```
+
+and create a _.eslintrc_ config file:
+
+```json
+{
+  "extends": ["standard", "plugin:promise/recommended"],
+  "plugins": ["mocha-no-only", "promise"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jest": true
+  },
+  "globals": {
+    "artifacts": false,
+    "contract": false,
+    "assert": false,
+    "web3": false
+  },
+  "rules": {
+    // Strict mode
+    "strict": ["error", "global"],
+
+    // Code style
+    "array-bracket-spacing": ["off"],
+    "camelcase": ["error", { "properties": "always" }],
+    "comma-dangle": ["error", "always-multiline"],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "dot-notation": ["error", { "allowKeywords": true, "allowPattern": "" }],
+    "eol-last": ["error", "always"],
+    "eqeqeq": ["error", "smart"],
+    "generator-star-spacing": ["error", "before"],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "max-len": ["error", 120, 2],
+    "no-debugger": "off",
+    "no-dupe-args": "error",
+    "no-dupe-keys": "error",
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+    "no-redeclare": ["error", { "builtinGlobals": true }],
+    "no-trailing-spaces": ["error", { "skipBlankLines": false }],
+    "no-undef": "error",
+    "no-use-before-define": "off",
+    "no-var": "error",
+    "object-curly-spacing": ["error", "always"],
+    "prefer-const": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "space-before-function-paren": ["error", "always"],
+
+    "mocha-no-only/mocha-no-only": ["error"],
+
+    "promise/always-return": "off",
+    "promise/avoid-new": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  }
+}
+```
+
+### **prettier**
+
+`prettier`is a code formatter. It formats our code automatically on save.  
+In your project directory install `prettier` and `prettier-plugin-solidity` as dev dependency:
+
+```zsh
+yarn add --dev prettier prettier-plugin-solidity
+```
+
+and create a _.prettierrc_ config file:
+
+```json
+{
+  "overrides": [
+    {
+      "files": "*.sol",
+      "options": {
+        "printWidth": 120,
+        "tabWidth": 4,
+        "useTabs": false,
+        "singleQuote": false,
+        "bracketSpacing": false,
+        "explicitTypes": "always"
+      }
+    },
+    {
+      "files": "*.js",
+      "options": {
+        "tabWidth": 2,
+        "semi": true,
+        "singleQuote": true,
+        "arrowParens": "always"
+      }
+    }
+  ]
+}
+```
+
+At this point code formatting can be broken.  
+First try to restart your VSCode.
+If code formatting still doesn't work right click on an opened solidity file in the editor, select `Format Document` and select `prettier` as default formatter.
+Do the same with a JavaScript file.
+Now code formatting of JS and solidity file should work.
+
+### EditorConfig
+
+Install the EditorConfig extension: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+
+In your project create a `.editorconfig` file:
+
+```toml
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = false
+max_line_length = 120
+
+[*.sol]
+indent_size = 4
+
+[*.js]
+indent_size = 2
+
+[*.adoc]
+max_line_length = 0
+
+```
