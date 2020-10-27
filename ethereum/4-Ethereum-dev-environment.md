@@ -377,6 +377,10 @@ module.exports = {
 
 #### **Openzepplin test helpers**
 
-We will use the Openzepplin test helpers
+We will use the Openzepplin test helpers and test environment
 
 ## **Infura**
+
+Official website: https://infura.io/
+
+Register on `Infura` and create an Ethereum project
