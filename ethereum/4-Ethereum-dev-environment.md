@@ -524,6 +524,7 @@ and create a _.prettierrc_ config file:
       "files": "*.js",
       "options": {
         "tabWidth": 2,
+        "useTabs": false,
         "semi": true,
         "singleQuote": true,
         "arrowParens": "always"
