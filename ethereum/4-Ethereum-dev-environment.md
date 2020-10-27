@@ -283,8 +283,9 @@ Running a migration triggers 2 processes:
 
 A default migration script _1_initial_migration.js_ exists in the `migrations/` directory.
 **Just keep this file and never touch it.**  
-Your `migrations` should start by a number following the previous one, and have a `.js` extension.
-Create a migration file _2_deploy_contracts.sol_ in `migrations/` directory for deploying our contracts stored in `contracts/` directory.  
+Your `migrations` should start by a number following the previous one, and have a `.js` extension.  
+Create migration files _2_deploy_calc_operations.js_ and _3_deploy_calculator_contract.js_ in `migrations/` directory for deploying our contracts stored in `contracts/` directory.
+
 _2_deploy_calc_operations.js_:
 
 ```js
