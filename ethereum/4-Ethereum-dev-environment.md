@@ -240,8 +240,8 @@ contract Calculator {
 ```
 
 There is also a default `Migrations.sol` contract in the directory.  
-This contract keeps track of `migrations` AKA deployments, this is a configuration contract.  
-Just keep this file and never touch it.
+This contract keeps track of `migrations` AKA deployment, this is a configuration contract.  
+**Just keep this file and never touch it.**
 
 ### **Directory `migrations/`**:
 
@@ -275,34 +275,69 @@ Often the `development` network is the Ethereum blockchain running on a `ganache
 
 Running a migration triggers 2 processes:
 
-1. **compilation**: If a solidity file in `contracts/` is added or is modified then a compilation by the `solc` compiler occurs.  
-   The compiler version and options are defined in the _truffle-config.js_ config file.
+1. **compilation**: If a solidity file in `contracts/` is added or is modified then a compilation by the `solc` compiler occurs and an `artifact` for each contract is generated in `./build/contracts`.  
+   An `artifact` is a `JSON` file containing ABI, byte-code and various informations about the contract.  
+   The compiler version and options is defined in the _truffle-config.js_ config file.
 2. **deployment**: The contracts are deployed following the rules described in the javascript files in `migrations/` directory.  
    The available networks for deployment are defined in the _truffle-config.js_ config file.
 
-A default migration script _1_initial_migration.js_ exists in the `migrations/` directory. Don't touch it.  
+A default migration script _1_initial_migration.js_ exists in the `migrations/` directory.
+**Just keep this file and never touch it.**  
 Your `migrations` should start by a number following the previous one, and have a `.js` extension.
 Create a migration file _2_deploy_contracts.sol_ in `migrations/` directory for deploying our contracts stored in `contracts/` directory.  
-_2_deploy_contracts.sol_:
+_2_deploy_calc_operations.js_:
 
 ```js
+// Adder is an artifact of the Adder contract
 const Adder = artifacts.require('Adder')
+// Suber is an artifact of the Suber contract
 const Suber = artifacts.require('Suber')
+// Multiplier is an artifact of the Multiplier contract
 const Multiplier = artifacts.require('Multiplier')
+// Divisor is an artifact of the Multiplier contract
 const Divisor = artifacts.require('Divisor')
+
+module.exports = async (deployer) => {
+  // All the abstractions/instances below are not needed
+  // They are only useful if we need to interact with it
+  // for further deployments.
+
+  // adderInstance is an abstraction/instance of Adder
+  const adderInstance = await deployer.deploy(Adder)
+  // suberInstance is an abstraction/instance of Suber
+  const suberInstance = await deployer.deploy(Suber)
+  // multiplierInstance is an abstraction/instance of Multiplier
+  const multiplierInstance = await deployer.deploy(Multiplier)
+  //divisorInstance is an abstraction/instance of Divisor
+  const divisorInstance = await deployer.deploy(Divisor)
+}
+```
+
+_3_deploy_calculator_contract.js_:
+
+```js
+// Adder is an artifact of the Adder contract
+const Adder = artifacts.require('Adder')
+// Suber is an artifact of the Suber contract
+const Suber = artifacts.require('Suber')
+// Multiplier is an artifact of the Multiplier contract
+const Multiplier = artifacts.require('Multiplier')
+// Divisor is an artifact of the Multiplier contract
+const Divisor = artifacts.require('Divisor')
+// Calculator is an artifact of the Calculator contract
 const Calculator = artifacts.require('Calculator')
 
 module.exports = async (deployer) => {
-  const adderInstance = await deployer.deploy(Adder)
-  const suberInstance = await deployer.deploy(Suber)
-  const multiplierInstance = await deployer.deploy(Multiplier)
-  const divisorInstance = await deployer.deploy(Divisor)
+  // multiplierInstance is an instance of the already deployed Multiplier contract
+  const multiplierInstance = await Multiplier.deployed()
+  // divisorInstance is an instance of the already deployed Divisor contract
+  const divisorInstance = await Divisor.deployed()
   const calculatorInstance = await deployer.deploy(
     Calculator,
-    Adder.address,
-    Suber.address,
-    multiplierInstance.address,
-    divisorInstance.address
+    Adder.address, // use Adder address from artifact
+    Suber.address, // use Suber address from artifact
+    multiplierInstance.address, // use Multiplier address from instance
+    divisorInstance.address // use Divisor address from instance
   )
 }
 ```
@@ -314,3 +349,5 @@ module.exports = async (deployer) => {
 We will use the Openzepplin test helpers
 
 ### **Configuration file `truffle-config.js`**
+
+## **Infura**
