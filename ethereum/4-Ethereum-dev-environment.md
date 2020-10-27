@@ -380,12 +380,12 @@ We will use the OpenZepplin test helpers and test environment
 Official website: https://infura.io/
 
 `Infura` API provides access over `HTTPS` and `WebSockets` to the Ethereum and IPFS networks for our applications.  
-Without `Infura` we would need to connect directly to an Ethereum node and use the default `JSON RPC`default API.  
+Without `Infura` we would need to connect directly to an Ethereum node and use the default `JSON RPC` default API.  
 So with `Infura` API we can connect our Frontend, backend and Truffle to the Ethereum network with `HTTPS`.  
 For deploying on mainnet and testnets Truffle migration scripts need access to the Ethereum network, `Infura` is an easy way to provide this access over HTTPS/WS.
 
 Register on `Infura` and create an Ethereum project.
-When a project is created in the `SETTINGS` you have access to:
+When a project is created, in the `SETTINGS` you have access to:
 
 - Project ID: Identifier of your project.
 - Project Secret: The api key of your project, keep it secret.
