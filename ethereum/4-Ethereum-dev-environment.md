@@ -80,13 +80,9 @@ https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity
 
 Set the `solc` version we will use while programming:
 
-**A voir conflit entre installed version ?**
-
 ```txt
 RIGHT CLICK on a `.sol` file -> Solidity: Change global compiler version(remote) -> choose 0.6.12
 ```
-
-## **Install solhint ? or manafed by extensions?**
 
 ## **Truffle**
 
