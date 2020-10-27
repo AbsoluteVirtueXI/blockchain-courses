@@ -545,7 +545,7 @@ Install the EditorConfig extension: https://marketplace.visualstudio.com/items?i
 
 In your project create a `.editorconfig` file:
 
-```toml
+```js
 # EditorConfig is awesome: https://EditorConfig.org
 
 # top-most EditorConfig file
