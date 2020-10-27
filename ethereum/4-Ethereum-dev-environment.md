@@ -371,9 +371,9 @@ module.exports = {
 
 ### **Directory `test/`**:
 
-#### **Openzepplin test helpers**
+#### **OpenZepplin test helpers**
 
-We will use the Openzepplin test helpers and test environment
+We will use the OpenZepplin test helpers and test environment
 
 ## **Infura**
 
