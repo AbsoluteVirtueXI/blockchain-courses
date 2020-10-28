@@ -483,7 +483,7 @@ Inside your project directory:
 install `solhint` as dev dependency:
 
 ```zsh
-yarn add —-dev solhint
+yarn add --dev solhint
 ```
 
 and create a _.solhint.json_ config file:
