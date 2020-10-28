@@ -374,8 +374,6 @@ module.exports = {
 
 ### **Directory `test/`**:
 
-#### **OpenZepplin test helpers and test environment**
-
 We will use the OpenZepplin test helpers and test environment.
 Install these packages as dev dependencies:
 
