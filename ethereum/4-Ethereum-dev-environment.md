@@ -374,9 +374,87 @@ module.exports = {
 
 ### **Directory `test/`**:
 
-#### **OpenZepplin test helpers**
+#### **OpenZepplin test helpers and test environment**
 
-We will use the OpenZepplin test helpers and test environment
+We will use the OpenZepplin test helpers and test environment.
+Install these packages as dev dependencies:
+
+```zsh
+yarn add --dev @openzeppelin/test-helpers @openzeppelin/test-environment mocha chai
+```
+
+We will no use `truffle test` for running tests since we switched to OpenZepplin test env.
+So make Mocha the entry point of the test suite by modifying your _package.json_:  
+add to _package.json_:
+
+```json
+"scripts": {
+    "test": "npx mocha --exit --recursive"
+},
+```
+
+we can now run test with `yarn test` command.`yarn test` will not compile your smart contracts. You will have to compile your smart contracts with`truffle compile` first.
+
+Add _operations.test.js_ in your `test/` directory:
+_operations.test.js_:
+
+```js
+const { contract } = require('@openzeppelin/test-environment')
+
+const { BN, expectRevert } = require('@openzeppelin/test-helpers')
+const { expect } = require('chai')
+
+const Adder = contract.fromArtifact('Adder')
+const Suber = contract.fromArtifact('Suber')
+
+describe('Adder', () => {
+  beforeEach(async function () {
+    this.adder = await Adder.new()
+  })
+
+  it('add numbers', async function () {
+    expect(await this.adder.add(1, 1)).to.be.bignumber.equal(new BN(2))
+  })
+})
+
+describe('Suber', () => {
+  beforeEach(async function () {
+    this.suber = await Suber.new()
+  })
+
+  it('substract numbers nb1 - nb2', async function () {
+    expect(await this.suber.sub(100, 98)).to.be.bignumber.equal(new BN(2))
+  })
+
+  it('reverts when nb1 < nb2', async function () {
+    await expectRevert(
+      this.suber.sub(98, 199),
+      'Suber: no negative value here.'
+    )
+  })
+})
+```
+
+Compile your smart contracts: `truffle compile`.  
+we can now run our test with:
+
+```zsh
+% yarn test
+yarn run v1.22.10
+$ npx mocha --exit --recursive
+
+  Adder
+    ✓ add numbers (38ms)
+
+  Suber
+    ✓ substract numbers nb1 - nb2
+    ✓ reverts when nb1 < nb2 (49ms)
+
+
+  3 passing (577ms)
+
+✨  Done in 1.73s.
+```
 
 ## **Infura**
 
@@ -530,7 +608,8 @@ and create a _.prettierrc_ config file:
         "useTabs": false,
         "semi": true,
         "singleQuote": true,
-        "arrowParens": "always"
+        "arrowParens": "always",
+        "bracketSpacing": true
       }
     }
   ]
