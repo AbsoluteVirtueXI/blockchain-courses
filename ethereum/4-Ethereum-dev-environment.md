@@ -610,7 +610,6 @@ and create a _.prettierrc_ config file:
         "arrowParens": "always",
         "bracketSpacing": true,
         "trailingComma": "all"
-
       }
     }
   ]
