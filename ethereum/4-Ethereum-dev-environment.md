@@ -602,6 +602,7 @@ and create a _.prettierrc_ config file:
     {
       "files": "*.js",
       "options": {
+        "printWidth": 120,
         "tabWidth": 2,
         "useTabs": false,
         "semi": true,
