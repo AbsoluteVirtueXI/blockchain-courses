@@ -607,7 +607,9 @@ and create a _.prettierrc_ config file:
         "semi": true,
         "singleQuote": true,
         "arrowParens": "always",
-        "bracketSpacing": true
+        "bracketSpacing": true,
+        "trailingComma": "all"
+
       }
     }
   ]
