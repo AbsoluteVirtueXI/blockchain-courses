@@ -3,7 +3,7 @@
 Vous devrez continuer un projet `Truffle` qui est accessible depuis github.  
 C'est le projet des exercices précédents: https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/ethereum/exercices-truffle-1.md
 
-# Deployer sur les testnets
+# Déployer sur les testnets
 
 En utilisant truffle, déployer les smart contracts, `Adder`, `Suber`, `Multiplier`, `Divisor` et `Calculator` sur les testnets suivant:
 
