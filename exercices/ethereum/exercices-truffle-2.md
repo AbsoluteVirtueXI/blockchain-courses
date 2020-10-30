@@ -1,7 +1,6 @@
 # Exercices Truffle 2
 
-Vous devrez continuer un projet `Truffle` qui est accessible depuis github.  
-C'est le projet des exercices précédents: https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/ethereum/exercices-truffle-1.md
+Vous devrez continuer le projet `Truffle` des exercices précédents: https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/ethereum/exercices-truffle-1.md
 
 # Déployer sur les testnets
 
