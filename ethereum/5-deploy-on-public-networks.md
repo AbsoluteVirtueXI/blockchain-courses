@@ -20,7 +20,7 @@ To send transactions in a testnet, you will need a new Ethereum account. There a
 silver pupil shift lumber cluster dizzy ramp acquire video pioneer sauce deer
 ```
 
-To access our mnemonics and Infura api key we will use environment variables.
+To access our mnemonics and Infura project id we will use environment variables.
 Create a _.env_ file in the project root folder.  
 Add `NNEMONIC` and `ENDPOINT_ID` as environment variables.  
 _.env_:
