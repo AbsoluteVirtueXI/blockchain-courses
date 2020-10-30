@@ -12,4 +12,4 @@ En utilisant truffle, déployer les smart contracts, `Adder`, `Suber`, `Multipli
 
 Il vous faudra récupérer des ethers de tests pour ces réseaux.
 
-Fournir l'addresse des smart contracts déployés sur ces réseaux.
+Fournir l'adresse des smart contracts déployés sur ces réseaux.
