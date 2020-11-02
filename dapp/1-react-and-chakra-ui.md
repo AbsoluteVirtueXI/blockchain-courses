@@ -136,3 +136,9 @@ All available components with their document and code sample are available on th
 https://next.chakra-ui.com/docs/getting-started
 
 ## Project layout
+
+...
+
+## First example
+
+https://github.com/AbsoluteVirtueXI/react-example-1
