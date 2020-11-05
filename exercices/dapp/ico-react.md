@@ -17,7 +17,7 @@ Déployer le contrat du token, et vous attribuer l'ensemble de la capacité tota
 Déployer le contrat de l'ICO et configurer le prix à 1 TOKEN pour 0.1 Ether
 
 N'oubliez pas qu'il faudra `approve` le smart contract d'ico depuis le smart contract de token.
-Cela peut être difficile pour ceux qui ont déployé depuis Truffle, pour cela il faudra faudra utiliser le déploiement via "At Address" de remix, ou il faudra renseigner l'adresse de déploiement que vous avez récupérer via Truffle.
+Cela peut être difficile pour ceux qui ont déployé depuis Truffle, pour cela il faudra faudra utiliser le déploiement via "At Address" de remix, ou il faudra renseigner l'adresse de déploiement que vous avez récupéré via Truffle.
 (C'est l'astuce que vous avez utilisé pour récupérer les exo que j'avais caché)
 
 ## FronEnd
