@@ -3,7 +3,7 @@
 Le but de cet exercice est de créer une interface utilisateur pour votre ICO.
 Les utilisateurs se connecteront à votre interface pour effectuer un achat de token.
 
-Vous devrez créer 2 repo accessible depuis github:
+Vous devrez créer 2 repo accessibless depuis github:
 
 - 1 pour votre frontend React
 - 1 pour vos smart contracts.
