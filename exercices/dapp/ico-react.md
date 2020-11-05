@@ -10,7 +10,7 @@ Vous devrez créer 2 repo accessible depuis github:
 
 ## smart contracts
 
-Je vous recommande d'ecrire vos smart contracts sur remix et de les tester sur remix puis ensuite de déployer les versions définivitves via Truffle.
+Je vous recommande d'ecrire vos smart contracts sur remix et de les tester sur remix puis ensuite de déployer les versions définitives via Truffle.
 Il faudra 1 smart contract pour le token et 1 smart contract pour l'ICO, vous pouvez vous inspirez de: https://github.com/AbsoluteVirtueXI/blockchain-courses/tree/master/exercices/ethereum/correction-exercices-soutien.md
 
 Déployer le contrat du token, et vous attribuer l'ensemble de la capacité totale des tokens
