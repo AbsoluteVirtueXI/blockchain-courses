@@ -32,7 +32,7 @@ Les ordinateurs sont aujourd'hui des outils génériques qui peuvent être utili
 Mais il faut un programme pour rendre cet ordinateur utile.
 Pour rendre un ordinateur utile il faut un programmeur.
 Lorsqu'on voit un ordinateur qui fonctionne, nous oublions souvent le software qui s'exécutent dessus, et encore plus nous oublions qu'il y a un programmeur qui a écrit ce software.
-Hollywood et la pop culture ont contribué (un peu moins qu'avant néanmoins) à donner une mauvaise image du programmeur: un solitaire, sale, asocial, obsédé par les jeux videos et par pirater le pc des autres. Et C'est presque toujours un homme.
+Hollywood et la pop culture ont contribué (un peu moins qu'avant néanmoins) à donner une mauvaise image du programmeur: un solitaire, sale, asocial, obsédé par les jeux videos et par pirater le pc des autres. Et c'est presque toujours un homme.
 Le développement d'une application est un activité qui implique des dizaines à des milliers de collaborateurs issus de champs différents:
 
 - programmeurs frontend
@@ -97,7 +97,7 @@ Les browsers possèdent tous un `Javascript runtime environment`:
 - Firefox: SpiderMonkey
 - Chrome: V8 JavaScript engine
 
-Ce runtime permet à vos navigateurs de d'exécuter du code javascript.
+Ce runtime permet à vos navigateurs d'exécuter du code javascript.
 
 ### Server side
 
@@ -132,5 +132,5 @@ Hello HardFork!
 ### Ethereum
 
 Les smart contracts que vous déploierez sur Ethereum seront exécutés par un `runtime environnment` appelé l'`EVM` pour `Ethereum Virtual Machine`.  
-A la différence des runtime JS, le code source `Solidity` n'est pas déployé directement, mais une étape intermédiaire de compilation est nécéssaire, pour compiler le code source `Solidity` en `Bytecode`.
+À la différence des runtime JS, le code source `Solidity` n'est pas déployé directement, mais une étape intermédiaire de compilation est nécéssaire, pour compiler le code source `Solidity` en `Bytecode`.
 (De nombreux langages utilisent en realité ce procédé tel que `ruby`, `java`, `C#`)
