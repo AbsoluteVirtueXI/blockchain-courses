@@ -47,6 +47,7 @@ Le développement d'une application est un activité qui implique des dizaines �
 - administrateurs systèmes
 - administrateurs réseaux
 - administrateurs sécurité
+- techniciens bureautique
 - ingénieurs qualité
 - marketing
 - commerciaux
