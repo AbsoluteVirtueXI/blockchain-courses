@@ -73,7 +73,7 @@ Sous Linux il est préferable d'installer `nvm` qui est un manager de version `N
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 ```
 
-Si `nvm` est correctement installer la commande suivante doit vous retourner "nvm":
+Si `nvm` est correctement installé la commande suivante doit vous retourner "nvm":
 
 ```zsh
 command -v nvm
