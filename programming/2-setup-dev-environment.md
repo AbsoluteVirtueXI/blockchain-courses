@@ -124,3 +124,17 @@ node --version
 ```
 
 # VSCode extensions
+
+## Windows users: Install Remote - WSL
+
+Pour les utilisateurs windows VSCode fonctionne correctement en local, cad pour votre système windows.  
+Mais puisque que votre environnement de développement est sur WSL2 il faut connecter VSCode à votre Ubuntu.
+Pour cela il faut installer l'extension ![Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+Documentation:  
+https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode  
+https://code.visualstudio.com/blogs/2019/09/03/wsl2  
+https://devblogs.microsoft.com/commandline/tips-and-tricks-for-linux-development-with-wsl-and-visual-studio-code/
+
+## Install Code Runner
+
+[Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner) nous permettra d'exécuter directement nos scripts depuis VSCode.
