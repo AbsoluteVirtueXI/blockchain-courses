@@ -63,10 +63,10 @@ En vous servant de `console.log` successifs, l'exécution de ce script affichera
 ### pyramid_generic.js
 
 L'affichage de nos pyramides utilise le caractères `*`.  
-_info_: En javascript un unique caractère est aussi une `string`.
-Trouver un moyen pour qu'en ne modifiant qu'une seule variable dans le script on puisse utiliser le caractère que l'on souhaite pour l'affichage.
-Implémenter cela dans un fichier _pyramid_generic.js_
-_indice_: ce caractère doit être dans une variable.
+_info_: En javascript un unique caractère est aussi une `string`.  
+Trouver un moyen pour qu'en ne modifiant qu'une seule variable dans le script on puisse utiliser le caractère que l'on souhaite pour l'affichage.  
+Implémenter cela dans un fichier _pyramid_generic.js_  
+_indice_: ce caractère doit être dans une variable.  
 On pourra obtenir avec une seule modification du fichier un affichage tel que:
 
 ```zsh
