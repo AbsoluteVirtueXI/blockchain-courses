@@ -73,6 +73,8 @@ Sous Linux il est préferable d'installer `nvm` qui est un manager de version `N
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 ```
 
+Fermer le terminal, puis ouvrir un autre terminal pour appliquer les changements appliqués aux variables d'environnement.
+
 Si `nvm` est correctement installé la commande suivante doit vous retourner "nvm":
 
 ```zsh
