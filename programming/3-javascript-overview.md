@@ -127,7 +127,7 @@ Dans les cas ou un _counter_ est nécessaire pour tracker la progression de la b
 
 ```js
 // Pour tous les élements de 10, jusqu'a
-// 0
+// 0 (0 non inclus)
 for (let counter = 10; counter > 0; counter -= 1) {
   console.log(counter)
 }
