@@ -123,7 +123,7 @@ Vérifier que `Node.js` est accessible et correctement installé en exécutant:
 node --version
 ```
 
-# VSCode extensions
+# VSCode extensions and configuration
 
 ## Windows users: Install Remote - WSL
 
@@ -138,3 +138,14 @@ https://devblogs.microsoft.com/commandline/tips-and-tricks-for-linux-development
 ## Install Code Runner
 
 [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner) nous permettra d'exécuter directement nos scripts depuis VSCode.
+
+## Auto Save and indentation
+
+- auto formatting on save:  
+  Dans **Preferences > Settings** sous **User**, dans **Text Editor > Formatting** check **Format on Save**
+- auto formatting on paste:  
+  Dans **Preferences > Settings** sous **User**, dans **Text Editor > Formatting** check **Format on Paste**
+- auto saving:  
+  Dans **Preferences > Settings** sous **User**, dans **Text Editor > Files > Auto Save** select **onFocusChange**
+- indentation 2 espaces:
+  Dans **Preferences > Settings** sous **User**, recherchez `tab size`, sous `Tab Size` entrez comme valeur `2`
