@@ -104,13 +104,13 @@ let sum = nb1 + nb2
 console.log(sum)
 ```
 
-Nous attendons comme résultat `17`.
+Nous attendons comme résultat `17`.  
 Après avoir effectué vos recherches corrigez le script pour qu'il affiche le résultat attendu.
 
 ### manual_count.js
 
-Créer un script _manual_count.js_
-En ne vous servant que de `console.log` écrivez un programme qui compte de 0 à 20.
+Créer un script _manual_count.js_  
+En ne vous servant que de `console.log` écrivez un programme qui affiche les nombres de 0 à 20.  
 L'affichage à l'exécution du script devra ressembler à ca:
 
 ```zsh
@@ -128,9 +128,9 @@ L'affichage à l'exécution du script devra ressembler à ca:
 ### for_count.js
 
 En allant plus loin dans le cours vu ce matin, créer un fichier _for_count.js_ qui affiche les nombres de 0 à 1000.  
-Vous devrez utiliser une boucle `for` pour cela.
+Vous devrez utiliser une boucle `for` pour cela.  
 Implémenter votre solution dans un fichier _for_count.js_
 
 ### reverse_for_count.js
 
-Même principe que l'exercice précédent, mais cette fois de 1000 à 0;
+Même principe que l'exercice précédent, mais cette fois de 1000 à 0.
