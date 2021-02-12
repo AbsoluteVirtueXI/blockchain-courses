@@ -149,3 +149,45 @@ https://devblogs.microsoft.com/commandline/tips-and-tricks-for-linux-development
   Dans **Preferences > Settings** sous **User**, dans **Text Editor > Files > Auto Save** select **onFocusChange**
 - indentation 2 espaces:
   Dans **Preferences > Settings** sous **User**, recherchez `tab size`, sous `Tab Size` entrez comme valeur `2`
+
+# Git and Github
+
+## Install git
+
+Vérifier que `git` est installé avec la commande:
+
+```zsh
+git --version
+```
+
+Si vous recevez un output comme ci dessous, alors `git` est installé.
+
+```zsh
+git version 2.28.0
+```
+
+### Linux
+
+```zsh
+sudo apt update
+sudo apt install git
+```
+
+### macOS
+
+```zsh
+brew install git
+```
+
+### configure git
+
+```zsh
+git config --global user.name "Your Name"
+git config --global user.email "youremail@domain.com"
+```
+
+Pour afficher la configuration de votre git:
+
+```zsh
+git config --list
+```
