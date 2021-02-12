@@ -182,7 +182,7 @@ brew install git
 ### configure git
 
 ```zsh
-git config --global user.name "Your Name"
+git config --global user.name "Your Github username"
 git config --global user.email "youremail@domain.com"
 ```
 
