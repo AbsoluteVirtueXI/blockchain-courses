@@ -13,21 +13,21 @@ Voir démo pour créer un nouveau repo sur github
 Si vous partez de zéro:
 
 ```zsh
-mkdir MyNewProject
-cd MyNewProject
+mkdir testfordwd
+cd testfordwd
 git init
 echo "# testfordwd" >> README.md
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin git@github.com:AbsoluteVirtueXI/testfordwd.git
+git remote add origin https://github.com/AbsoluteVirtueXI/testfordwd.git
 git push -u origin main
 ```
 
 Si vous voulez push un repository local déjà existant:
 
 ```zsh
-git remote add origin git@github.com:YourUserName/testfordwd.git
+git remote add origin https://github.com/AbsoluteVirtueXI/testfordwd.git
 git branch -M main
 git push -u origin main
 ```
