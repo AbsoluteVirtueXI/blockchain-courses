@@ -81,7 +81,7 @@ Ecrivez un programme qui affichera un message contenant tous les vêtements et a
 Ci dessus le début d'un template:
 
 ```js
-let isRainy
+let isRainy = true
 let temperature = 10
 let clothes = ''
 
