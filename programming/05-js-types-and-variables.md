@@ -49,7 +49,7 @@ console.log(n) // output: 10
 // movies is mutable
 let movies = ['The Prestige', 'Batman', 'Incepetion', 'Interstellar']
 addMovie(movies, 'Tenet')
-console.log('movies') // output:
+console.log(movies) // output: [ 'The Prestige', 'Batman', 'Incepetion', 'Interstellar', 'Tenet' ]
 ```
 
 #### Undefined type
