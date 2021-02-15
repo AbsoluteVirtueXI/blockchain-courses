@@ -114,11 +114,11 @@ while (!gameOver) {
 console.log('Game over')
 ```
 
-Comme les valeurs de type `number`, qui ont leurs opérateurs arithmétiques, `+`, `-`, `/`, `*`, `%` et `**`, les valeurs de type `boolean` possèdent aussi des opérateurs logiques.
-**Binary logical operators:**
-`&&`: Logical AND
-`||`: Logical OR
-`!`: Logical NOT
+Comme les valeurs de type `number`, qui ont leurs opérateurs arithmétiques, `+`, `-`, `/`, `*`, `%` et `**`, les valeurs de type `boolean` possèdent aussi des opérateurs logiques.  
+**Binary logical operators:**  
+`&&`: Logical AND  
+`||`: Logical OR  
+`!`: Logical NOT  
 `??`: [Nullish Coalescing Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
 
 ```js
@@ -165,7 +165,7 @@ Ces opérations logiques sont représentées dans les tables de vérités suivan
 | 1 | 0 | 1 |
 | 1 | 1 | 1 |
 
-**Table de vérité `||` JS**:
+**Table de vérité `||` JS**:  
 | a | b | a `||` b |
 |---|---|---------|
 | `false` | `false` | `false` |
@@ -173,7 +173,7 @@ Ces opérations logiques sont représentées dans les tables de vérités suivan
 | `true` | `false` | `true` |
 | `true` | `true` | `true` |
 
-**Table de vérité NOT classique**:
+**Table de vérité NOT classique**:  
 | a | NOT a |
 |---|---|
 | 0 | 1 |
