@@ -323,7 +323,7 @@ if (42 === 0b101010 && 42 === 052 && 42 === 0x2a) {
 }
 ```
 
-Les variables de types `number` ont une méthode `.toString([radix])` qui permet de retourner une chaîne représentant le nombre dans une base numérique (radix) donnée.  
+Les variables de types `number` ont une méthode `.toString([radix])` qui permet de retourner une `string` représentant le nombre dans une base numérique (radix) donnée.  
 Si aucun radix n'est indiqué alors la base par défaut est la base 10.
 _une base se traduit par radix en anglais_
 
