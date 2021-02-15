@@ -165,13 +165,14 @@ Ces opérations logiques sont représentées dans les tables de vérités suivan
 | 1 | 0 | 1 |
 | 1 | 1 | 1 |
 
-**Table de vérité `||` JS**:  
-| a | b | a `||` b |
-|---|---|---------|
-| `false` | `false` | `false` |
-| `false` | `true` | `true` |
-| `true` | `false` | `true` |
-| `true` | `true` | `tru` |
+**Table de vérité `||` JS**:
+
+| a       | b       | a `\|\|` b |
+| ------- | ------- | ---------- |
+| `false` | `false` | `false`    |
+| `false` | `true`  | `true`     |
+| `true`  | `false` | `true`     |
+| `true`  | `true`  | `tru`      |
 
 **Table de vérité NOT classique**:  
 | a | NOT a |
