@@ -126,7 +126,7 @@ Comme les valeurs de type `number`, qui ont leurs opérateurs arithmétiques, `+
 false && false // false
 false && true // false
 true && false // false
-true && true // false
+true && true // true
 
 // ||: logical OR operator
 false || false // false
