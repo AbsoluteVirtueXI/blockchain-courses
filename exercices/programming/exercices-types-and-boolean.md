@@ -100,4 +100,4 @@ console.log(`Je vous recommande de porter: ${clothes}`)
 ```
 
 Soyez imaginatif et cohérent.
-Si l'on veut bien faire cet exercice peut être assez difficile, par exemple un t-shirt doit être toujours porté, même sous un pull ou un manteau.
+Si l'on veut bien faire, cet exercice peut être assez difficile, par exemple un t-shirt doit être toujours porté, même sous un pull ou un manteau.
