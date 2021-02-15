@@ -171,7 +171,7 @@ Ces opérations logiques sont représentées dans les tables de vérités suivan
 | `false` | `false` | `false` |
 | `false` | `true` | `true` |
 | `true` | `false` | `true` |
-| `true` | `true` | `true` |
+| `true` | `true` | `tru` |
 
 **Table de vérité NOT classique**:  
 | a | NOT a |
