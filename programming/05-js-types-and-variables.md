@@ -33,7 +33,8 @@ let x = 10
 ++x // ici on ne modifie pas 10, on réasigne à x une nouvelle valeur qui est 11
 
 const increment = (n) => {
-  return (n = n + 1)
+  n = n + 1
+  return n
 }
 
 const addMovie = (list, elem) => {
