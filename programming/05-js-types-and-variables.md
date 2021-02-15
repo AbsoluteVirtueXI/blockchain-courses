@@ -187,7 +187,7 @@ Ces opérations logiques sont représentées dans les tables de vérités suivan
 | `true` | `false` |
 
 Les opérateurs logiques sont normalement utilisés avec des opérandes de type `boolean`.  
-Dans ce cas l'`expression` retournera un `boolean`.
+Dans ce cas l'`expression` sera évaluée et retournera un `boolean`.
 Comme ci dessous:
 
 ```js
@@ -231,13 +231,45 @@ if ((isDev && hasSoliditySkill) || hasIndomitableWill) {
 }
 ```
 
+Exemples:
+
+```js
+// Programme qui va m'aider à décider si je dois mettre mon manteau
+// ou pas en fonction d'une méteo pluvieuse ou venteuse
+let isRainy = true
+let isWindy = false
+
+if (isRainy || isWindy) {
+  console.log('Mettez votre manteau')
+} else {
+  console.log('Nous n avez pas besoin de manteau today')
+}
+```
+
+```js
+// Programme pour vérifier si on peut voter en France
+// Pour voter il faut être majeur, de nationalité francaise
+// et être sur le sol francais
+let age = 20
+let nationality = 'french'
+let isResident = false // résident sur le sol francais ?
+
+if (age >= 18 && nationality === 'french' && isResident) {
+  console.log('Vous pouvez voter en France')
+} else if (age >= 18 && nationality === 'french' && !isResident) {
+  console.log('Vous pouvez voter mais à l etranger. Contactez votre consulat.')
+} else {
+  console.log('Un des paramêtres n est pas valide')
+}
+```
+
 _Nous le verrons plus tard, une expression est une opération qui nous retourne une valeur.
-Les opérations arithmétiques, de comparaisons relationnelles ou d'égalité, bit à bit, logiques et même l'appelle de fonction sont des expressions. Et certaines de ces opérations retournent un `boolean`_  
+Les opérations arithmétiques, de comparaisons relationnelles ou d'égalité, bit à bit, logiques et même l'appelle de fonction sont des expressions. Et certaines de ces opérations retournent un `boolean`_
 _Nous le verrons également plus tard, mais puisque les opérations logiques sont évaluées de gauche à droite, elles peuvent servir à `short-circuit` l'évaluation d'une expression_
 
 #### Number type
 
-le type `number` représente un nombre entier ou réel/décimal, aussi bien positif que négatif.  
+le type `number` représente un nombre entier ou réel/décimal, aussi bien positif que négatif.
 En anglais on les désigne comme `integer` et `float`.
 Les `number` peuvent avoir comme valeur maximum `9007199254740991` et comme valeur minimum `-9007199254740991`.
 
