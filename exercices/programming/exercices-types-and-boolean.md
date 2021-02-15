@@ -13,7 +13,7 @@ Pratiquer les exemples.
 
 ## boolean.js
 
-Ecrire un script `boolean.js` qui affichera le résultat des expressions suivantes qui ont été assignée à des variables.  
+Ecrire un script `boolean.js` qui affichera le résultat des expressions suivantes qui ont été assignées à des variables.  
 Evaluer d'abord mentalement le résultat puis vérifier cela avec votre script.
 
 ```js
