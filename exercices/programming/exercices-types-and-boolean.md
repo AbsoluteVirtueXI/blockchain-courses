@@ -33,7 +33,7 @@ let res10 =
 Vous devrez afficher les résultats sur la console avec un `console.log`, par exemple:
 
 ```js
-console.log(`res1 = ${res1}`, res1)
+console.log(`res1 = ${res1}`)
 ```
 
 Dans le doute sur la priorité des différents opérateurs vous pouvez vous appuyer sur cette [table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#table).  
