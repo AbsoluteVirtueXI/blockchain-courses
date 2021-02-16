@@ -70,7 +70,7 @@ Ecrivez un programme qui affiche ligne par ligne, l'index et le caractère situ�
 C'était à Mégara, faubourg de Carthage, dans les jardins d'Hamilcar.
 ```
 
-Le format du message attendu pour chaque caractère sera par exemple:
+Le format du message attendu pour chaque caractère sera par exemple:  
 `Le caractère C est à l'index 0`
 `Le caractère ' est à l'index 1`
 
