@@ -351,14 +351,170 @@ let res2 = bigNumber2 + BigInt(1)
 
 #### String type
 
+##### String === liste de caractères
+
 Le type `string` représente une suite de caractères, c'est à dire du texte.
 Puisque les `string` sont une suite de caractères, chaque caractère de la `string` occupe une position dans cette suite.  
 Le premier caractère est à l'index 0, le suivant à l'index 1, etc...  
 La longueur de cette string, sa `length`, est le nombre de caractères qu'elle contient.
 
 ```js
-'Hello World!'
+const msg = 'Hello World!'
+console.log(msg[0]) // output: H
+console.log(msg[1]) // output: e
+console.log(msg[2]) // output: l
+console.log(msg[3]) // output: l
+console.log(msg[11]) // output:!
+console.log(msg[12]) // output: undefined, index out of range
+```
 
+**En javascript, le premier élément d'une `string` ou d'une tableau est à l'index `0`. Le premier élément est accessible via la `bracket notation` `[index]`**  
+Il existe une autre méthode pour avoir accès à un caractère en fonction de son index avec la méthode: `charAt()`
+
+```js
+const msg = 'Hello World!'
+console.log(msg.charAt(0)) // output: H
+console.log(msg.charAt(1)) // output: e
+console.log(msg.charAt(2)) // output: l
+console.log(msg.charAt(3)) // output: l
+console.log(msg.charAt(11)) // output:!
+console.log(msg.charAt(12)) // output: '', une string vide
+```
+
+La propriété `.length` d'une `string` correspond à la longueur de cette `string`, c'est un `number`.
+
+```js
+let msg = 'I have a love-hate relationship with Javascript.'
+console.log(`La longueur de msg est: ${msg.length}`)
+
+// Afficher chaque caractères d'une string et son index
+for (let i = 0; i < msg.length; ++i) {
+  console.log(`character ${msg[i]} is at index: ${i}`)
+}
+```
+
+Les `string` sont un `primitive type`, donc elle sont `immutable`s.  
+Une fois créées on ne peut plus les modifier.
+
+```js
+let msg = 'I am immutable, you can not modify me.'
+msg[0] = '*'
+console.log(msg) // output: I am immutable, you can not modify me.
+```
+
+Si on veut modifier une `string` il faudra en créer une nouvelle en se basant sur celle que l'on voulait initialement modifier.
+
+##### Declaration
+
+Pour créer une donnée de type `string` on place les caractères entre 2 single quotes, double quotes ou backquotes:
+
+```js
+let str1 = 'Une string'
+let str2 = `Une autre ${str1}`
+```
+
+L'avantage des backquotes c'est que l'on peut créer des `template strings`.
+Les `template strings` peuvent contenir des `placeholders`. Ceux-ci sont indiqués par le signe dollar et des accolades `${expression}`.  
+Les expressions dans ces `placeholders` sont évaluées et ensuite intégrées dans la `string`.
+
+```js
+let age = 30
+let msg = `Dans 10 ans vous aurrez ${age + 10}`
+console.log(msg)
+```
+
+Un exemple qui gère le pluriel du mot "student" en fonction du nombre d'étudiants `nbStudents`:
+
+```js
+let nbStudents = 42
+let msg = `I am teaching to ${nbStudents} student${nbStudents > 1 ? 's' : ''}`
+console.log(msg)
+nbStudents = 1
+console.log(
+  `Now, I am teaching to ${nbStudents} student${nbStudents > 1 ? 's' : ''}`
+)
+```
+
+##### Special characters
+
+Dans une `string` des caractères peuvent être encodé avec l'`escape notation`.
+Les caractères spéciaux les plus courants sont:
+`\n`: passage à la line
+`\'`: single quote (utile car nous utilisons déjà les singles quotes pour définir une string)
+`\t`: tabulation
+`\\`: un backslash
+
+```js
+console.log('/home\n\t/user1\n\t/user2\n\t/user3')
+```
+
+```js
+console.log('Please choose an option:')
+console.log('\t1: reboot')
+console.log('\t2: shutdown')
+console.log('\t3: cancel')
+```
+
+Pour une liste complète des caractères spéciaux consulter:  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#escape_notation
+
+##### String operators
+
+L'opérateur `+` sert à concaténer des `string`:
+
+```js
+console.log('Hello ' + ' ' + 'world' + '!')
+```
+
+C'est un raccourci à la méthode `.concat()`
+
+```js
+console.log('Hello'.concat(' ', 'world', '!'))
+```
+
+Les différents opérateurs de comparaison s'appliquent aussi à une `string`:
+
+```js
+'abc' === 'abc' // true
+'abc' !== 'abc' // false
+'ab' > 'ac' // false
+'ab' < 'ac' // true
+'Bonjour' >= 'Au revoir' // true
+'A' <= 'a' // true
+'a' > "Un caractères vaut mieux qu'une longue phrase" // true
+```
+
+Ce sont les valeurs `Unicode` qui sont comparées en suivant l'ordre lexicographique.
+Une table Unicode: https://unicode-table.com/en/
+_La norme ASCII est l'ancêtre de la norme Unicode_
+
+##### Multiline String
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#long_literal_strings
+
+##### String methods and properties
+
+le type `string` est un `primitive type`, qui possède de nombreuses méthodes et une propriété `.length`
+_Les méthodes sont comme des fonctions, mais appliquées directement à une donnée. Les méthodes sont des concepts de la programmation orienté objet que l'on verra plus tard._
+Nous avons déjà croisé une de ces méthodes dans les cours précédents, c'est la méthode `.repeat()`.
+
+```js
+'zZ'.repeat(100)
+```
+
+La liste de toute les méthodes disponibles pour le type `string` est accessible sur la documentation officielle de MDN (Mozilla Developper Network):  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods
+
+Une liste de méthodes intéressantes:  
+https://www.digitalocean.com/community/tutorials/how-to-index-split-and-manipulate-strings-in-javascript
+
+exemple(démo en cours):
+
+```js
+// Vérifier si une phrase donnée contient le prenom "Bob"
+let pattern = 'Bob'
+let str =
+  '\n\n\t\t    AlIcE eT bOb EsSaYeNt De CoMmUnIqUeR sEcReTeMeNt, MaIs EvE vEiLlE  \n\n '
 ```
 
 #### Symbol type
@@ -366,6 +522,10 @@ La longueur de cette string, sa `length`, est le nombre de caractères qu'elle c
 n/a
 
 ### Compound/Object Types
+
+En plus des tous `primitive type`s vu précédemment il y a les `object`s
+Ce sont des types plus complexes, car composés d'autres types.
+Contrairement aux données de catégorie `primitive type`, les `objects`s peuvent être modifiés après leur création. On dit d'eux qu'ils sont `mutables`s.
 
 #### Arrays
 
