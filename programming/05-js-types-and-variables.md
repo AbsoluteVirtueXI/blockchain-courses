@@ -359,7 +359,7 @@ Le premier caractère est à l'index 0, le suivant à l'index 1, etc...
 La longueur de cette string, sa `length`, est le nombre de caractères qu'elle contient.
 
 ```js
-const msg = 'Hello World!'
+let msg = 'Hello World!'
 console.log(msg[0]) // output: H
 console.log(msg[1]) // output: e
 console.log(msg[2]) // output: l
@@ -368,11 +368,11 @@ console.log(msg[11]) // output:!
 console.log(msg[12]) // output: undefined, index out of range
 ```
 
-**En javascript, le premier élément d'une `string` ou d'une tableau est à l'index `0`. Le premier élément est accessible via la `bracket notation` `[index]`**  
+**En javascript, le premier élément d'une `string` ou d'une tableau est à l'index `0`. Les éléments sont accessibles via la `bracket notation` `[index]`**  
 Il existe une autre méthode pour avoir accès à un caractère en fonction de son index avec la méthode: `charAt()`
 
 ```js
-const msg = 'Hello World!'
+let msg = 'Hello World!'
 console.log(msg.charAt(0)) // output: H
 console.log(msg.charAt(1)) // output: e
 console.log(msg.charAt(2)) // output: l
