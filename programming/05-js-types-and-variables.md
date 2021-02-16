@@ -297,7 +297,7 @@ let currentBalance = -balance // unary negation
 ```
 
 les nombres sont habituellement représentés en base 10, c'est à dire exprimé avec les chiffres de 0 à 9.  
-En informatique il peut être utile, et recommendé pour certains cas, d'exprimer les chiffres dans une autre base:
+En informatique il peut être utile, et recommendé pour certains cas, d'exprimer les chiffres dans une autre base:  
 binaire: 2 digits, chiffre 0 et 1 uniquement  
 octal: 8 digits, chiffre de 0 à 7 uniquement  
 décimal: 10 digits, chiffre de 0 à 9 uniquement  
