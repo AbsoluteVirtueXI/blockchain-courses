@@ -529,11 +529,76 @@ Contrairement aux données de catégorie `primitive type`, les `objects`s peuven
 
 #### Arrays
 
-#### Objects
+Un tableau est une liste composée d'expressions/éléments.  
+_Une expression est un ensemble d'instruction qui retourne une valeur_
+
+**Créer un tableau:**
+
+```js
+let languages = ['Javascript', 'Solidity', 'Python', 'C++']
+```
+
+**Accéder aux éléments d'un tableau en fonction de leur index:**
+
+```js
+let languages = ['Javascript', 'Solidity', 'Python', 'C++']
+let first = languages[0]
+let second = languages[1]
+let third = languages[2]
+let last = languages[-1]
+console.log(`I know ${first}, and i would like to learn ${second}.`)
+console.log(`${third} and ${last} are not in my learning scope.`)
+```
+
+**Itérer sur les éléments d'un tableau**:
+
+```js
+let languages = ['Javascript', 'Solidity', 'Python', 'C++']
+// Loop classique avec une boucle for
+for (let i = 0; i < languages.length; ++i) {
+  console.log(languages[i])
+}
+
+// for...of
+for (let elem of languages) {
+  console.log(elem)
+}
+
+// forEach
+languages.forEach((elem) => {
+  console.log(elem)
+})
+```
 
 #### Functions
 
-### type of
+Les fonctions sont aussi des `object`s.
+Il existe 2 manières pour définir une fonction.  
+Avec le keyword `function`:
+
+```js
+function add(nb1, nb2) {
+  return nb1 + nb2
+}
+
+let sum = add(1, 2)
+console.log(sum)
+```
+
+Ou bien avec l'`arrow function expression`:
+
+```js
+const add = (nb1, nb2) => {
+  return nb1 + nb2
+}
+
+let sum = add(1, 2)
+console.log(sum)
+```
+
+#### Objects
+
+### typeof
 
 ## Variables
 
@@ -543,7 +608,7 @@ Il existe 3 types de variables en javascript.
 Elles sont déclarés avec les keywords suivants:
 `let`: Déclare une `block-scoped` variable, locale à un scope, on peut optionnellement l'initialiser
 `const`: Déclare une `block-scoped` constante. On ne pourra ensuite plus que lire sont contenu. Il faut obligatoirement initialiser une constante.
-`var`: Déclare une variable, on peut optionnellement l'initialiser.
+`var`: Déclare une variable, on peut optionnellement l'initialiser.  
 Les variables déclarées avec les keywords `var` ou `let` et qui ne sont pas initialisées, auront comme valeur `undefined`.
 
 ### Constantes
