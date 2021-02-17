@@ -585,7 +585,7 @@ console.log(`nb elem: ${languages.length}`) // output: nb elem: 6
 ```js
 let languages = ['Javascript', 'Solidity', 'Python', 'C++']
 let last = languages.pop()
-console.log(`Last elem: ${last}`)
+console.log(`Last elem: ${last}`)
 console.log(languages)
 ```
 
