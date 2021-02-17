@@ -570,6 +570,31 @@ languages.forEach((elem) => {
 })
 ```
 
+**Ajouter un élément à la fin du tableau:**
+
+```js
+let languages = ['Javascript', 'Solidity', 'Python', 'C++']
+console.log(`nb elem: ${languages.length}`) // output: nb elem: 4
+languages.push('Rust')
+languages.push('Lisp')
+console.log(`nb elem: ${languages.length}`) // output: nb elem: 6
+```
+
+**Retirer le dernier élément du tableau:**
+
+```js
+let languages = ['Javascript', 'Solidity', 'Python', 'C++']
+let last = languages.pop()
+console.log(`Last elem: ${last}`)
+console.log(languages)
+```
+
+Il y a beaucoup de méthodes que l'on peut appliquer à des tableaux.  
+Pour avoir une liste des opérations courantes:  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#common_operations
+Pour avoir une liste exhaustive des méthodes:  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#instance_methods
+
 #### Functions
 
 Les fonctions sont aussi des `object`s.
