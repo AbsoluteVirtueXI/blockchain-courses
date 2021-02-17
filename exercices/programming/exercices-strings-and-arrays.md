@@ -80,3 +80,42 @@ str
   .split(' ')
   .forEach((elem) => console.log(`mot: ${elem}`))
 ```
+
+# Challenge
+
+## decypher.js
+
+le texte suivant est chiffré avec un code Caesar (chiffrement par décalage):
+
+```text
+YRMV PFL VMVI YRU R UIVRD EVF KYRK PFL NVIV JF JLIV NRJ IVRC NYRK ZW PFL NVIV LERSCV KF NRBV WIFD KYRK UIVRD YFN NFLCU PFL BEFN KYV UZWWVIVETV SVKNVVE KYV UIVRD NFICU REU KYV IVRC NFICU
+```
+
+Le but de cet exercice est de vous mettre dans la peau d'un cryptanalyste qui devra casser ce chiffrement Caesar.  
+La méthode manuelle est évidement la pire de toute et n'est pas une solution valide.
+En vous servant de Javascript essayez de casser ce code.  
+Une interaction manuelle est possible, le but n'étant pas de déchiffrer ce code de manière totalement automatique, car pour bien le faire il vous faudrait un dictionnaire de mots.  
+On attend de vous que vous minimalisiez les interactions manuelles pour déchiffrer ce code.
+Vous devrez rendre les codes que vous avez utilisez dans un fichier _decypher.js_ et ecrire en commentaire vos démarches et les différentes étapes que vous avez suivi pour obtenir le message en clair.
+**Hypothèses**:
+
+- le message est en anglais
+- Toutes les lettres sont en majuscules
+- Il n'y a pas de ponctuation
+- Les espaces dans le message chiffré sont aussi des espaces dans le message non chiffré
+
+**Indices**:
+
+- on peut récupérer le code ascii d'un caractères avec la méthode `.charCodeAt([index])`
+
+```js
+'HELLO'.charCodeAt(0) // code ascii du caractère à l'index 0 => H: 72
+'HELLO'.charCodeAt(1) // code ascii du caractère à l'index 1 => E: 69
+```
+
+- pour faire l'inverse et traduire un code ascii en caractère:
+
+```js
+String.fromCharCode(72) // String qui comporte 1 caractère: 'H'
+String.fromCharCode(69) // String qui comporte 1 caractère: 'E'
+```
