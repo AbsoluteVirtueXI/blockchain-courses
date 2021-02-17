@@ -545,9 +545,9 @@ let languages = ['Javascript', 'Solidity', 'Python', 'C++']
 let first = languages[0]
 let second = languages[1]
 let third = languages[2]
-let last = languages[-1]
+let fourth = languages[3]
 console.log(`I know ${first}, and i would like to learn ${second}.`)
-console.log(`${third} and ${last} are not in my learning scope.`)
+console.log(`${third} and ${fourth} are not in my learning scope.`)
 ```
 
 **Itérer sur les éléments d'un tableau**:
