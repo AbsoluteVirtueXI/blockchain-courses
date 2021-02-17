@@ -96,7 +96,7 @@ La méthode manuelle est évidement la pire de toute et n'est pas une solution v
 En vous servant de Javascript essayez de casser ce code.  
 Une interaction manuelle est possible, le but n'étant pas de déchiffrer ce code de manière totalement automatique, car pour bien le faire il vous faudrait un dictionnaire de mots.  
 On attend de vous que vous minimalisiez les interactions manuelles pour déchiffrer ce code.
-Vous devrez rendre les codes que vous avez utilisez dans un fichier _decypher.js_ et ecrire en commentaire vos démarches et les différentes étapes que vous avez suivi pour obtenir le message en clair.
+Vous devrez rendre les codes que vous avez utilisé dans un fichier _decypher.js_ et ecrire en commentaire vos démarches et les différentes étapes que vous avez suivi pour obtenir le message en clair.
 **Hypothèses**:
 
 - le message est en anglais
