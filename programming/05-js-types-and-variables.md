@@ -589,6 +589,19 @@ console.log(`Last elem: ${last}`)
 console.log(languages)
 ```
 
+**Récupérer un sous ensemble du tableau:**
+
+```js
+let animals = ['ant', 'bison', 'camel', 'duck', 'elephant']
+console.log(animals.slice(2)) // expected output: ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4)) // expected output: ["camel", "duck"]
+
+console.log(animals.slice(1, 5)) // expected output: ["bison", "camel", "duck", "elephant"]
+
+console.log(animals.slice(-1)) // expected output: [ 'elephant' ]
+```
+
 Il y a beaucoup de méthodes que l'on peut appliquer à des tableaux.  
 Pour avoir une liste des opérations courantes:  
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#common_operations
@@ -602,38 +615,183 @@ Il existe 2 manières pour définir une fonction.
 Avec le keyword `function`:
 
 ```js
+// Déclaration de la fonction add qui prend 2 paramètres
+// Cette fonction retourne la somme des 2 paramètres passés à la fonction add
 function add(nb1, nb2) {
   return nb1 + nb2
 }
 
+// Appelle de la fonction add avec les 2 arguments 1 et 2
 let sum = add(1, 2)
 console.log(sum)
 ```
 
-Ou bien avec l'`arrow function expression`:
+Ou bien avec l'`arrow function expression` (recommandé!!!!!):
 
 ```js
+// Déclaration de la fonction add qui prend 2 paramètres
+// Cette fonction retourne la somme des 2 paramètres passés à la fonction add
 const add = (nb1, nb2) => {
   return nb1 + nb2
 }
 
+// Appelle de la fonction add avec les 2 arguments 1 et 2
 let sum = add(1, 2)
 console.log(sum)
 ```
 
 #### Objects
 
+Tout ce qui n'est pas un `primitive type` est un `object`.
+Les `object`s servent à grouper des données ensemble si cela à du sens.  
+Pour cela on utilise un `Object literal`.
+
+```js
+const person1 = {
+  name: 'Alice',
+  age: 29,
+}
+
+const person2 = {
+  name: 'Bob',
+  age: 30,
+}
+console.log(person1.name)
+console.log(person2['name'])
+```
+
+Nous pouvons aussi créer nos propres types qui seront aussi des `object`s.
+C'est une version améliorée des `Object literal`s
+Pour cela on utilise le keyword `class`, et on instancie cette classe avec le keyword `new`.
+
+```js
+// Déclaration d'un nouveau type Player que l'on utilisera
+// dans notre programme, probablement un jeu
+class Player {
+  constructor(name, race) {
+    this.name = name
+    this.posX = 0
+    this.posY = 0
+    if (race === 'human') {
+      this.race = 'human'
+      this.hp = 100
+      this.mp = 100
+    } else if (race === 'elf') {
+      this.race = 'elf'
+      this.hp = 80
+      this.mp = 120
+    } else if (race === 'orc') {
+      this.race = 'orc'
+      this.hp = 120
+      this.mp = 80
+    } else if (race === 'undead') {
+      this.race = 'undead'
+      this.hp = 90
+      this.mp = 110
+    } else {
+      this.race = 'troll'
+      this.hp = 110
+      this.mp = 90
+    }
+  }
+  // Méthode qui retourne une string contenant des informations sur le joueur
+  info() {
+    return `name: ${this.name}\nrace: ${this.race}\nhp: ${this.hp}\nmp: ${this.mp}`
+  }
+  // Méthode pour déplacer sur l'axe x le joueur
+  moveX(nb) {
+    this.posX += nb
+  }
+  // Méthode pour déplacer sur l'axe y le joueur
+  moveY(nb) {
+    this.posY += nb
+  }
+  // Méthode qui retourne une string contenant la position du joueur
+  position() {
+    return `Position: (${this.posX}, ${this.posY})`
+  }
+}
+
+// Le programme commence
+
+// Instanciation d'une class Player
+// On dit que player1 est une instance de la classe Player
+const player1 = new Player('AbsoluteVirtue', 'elf')
+const player2 = new Player('DeafKnightHaX0r', 'undead')
+
+// Utilisations des méthodes de la classe Player
+console.log(player1.info())
+console.log(player1.position())
+player1.moveX(10)
+player1.moveY(5)
+// Message destiné au développeur, pour tester son programme
+console.log('DEBUG: Position après avoir effectué un mouvement:')
+console.log(player1.position())
+```
+
 ### typeof
+
+`typeof` est un opérateur utile pour récupérer le nom du type d'une variable/donnée.  
+Le nom du type sera retourné comme une `string`.  
+`typeof` est surtout utilisé pour débuger.  
+Il est fortement déconseillé de se servir de `typeof` dans nos programmes en production, d'assumer son résultat et de prendre des décisions basées sur les résultats de `typeof`.
+
+```js
+console.log(typeof 42)
+// expected output: "number"
+
+console.log(typeof '42')
+// expected output: "string"
+
+console.log(typeof true)
+// expected output: "boolean"
+
+console.log(typeof undeclaredVariable)
+// expected output: "undefined"
+
+console.log(typeof [1, 2, 3])
+// expected output: "object"
+
+console.log(typeof null)
+// expected output: "object"
+```
 
 ## Variables
 
 ### Déclaration
 
 Il existe 3 types de variables en javascript.
-Elles sont déclarés avec les keywords suivants:
-`let`: Déclare une `block-scoped` variable, locale à un scope, on peut optionnellement l'initialiser
-`const`: Déclare une `block-scoped` constante. On ne pourra ensuite plus que lire sont contenu. Il faut obligatoirement initialiser une constante.
+Elles sont déclarées avec les keywords suivants:  
+`let`: Déclare une `block-scoped` variable, locale à un scope, on peut optionnellement l'initialiser.  
+`const`: Déclare une `block-scoped` constante.  
+Une fois déclarée on ne peut plus réassigner une constante.  
+Il faut obligatoirement initialiser une constante.  
 `var`: Déclare une variable, on peut optionnellement l'initialiser.  
-Les variables déclarées avec les keywords `var` ou `let` et qui ne sont pas initialisées, auront comme valeur `undefined`.
+Les variables déclarées avec les keywords `var` ou `let` et qui ne sont pas initialisées, auront comme valeur `undefined`.  
+En javavscript un autre nom pour une variable est un `binding`:
 
-### Constantes
+```js
+const list = ['un', 'deux', 'trois'] // A constant binding of an array to the name "list"
+let welcome = 'Hello World!' // A non-constant binding of a string to the name "welcome"
+```
+
+De nombreux mots sont réservés et ne pourront pas être utilisé comme nom pour vos variables:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#keywords
+
+Précèdent on a vu que les `primitive type`s étaient immutables, cad que ces données ne peuvent pas être modifiées.
+Les données de type `object` sont mutables, elles peuvent donc être modifiées.
+le keyword `const` n'a aucun impact sur la mutabilité d'une donnée.  
+Une donnée mutable, donc un `object`, peut être assignée à une constante, mais cette constante ne pourra plus être `bindé` à une autre donnée.
+
+```js
+const list = ['un', 'deux', 'trois']
+list.push('quatre') // OK beacause an array is mutable
+list = ['1', '2', '3'] // Error: list is a constant binding
+list = ['un', 'deux', 'trois'] // Error: list is a constant binding
+```
+
+```text
+The const declaration creates a read-only reference to a value. It does not mean the value it holds is immutable—just that the variable identifier cannot be reassigned. For instance, in the case where the content is an object, this means the object's contents (e.g., its properties) can be altered.
+```
+
+### Scope and visibility
