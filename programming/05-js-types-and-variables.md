@@ -545,6 +545,7 @@ let languages = ['Javascript', 'Solidity', 'Python', 'C++']
 let first = languages[0]
 let second = languages[1]
 let third = languages[2]
+languages[3] = 'Java'
 let fourth = languages[3]
 console.log(`I know ${first}, and i would like to learn ${second}.`)
 console.log(`${third} and ${fourth} are not in my learning scope.`)
@@ -795,3 +796,6 @@ The const declaration creates a read-only reference to a value. It does not mean
 ```
 
 ### Scope and visibility
+
+En Javascript les scopes sont délimités par `{}`
+La visibilité
