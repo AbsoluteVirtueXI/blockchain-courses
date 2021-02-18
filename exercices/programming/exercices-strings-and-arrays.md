@@ -122,6 +122,6 @@ String.fromCharCode(69) // String qui comporte 1 caractère: 'E'
 
 ## cypher.js
 
-Ecrivez un programme qui fait l'inverse que l'exercice précédent, c'est à dire chiffrer un message arbitraire avec un décalage arbitraire.  
+Ecrivez un programme qui fait l'inverse de l'exercice précédent, c'est à dire chiffrer un message arbitraire avec un décalage arbitraire.  
 Le message à chiffrer devra être un message en anglais, en majuscule, sans ponctuation, sans chiffres et les espaces du message en clair seront aussi des espaces dans le message chiffré.  
 Votre programme devra afficher le message chiffré que vous pourrez ensuite partager sur le discord à vos camarades pour qu'ils essayent de le casser.
