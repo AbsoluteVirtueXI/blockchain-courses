@@ -174,19 +174,19 @@ Nous avons vu précédemment comment brancher notre flot d'exécution en fonctio
 
 ```js
 let selectedRace = 'orc' // race chosen by player
-if (race === 'human') {
+if (selectedRace === 'human') {
   console.log(
     'The noble warriors of humanity employ both a strong military and powerful magics in the defense of their shining kingdoms.'
   )
-} else if (race === 'elf') {
+} else if (selectedRace === 'elf') {
   console.log(
     'The reclusive Night Elves were the first race to awaken in the World of Warcraft. These shadowy, immortal beings were the first to study magic and let it loose throughout the world nearly ten thousand years before Warcraft I.'
   )
-} else if (race === 'orc') {
+} else if (selectedRace === 'orc') {
   console.log(
     'The Orcs, who once cultivated a quiet Shamanistic society upon the world of Draenor, were corrupted by the chaos magics of the Burning Legion and formed into a voracious, unstoppable Horde.'
   )
-} else if (race === 'undead') {
+} else if (selectedRace === 'undead') {
   console.log(
     "The horrifying Undead army, called the Scourge, consists of thousands of walking corpses, disembodied spirits, damned mortal men and insidious extra-dimensional entities. The Scourge was created by the Burning Legion for the sole purpose of sowing terror across the world in anticipation of the Legion's inevitable invasion."
   )
