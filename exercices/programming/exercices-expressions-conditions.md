@@ -129,6 +129,14 @@ Les variables à utiliser et que vous manipulerez pour simuler le choix d'un uti
 
 ## elevator.js
 
+Installer globalement le package manager `yarn`:
+
+```zsh
+npm install --global yarn
+```
+
+On verra ce qu'est `yarn` très prochainement.
+
 Dans votre répertoire de travail, celui ou sont vos exercices, entrer la commande suivante:
 
 ```zsh
