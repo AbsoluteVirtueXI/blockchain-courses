@@ -97,6 +97,28 @@ for (let i = 0; i < names.length; ++i) {
 }
 ```
 
+```js
+// Affichage des tables et des clients d'un restaurant.
+let tables = [
+  ['Alice', 'Bob'],
+  ['Craig', 'Eve', 'Ginette'],
+  ['Sofiane', 'Franck', 'Paulina', 'Maxime'],
+]
+
+let nbUsers = 0
+for (let i = 0; i < tables.length; ++i) {
+  nbUsers += tables[i].length
+}
+console.log(`Today, nb users = ${nbUsers}`)
+
+for (let i = 0; i < tables.length; ++i) {
+  console.log(`Table ${i + 1}: `)
+  for (let j = 0; j < tables[i].length; ++j) {
+    console.log(`\t${tables[i][j]}`)
+  }
+}
+```
+
 ## break
 
 On peut sortir d'une boucle avec le `statement` `break`.
