@@ -461,7 +461,7 @@ closure() // output: 'function used 3 times'
 closure() // output: 'function used 4 times'
 ```
 
-Ce concept est redondant avec la notion de programmation orienté objet, qu'il faudra préféré aux closures.
+Ce concept est redondant avec la notion de programmation orienté objet, qu'il faudra préférer aux closures.  
 Pour plus d'information sur les closures: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
 ## Recursive functions
