@@ -337,7 +337,7 @@ Une fonction peut être le paramètre d'une autre fonction.
 ```js
 // Déclaration d'une fonction qui prend comme paramètre une fonction et un tableau
 // Cette fonction appliquera cette fonction à chaque élement du tableau
-// Un nouveau tableau sera retournée
+// Un nouveau tableau sera retourné
 const map = (fn, array) => {
   // On copie le tableau array dans tmpArray pour être sur de ne pas le modifier
   // On utilise pour cela la spread syntax
