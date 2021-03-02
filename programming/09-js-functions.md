@@ -455,10 +455,10 @@ const functionFactory = () => {
 }
 
 let closure = functionFactory()
-closure()
-closure()
-closure()
-closure()
+closure() // output: 'function used 1 times'
+closure() // output: 'function used 2 times'
+closure() // output: 'function used 3 times'
+closure() // output: 'function used 4 times'
 ```
 
 Ce concept est redondant avec la notion de programmation orienté objet, qu'il faudra préféré aux closures.
