@@ -2,11 +2,11 @@
 
 ## Why functions ?
 
-Les fonctions sont l'un des éléments essentiels de Javascript et de la programmation en général.
-Nous pouvons diviser notre programme en différentes fonctions afin de le rendre plus lisible et maintenable.
-Les lignes de codes qui sont écrites plusieurs fois ou le code qui effectue un traitement particulier sont des bons candidats pour des fonctions.
-Une fonction est en réalité que le `binding` d'un nom à un code exécutable.
-Ce code peut ensuite être appelé depuis notre programme grâce à son nom.
+Les fonctions sont l'un des éléments essentiels de Javascript et de la programmation en général.  
+Nous pouvons diviser notre programme en différentes fonctions afin de le rendre plus lisible et maintenable.  
+Les lignes de codes qui sont écrites plusieurs fois ou le code qui effectue un traitement particulier sont des bons candidats pour des fonctions.  
+Une fonction est en réalité que le `binding` d'un nom à un code exécutable.  
+Ce code peut ensuite être appelé depuis notre programme grâce à son nom (le nom de la fonction).  
 Les fonctions sont aussi très utiles pour cacher une implémentation complexe. Un développeur crée une fonction, et nous pouvons l'importer dans notre code et l'utiliser, sous réserve qu'une documentation sur son utilisation soit fournie.  
 Par exemple le package `axios` nous fournit un ensemble de fonctions qui nous permettent d'effectuer des requêtes web (GET, POST, etc) en quelques lignes de code au lieu de plusieurs centaines:
 
