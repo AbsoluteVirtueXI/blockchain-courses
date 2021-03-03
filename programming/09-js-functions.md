@@ -118,7 +118,7 @@ Si on nous demande maintenant de gérer 2 sessions d'étudiants, au lieu d'une s
 // ATTENTION: Cette fonction RETOURNE une string, elle ne l'affiche pas!!!!
 // Cette fonction est `pure`
 const welcomeString = (name, place, nb) => {
-  return `\tHello ${name}, welcome to the ${place}, you are user number ${nb}!`
+  return `Hello ${name}, welcome to the ${place}, you are user number ${nb}!`
 }
 
 // Cette fonction prend en paramètre un tableau de string
@@ -126,7 +126,7 @@ const welcomeString = (name, place, nb) => {
 // c'est ce que l'on veut!!
 const sayHelloToAll = (names, place) => {
   for (let i = 0; i < names.length; ++i) {
-    console.log(welcomeString(names[i], place, i + 1))
+    console.log(`\t${welcomeString(names[i], place, i + 1)}`)
   }
 }
 
