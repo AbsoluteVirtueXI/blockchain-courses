@@ -100,7 +100,7 @@ Ajouter au fichier précédent une fonction `calc` qui prend 3 paramètres:
 En fonction du caractère passé en paramètre, l'opération de calcul correspondante devra être appliquée aux 2 autres paramètres, et le résultat sera retourné
 Vous devrez absolument vous servir des 4 fonctions `add`, `sub`, `mul` et `div` écrites précédemment.
 
-## countWhells.js
+## countWheels.js
 
 un garagiste vous demande de compter le nombre de roues qu'il y a dans son garage.
 Les roues sont toutes montées sur des véhicules de types:
