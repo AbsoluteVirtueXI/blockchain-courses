@@ -7,9 +7,15 @@ Vous devrez fournir ce lien dans le formulaire de rendus d'exercices suivant: ht
 Essayez d'aller le plus loin possible.  
 Les exercices qui nécessitent une réflexion approfondie sont sous la section: **Challenge**
 
+**Ces exercices vous demandent d'écrire des fonctions dans un fichier. Il faudra évidement tester ces fonctions en les appelant dans votre programme!!. Les exercices consistent donc à déclarer ces fonctions mais aussi à les appeler pour vérifier leur exécution**
+
 ## count.js
 
 Ecrire une fonction `count` qui prend comme paramètre un nombre min, un nombre max et un nombre step. L'exécution de cette fonction devra afficher sur le terminal tous les nombres de min jusqu'a max avec un intervale de step
+
+## typeOf.js
+
+Ecrire une fonction `typeOf` qui prend comme paramètre une variable, et qui retourne une string qui sera le nom du type de cette variable passée en paramètre. Vous devrez utiliser l'opérateur `typeof` pour cela
 
 ## pyramid.js
 
@@ -42,6 +48,30 @@ Vous devrez utiliser la fonction `reverseStr` pour effectuer cette vérification
 
 Ecrire une fonction `convertMiToKm` qui fait la conversion d'une distance exprimée en Milles, en Kilomètres.
 1 Mille est à égal à 1.60934 Kilomètres.
+
+## arrayUtils.js
+
+Ecrivez une fonction `biggest` qui retourne le plus grand élément d'une liste de nombre.
+
+```js
+biggest([99, 100, 101, 1]) // returns 101
+```
+
+## arrayUtils.js
+
+Ajouter au fichier précédent une fonction `sortAscend` qui prend comme paramètre une liste de nombres et retourne une nouvelle liste dont les nombres sont classés par ordre croissant.
+
+```js
+sortAscend([99, 100, 101, 1]) // returns [1, 99, 100, 101]
+```
+
+## arrayUtils.js
+
+Ajouter au fichier précédent une fonction `makeUnique` qui prend comme paramètre une liste de nombre et retourne une nouvelle liste sans doublons, classée par ordre croissant.
+
+```js
+makeUnique([1, 2, 1, 3, 2, 4, 5, 7, 5, 1]) //returns [1, 2, 3, 4, 5, 7]
+```
 
 ## calc.js
 
