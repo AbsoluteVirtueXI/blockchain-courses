@@ -110,34 +110,6 @@ Hello, alyra
   % git push -u origin master
   ```
 
-### **djinit**:
-
-- create a new project on github
-- create your project with djinit:
-
-  ```zsh
-  % npx djinit my-project
-  ```
-
-- change the working directory to your project:
-
-  ```zsh
-  % cd my-project
-  ```
-
-- add github remote repository and set the branch:
-
-  ```zsh
-  % git remote add origin https://github.com/alyra-student/my-project.git
-  % git branch -M master
-  ```
-
-- push the first commit:
-
-  ```zsh
-  % git push -u origin master
-  ```
-
 ## **configuration: package.json**
 
 https://docs.npmjs.com/files/package.json
