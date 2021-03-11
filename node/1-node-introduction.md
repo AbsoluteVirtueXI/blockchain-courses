@@ -364,3 +364,77 @@ for (let i = 0; i < 10; ++i) {
   console.log(chalk.red.underline.bold('Hello HardFork!'))
 }
 ```
+
+ou encore créer un dégradé en se servant de l'index de la boucle
+
+```js
+const chalk = require('chalk')
+for (let i = 0; i < 10; ++i) {
+  console.log(chalk.bold.rgb(10, 100 + i * 10, 200)('Hello HardFork!'))
+}
+```
+
+Il faut parcourir la documentation pour découvrir les fonctionnalités que l'on peut utiliser avec le package `chalk`
+
+## readline-sync
+
+Package pour s'interfacer avec l'utilisateur via la console.
+
+installation: `yarn add readline-sync`
+Documentation: https://github.com/anseki/readline-sync
+
+```js
+// showStars.js
+
+const chalk = require('chalk')
+const readlineSync = require('readline-sync')
+
+const showStars = (nbBase, reverse, str) => {
+  if (!reverse) {
+    for (let i = 1; i <= nbBase; ++i) {
+      console.log(str.repeat(i))
+    }
+  } else {
+    for (let i = nbBase; i >= 1; --i) {
+      console.log(str.repeat(i))
+    }
+  }
+}
+
+let nbBase = readlineSync.question('Nb base ? ')
+nbBase = Number(nbBase)
+let motif = readlineSync.question('motif ? ')
+showStars(nbBase, false, motif)
+```
+
+```js
+// vote.js
+
+const chalk = require('chalk')
+const readlineSync = require('readline-sync')
+
+const MAX_VOTERS = 10
+
+let isRunning = true
+let counter = 0
+
+while (isRunning) {
+  const userName = readlineSync.question('May I have your name? ')
+  const ageStr = readlineSync.question('May i have your age? ')
+  const age = Number(ageStr)
+  if (age >= 18) {
+    ++counter
+    console.log(
+      chalk.green(`${userName} you can vote, you are voter number ${counter}`)
+    )
+    console.log('')
+  } else {
+    console.log(chalk.red(`${userName} you can not vote`))
+  }
+  if (counter >= MAX_VOTERS) {
+    // exit the loop
+    isRunning = false
+  }
+}
+console.log('END OF VOTING PROGRAM')
+```
