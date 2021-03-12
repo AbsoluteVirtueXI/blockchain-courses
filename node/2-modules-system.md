@@ -191,3 +191,5 @@ node main.js
 20
 3
 ```
+
+Un exemple d'une calculatrice interactive: https://github.com/AbsoluteVirtueXI/calc
