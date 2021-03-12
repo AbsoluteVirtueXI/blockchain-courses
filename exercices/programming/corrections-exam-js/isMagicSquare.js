@@ -1,5 +1,5 @@
 const isMagicSquare = (square) => {
-  let d1Sum = 0 // sum of first diagonal
+  let d1Sum = 0 // sum of first diagonal, it will our sum reference
   for (let i = 0; i < square.length; ++i) {
     d1Sum += square[i][i]
   }
@@ -9,6 +9,7 @@ const isMagicSquare = (square) => {
     d2Sum += square[i][i]
   }
 
+  // check if diagonals are equal
   if (d1Sum !== d2Sum) {
     return false
   }
