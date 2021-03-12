@@ -5,8 +5,8 @@ const isMagicSquare = (square) => {
   }
 
   let d2Sum = 0 // sum of second diagonal
-  for (let i = square.length - 1; i >= 0; --i) {
-    d2Sum += square[i][i]
+  for (let i = 0; i < square.length; ++i) {
+    d2Sum += square[i][square.length - 1 - i]
   }
 
   // check if diagonals are equal
