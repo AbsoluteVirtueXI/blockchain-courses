@@ -1,5 +1,5 @@
 const podium = (tab) => {
-  let top3 = scores
+  let top3 = tab
     .sort((a, b) => {
       return b - a
     })
