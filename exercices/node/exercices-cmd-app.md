@@ -44,7 +44,7 @@ prenom nom, vous êtes majeur, vous pouvez voter
 
 Utiliser `readline-sync` pour l'interaction avec l'utilisateur
 
-## 10: **interMajorityTest.js**:
+## **interMajorityTest.js**:
 
 Le programme précédent ne fonctionnera que dans les pays ou la majorité est à 18 ans.  
 Afin que votre programme puisse fonctionner pour tous les pays, réécrivez le programme précédent pour qu'il puisse prendre un argument à son lancement en ligne de commande qui correspondra à l'âge de la majorité dans le pays de l'utilisateur du programme.  
