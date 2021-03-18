@@ -374,8 +374,8 @@ if (isNaN(process.argv[2])) {
 }
 
 // Nous somme OK, il n'y a qu'un seul argument et c'est un nombre.
-let nb = Number(process.argv[2])
-showStars(nb)
+const nbStars = Number(process.argv[2])
+showStars(nbStars)
 ```
 
 ```zsh
