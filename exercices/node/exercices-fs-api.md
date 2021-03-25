@@ -59,8 +59,8 @@ Gestion de l'erreur si l'un des fichiers à afficher n'existe pas.
 node append.js src1.txt src2.txt src3.txt dst.txt
 ```
 
-Copie le contenu de src1.txt, src2.txt, src3.txt vers dst.txt.  
-`ap` prend un nombre variable d'arguments, minimum 2 arguments.  
+Copie le contenu de _src1.txt_, _src2.txt_, _src3.txt_ vers _dst.txt_.  
+`append.js` prend un nombre variable d'arguments, minimum 2 arguments.  
 Le fichier de destination sera toujours le dernier de la liste:
 
 ```zsh
