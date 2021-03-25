@@ -253,5 +253,32 @@ Les soupirs de la Sainte et les cris de la Fée.
 
 ### ls.js
 
-Implémentation de la commande `ls`.
-voir live coding
+Implémentation de la commande `ls` simplifiée.
+
+```js
+const fs = require('fs')
+
+// check if 3 elements on the command line (we need 1 argument for our program)
+if (process.argv.length !== 3) {
+  console.log('usage: node ls.js directory')
+  process.exit(1)
+}
+
+// check if path (3rd argument) exists
+if (!fs.existsSync(process.argv[2])) {
+  console.log(`Error: ${process.argv[2]} does not exist`)
+  process.exit(1)
+}
+
+// check if path (3rd argument) is a directory
+if (!fs.statSync(process.argv[2]).isDirectory()) {
+  console.log(`Error: ${process.argv[2]} is not a directory`)
+  process.exit(1)
+}
+
+// get content of directory and print it, 1 element per line
+let tab = fs.readdirSync(process.argv[2])
+tab.forEach((elem) => {
+  console.log(elem)
+})
+```
