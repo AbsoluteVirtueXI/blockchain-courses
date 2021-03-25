@@ -153,7 +153,9 @@ if (existsSync('./newdirectory')) {
 }
 ```
 
-### examples
+## examples
+
+### countVowel.js
 
 Dans l'exercice [countVowel.js](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/exercices-numbers-and-strings.md#countvoweljs) nous devions compter le nombre de voyelles dans un poème.  
 La correction est accessible [ici](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/corrections-numbers-and-strings.md/countVowel.js).
@@ -166,3 +168,8 @@ Nous pouvons désormais appliquer ce programme `countVowel.js` à n'importe quel
 - Nous utiliserons `fs.readFileSync` pour lire le fichier récupérer le contenu de ce fichier comme une `string`
 
 Voir Live coding
+
+### ls.js
+
+Implémentation de la commande `ls`.
+voir live coding
