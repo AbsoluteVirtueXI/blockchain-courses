@@ -111,9 +111,9 @@ Gestion l'erreur si _file.txt_ n'existe pas.
 ## wc.js
 
 Améliorer l'exercice précédent en ajoutant la possibilité de passer des paramètres optionnels:
-`-l`: pour afficher le nombre de lignes uniquement.
-`-w`: pour afficher le nombre de mots uniquement.
-`-c`: pour afficher le nombre de caractères uniquement.
+`-l`: pour afficher le nombre de lignes uniquement.  
+`-w`: pour afficher le nombre de mots uniquement.  
+`-c`: pour afficher le nombre de caractères uniquement.  
 Pour simplifier l'exercice nous supposerons que seulement 1 seul paramètres optionnel peut être passé en même temps.
 
 ```zsh
