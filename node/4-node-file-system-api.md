@@ -152,3 +152,10 @@ if (existsSync('./newdirectory')) {
   console.log('The path does not exists.')
 }
 ```
+
+### examples
+
+Dans l'exercice [countVowel.js](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/exercices-numbers-and-strings.md#countvoweljs) nous devions compter le nombre de voyelles dans un poème.
+La correction est accessible [ici](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/corrections-numbers-and-strings.md/countVowel.js)
+
+Nous pouvons désormais appliquer ce programme `countVowel.js` à n'importe quel fichier passé sur la ligne de commande:
