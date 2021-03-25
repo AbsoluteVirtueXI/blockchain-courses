@@ -155,7 +155,14 @@ if (existsSync('./newdirectory')) {
 
 ### examples
 
-Dans l'exercice [countVowel.js](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/exercices-numbers-and-strings.md#countvoweljs) nous devions compter le nombre de voyelles dans un poème.
-La correction est accessible [ici](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/corrections-numbers-and-strings.md/countVowel.js)
+Dans l'exercice [countVowel.js](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/exercices-numbers-and-strings.md#countvoweljs) nous devions compter le nombre de voyelles dans un poème.  
+La correction est accessible [ici](https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/programming/corrections-numbers-and-strings.md/countVowel.js).
 
 Nous pouvons désormais appliquer ce programme `countVowel.js` à n'importe quel fichier passé sur la ligne de commande:
+
+- Le programme de traitement des voyelles est déjà crée
+- Nous récupérerons le nom du fichier à traiter via `process.argv[2]`
+- Nous utiliserons `fs.existsSync`pour vérifier que le fichier existe.
+- Nous utiliserons `fs.readFileSync` pour lire le fichier récupérer le contenu de ce fichier comme une `string`
+
+Voir Live coding
