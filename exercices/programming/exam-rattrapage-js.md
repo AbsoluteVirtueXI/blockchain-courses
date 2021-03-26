@@ -2,7 +2,7 @@
 
 Ces exercices devront tous être pushés sur un repository accessible depuis github.  
 Ce repository devra se nommer `exam-rattrapage-js`
-Vous devrez fournir ce lien dans le formulaire de rendus d'exercices suivant: https://forms.gle/QNhDencvCBCNSufw7
+Vous devrez fournir ce lien dans le formulaire de rendus d'exercices suivant: https://forms.gle/LUExirN5LTfkVVsS7
 
 **Certains exercices vous demandent d'écrire des fonctions dans un fichier. Il faudra évidement tester ces fonctions en les appelant dans votre programme!!. Ces exercices consistent donc à déclarer ces fonctions mais aussi à les appeler pour vérifier leur exécution**
 
@@ -79,7 +79,7 @@ Pour notre exercice l'âge de la majorité est **18 ans** et ne vous souciez pas
 
 ## sumAll.js
 
-Ecrire une fonction `summAll` qui prend comme paramètre un tableau de `number` et **retourne** la somme de tous les nombres de ce tableau.
+Ecrire une fonction `sumAll` qui prend comme paramètre un tableau de `number` et **retourne** la somme de tous les nombres de ce tableau.
 
 ## isEven.js
 
