@@ -198,6 +198,7 @@ La propriété `bankAccount` n'existe pas dans l'objet `alice`, nous récupéron
 Une classe est un "template" qui nous servira à créer des objets.
 
 ```js
+// class declaration
 class Person {
   constructor(firstName, age, friends, isDev) {
     this.firstName = firstName
@@ -219,7 +220,9 @@ class Person {
   }
 }
 
+// alice is an instance of Person
 const alice = new Person('Alice', 27, ['Bob', 'Charlie'], true)
+// bob is an instance of Person
 const bob = new Person('Bob', 30, ['Alice', 'Charlie'], false)
 alice.printInfo()
 bob.printInfo()
