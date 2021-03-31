@@ -224,6 +224,8 @@ class Person {
 const alice = new Person('Alice', 27, ['Bob', 'Charlie'], true)
 // bob is an instance of Person
 const bob = new Person('Bob', 30, ['Alice', 'Charlie'], false)
+console.log(alice.firstName)
+console.log(bob.firstName)
 alice.printInfo()
 bob.printInfo()
 bob.learnDev() // bob is now a dev
