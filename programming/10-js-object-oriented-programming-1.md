@@ -95,7 +95,7 @@ const bob = {
 ```
 
 les variables `alice` et `bob` sont des objets, et plus précisément ce sont des `object literals` car ils sont définis directement dans le code source.  
-Les propriétés `firstName`, `age`, `friends`, `isDev` sont les propriétés de ces objets, elles peuvent être utilisés et manipulés comme de la même manière que des variables de leur type.
+Les propriétés `firstName`, `age`, `friends`, `isDev` sont les propriétés de ces objets, elles peuvent être utilisées et manipulées de la même manière que des variables de leur type.
 
 ```js
 console.log(alice.firstName)
