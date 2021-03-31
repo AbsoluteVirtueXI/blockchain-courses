@@ -83,14 +83,14 @@ const alice = {
   firstName: 'Alice',
   age: 27,
   friends: ['Bob', 'Charlie'],
-  isDev: true
+  isDev: true,
 }
 
 const bob = {
-  firstName = 'Bob',
+  firstName: 'Bob',
   age: 30,
   friends: ['Alice', 'Charlive'],
-  isDev: false
+  isDev: false,
 }
 ```
 
