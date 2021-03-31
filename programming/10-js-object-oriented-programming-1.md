@@ -205,8 +205,8 @@ class Person {
     this.friends = friends
     this.isDev = isDev
   }
-  run() {
-    return `${this.firstName} is running from ${this.from} to ${this.to}`
+  learnDev() {
+    this.isDev = true
   }
   printInfo() {
     console.log(`first name: ${this.firstName}`)
@@ -221,8 +221,8 @@ class Person {
 
 const alice = new Person('Alice', 27, ['Bob', 'Charlie'], true)
 const bob = new Person('Bob', 30, ['Alice', 'Charlie'], false)
-console.log(alice.run())
-console.log(bob.run())
 alice.printInfo()
+bob.printInfo()
+bob.learnDev() // bob is now a dev
 bob.printInfo()
 ```
