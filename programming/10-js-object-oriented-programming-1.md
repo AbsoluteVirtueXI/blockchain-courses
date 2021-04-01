@@ -89,7 +89,7 @@ const alice = {
 const bob = {
   firstName: 'Bob',
   age: 30,
-  friends: ['Alice', 'Charlive'],
+  friends: ['Alice', 'Charlie'],
   isDev: false,
 }
 ```
