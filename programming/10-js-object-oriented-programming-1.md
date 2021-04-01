@@ -232,3 +232,66 @@ bob.printInfo()
 bob.learnDev() // bob is now a dev
 bob.printInfo()
 ```
+
+Tout ce que l'on a vu précédemment pour les `object literals` s'applique aux classes.
+
+Un objet encapsule ses données et ses méthodes (fonctionnalités qui peuvent aussi bien lire ou modifier ces données) au sein d'une même variable.
+Un objet possède donc un **état** qui sera l'ensemble de toutes ses données et des fonctionnalités qui utiliseront ces données ou modifieront son état interne.
+
+## Declaration and instantiation
+
+C'est un process en 2 étapes
+
+1. Définir une classe avec le keyword `class`
+2. Instancier un objet de la classe avec le keyword `new`
+
+```js
+// Définit d'une classe Point
+class Point {
+  constructor(x, y) {
+    this.x = x
+    this.y = y
+  }
+  show() {
+    console.log(`(${this.x}, ${this.y})`)
+  }
+  isEqual(point) {
+    return this.x === point.x && this.y === point.y ? true : false
+  }
+}
+// p1 est une instance de Point
+const p1 = new Point(1, 2)
+// p2 est une autre instance de Point
+const p2 = new Point(10, 11)
+```
+
+- `Point` est une classe que l'on définit grâce au keyword `class`.
+- `constructor` est la fonction d'initialisation de notre objet au moment de son instanciation. Elle est appelée automatiquement.  
+  Le `constructor` peut prendre des paramètres lorsqu'on a besoin d'initialiser les propriétés de notre objet avec certaines valeurs.
+- `show` et `isEqual` sont des méthodes d'instance. Elles ne peuvent être appelées que sur une instance!!!
+
+```js
+// OK
+p1.isEqual(p2) // return false
+p2.show() // print '(10, 11)'
+
+// Error
+Point.show() // Point is not an instance of Point.. Point is a class
+```
+
+- `this` est un mot clef spécial. Il est interprété comme l'instance en cours!!
+  Dans nos exemple précédent, `this` sera interprété comme l'instance `p1` ou l'instance `p2`. Il est obligatoire si on veut référencer, la future instance, dans notre déclaration de classe.
+- `new` est l'opérateur d'instanciation de classe.
+  `1` et `2` seront passés en argument au constructor de `Point`.
+
+```js
+const p1 = new Point(1, 2)
+```
+
+## getter
+
+## static methods
+
+## inheritance (héritage)
+
+## visibility: public vs private
