@@ -377,8 +377,9 @@ class Person {
   }
 }
 
-const alice = new Person('Alice', 27, ['Bob', 'Charlie'], ['JS', 'Solidity'])
-alice.printInfo()
+const alice = new Person('Alice', 27, ['Bob', 'Charlie'], [])
+console.log(alice.isDev)
+alice.learnDev('JS')
 console.log(alice.isDev)
 ```
 
