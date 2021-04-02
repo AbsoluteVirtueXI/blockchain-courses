@@ -360,8 +360,8 @@ class Person {
     this.friends = friends
     this.languages = languages
   }
-  learnDev() {
-    this.isDev = true
+  learnDev(language) {
+    this.languages.push(language)
   }
   printInfo() {
     console.log(`first name: ${this.firstName}`)
