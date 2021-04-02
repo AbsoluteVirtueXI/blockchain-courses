@@ -288,10 +288,100 @@ Point.show() // Point is not an instance of Point.. Point is a class
 const p1 = new Point(1, 2)
 ```
 
+## inheritance (héritage)
+
+Une classe peut hériter d'une autre classe.
+Cela nous permet de réutiliser du code déjà écrit (une classe déjà écrite).
+Lorsqu'une `classeB` hérite d'une `classeA` on dit que:
+
+- `classeB` **hérite** de `classeA`
+- `classeB` **spécialise** `classeA`
+- `classeB` **is a** `classeA`
+- `classeB` est une classe enfant de `classeA`
+- `classeA` est une classe parent de `classeB`
+- `classeB` _spécialise_ `classeA`
+
+On utilise le mot clefs `extends` pour cela
+
+```js
+// la Classe Developer hérite de la classe Person
+class Developer extends Person {
+  constructor(firstName, age, friends, isDev, languages, github) {
+    super(firstName, age, friends, isDev)
+    this.githubHomePage = github
+    this.languages = languages
+  }
+  push(projectName) {
+    console.log(
+      `${this.firstName} is pushing code to ${this.githubHomePage}/${projectName}`
+    )
+  }
+  // printInfo override
+  printInfo() {
+    super.printInfo()
+    console.log(`github home page: ${this.githubHomePage}`)
+    console.log('languages: ')
+    this.languages.forEach((elem) => {
+      console.log(`\t${elem}`)
+    })
+  }
+}
+
+const alice = new Developer(
+  'Alice',
+  27,
+  ['Bob', 'Charlie'],
+  true,
+  ['JS', 'Solidity'],
+  'https://github.com/alice'
+)
+
+alice.printInfo()
+alice.push('projet1')
+```
+
+Une classe enfant doit obligatoirement appeler le `constructor` de son parent si ce dernier possède un `constructor`.
+Une classe enfant a accès aux données et méthodes de ses parents
+Une classe enfant peut `override` une méthode des ses parents.
+`super` nous permet d'avoir accès aux propriétés et méthodes des parents.
+
 ## getter
 
-## static methods
+Un getter nous permet d'associer une propriété à une fonction.
+C'est très pratique lorsque l'on veut récupérer une information qui dépend d'autres informations.  
+Dans nos exemples précédents la propriété `isDev` peut être un getter qui retournera `true` si `languages.length > 0` sinon ce getter retournera `false`.
+Ainsi nous n'avons plus besoin d'une véritable propriété `isDev`
 
-## inheritance (héritage)
+```js
+class Person {
+  constructor(firstName, age, friends, languages) {
+    this.firstName = firstName
+    this.age = age
+    this.friends = friends
+    this.languages = languages
+  }
+  learnDev() {
+    this.isDev = true
+  }
+  printInfo() {
+    console.log(`first name: ${this.firstName}`)
+    console.log(`age: ${this.age}`)
+    console.log(`friends:`)
+    this.friends.forEach((elem) => {
+      console.log(`\t${elem}`)
+    })
+    console.log(`is dev: ${this.isDev}`)
+  }
+  get isDev() {
+    return this.languages.length > 0 ? true : false
+  }
+}
+
+const alice = new Person('Alice', 27, ['Bob', 'Charlie'], ['JS', 'Solidity'])
+alice.printInfo()
+console.log(alice.isDev)
+```
+
+## static methods
 
 ## visibility: public vs private
