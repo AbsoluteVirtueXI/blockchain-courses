@@ -286,7 +286,7 @@ try {
 
 Dans l'exemple précédent notre exception qui est une instance de la classe `Error` ne possède qu'un message `invalid direction`, c'est l'argument passé à la classe `Error` et qui sera par défaut accessible par la propriété `message`.  
 Dans un véritable programme il est possible que nous ayons besoin d'une véritable gestion des erreurs customisées et spécifiques à notre projet.
-Pour cela il faudra hériter de la classe `Error` et ajouter les propriétés qui nous interessent
+Pour cela il faudra hériter de la classe `Error` et ajouter les propriétés qui nous intéressent
 
 ```js
 const fs = require('fs')
