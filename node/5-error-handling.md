@@ -202,7 +202,7 @@ Notre programme ne crash plus peu importe l'erreur et donc peu importe l'excepti
 
 Si la fonction que l'on appelle et qui échoue gère correctement les erreurs, l'exception récupérée par un `catch` possède de nombreuses informations utiles, comme le code d'erreur, le message d'erreur , etc...
 Rien de magique, l'exception est un objet qui hérite de la classe `Error`.
-Classe `Error`: https://nodejs.org/api/errors.html#errors_class_error
+Classe `Error`: https://nodejs.org/api/errors.html#errors_class_error  
 Classe `SystemError` qui hérite de `Error`: https://nodejs.org/api/errors.html#errors_class_error
 
 ```js
