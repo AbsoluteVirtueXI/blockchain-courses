@@ -1,5 +1,7 @@
 # Monty hall game
 
+Formulaire de rendu: https://forms.gle/hodtGoSpJuqireE89
+
 ## montyHall.js
 
 Le jeu Monty hall est un jeu télévisé qui a fait débat dans la communauté mathématique.  
