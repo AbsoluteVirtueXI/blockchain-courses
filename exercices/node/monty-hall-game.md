@@ -32,6 +32,10 @@ Le jeu se passe donc en 4 étapes:
 3. l'utilisateur choisit de garder sa porte initiale ou de choisir l'autre porte qui n'est pas révélée
 4. Afficher à l'utilisateur le contenu derrière les portes et lui annoncer sa victoire ou sa défaite.
 
+## Optional
+
+Dans un fichier _log.txt_, ajouter le nom des différents joueurs et leur lot.
+
 ## solveMontyHall.js
 
 En vous servant du maximum de code précédemment écrit (fonctions, classes), écrivez un script qui va tester des centaines/milliers de possibilités pour les 2 cas:
