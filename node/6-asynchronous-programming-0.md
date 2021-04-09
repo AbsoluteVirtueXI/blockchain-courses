@@ -190,3 +190,19 @@ Nous n'utiliserons que des fonctions asynchrones et donc l'ordre d'exécution de
    repository officiel de `axios`: https://github.com/axios/axios
    `yarn add axios` pour installer le package. Se référer à la documentation officielle pour l'utiliser.
 2. Ecrire les données reçues sur notre disque avec `writeFile` dans un fichier `black_hat.html`.
+
+```js
+const axios = require('axios')
+const fsPromises = require('fs/promises')
+
+const main = async () => {
+  try {
+    const response = await axios.get('https://fr.wikipedia.org/wiki/Black_hat')
+    await fsPromises.writeFile('black_hat.html', response.data) // response.data est une string qui est la page html
+  } catch (e) {
+    console.log(e.message)
+  }
+}
+
+main()
+```
