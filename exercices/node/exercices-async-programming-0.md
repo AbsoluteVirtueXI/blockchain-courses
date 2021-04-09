@@ -10,7 +10,7 @@ Certains exercices nécessitent une réflexion approfondie prenez votre temps po
 Certains programmes que vous devez créer utilisent une interaction avec la ligne de commande.  
 Il faut absolument vérifier que les inputs envoyés à votre programme sont corrects et que votre programme ne se retrouve jamais dans un état indéfini, **tout doit être sous contrôle et un message clair doit être affiché à l'utilisateur en cas de mauvaise manipulation de la ligne de commande.**
 
-## toUpperCase.js
+## correctMe.js
 
 Ce programme asynchrone ne fonctionne pas.  
 Ajouter le code nécessaire pour faire fonctionner ce programme.
