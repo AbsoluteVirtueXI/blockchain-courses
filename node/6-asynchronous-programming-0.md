@@ -1,4 +1,4 @@
-# ** Asynchronous programming 0 **
+# Asynchronous programming 0
 
 ## Introduction
 
