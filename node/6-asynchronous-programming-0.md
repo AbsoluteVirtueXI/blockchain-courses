@@ -156,7 +156,7 @@ Après nos `await` on remarque que `p1` et `p2` sont résolues.
 `p1` contient bien le texte `Hello world!some new data\n`.  
 `p2` contient `undefined`, c'est normal car `appendFile` ne retourne rien (mais `p2` est bien résolue!!!).
 On remarque que le texte lu du fichier _hello.txt_ avec la fonction `readFile` contient déjà le fichier qui a été ajouté avec la fonction `appendFile`... Pourtant `readFile` a été appelé avant `appendFile`.  
-**On ne peut jamais prédire avec précision l'ordre de résolution des promises d'un ensemble de fonctions asynchrones. Et en général, nous voulons absolument que certaines fonctions asynchrones s'exécutent dans un certain ordre.**  
+**On ne peut jamais prédire avec précision l'ordre de résolution des promises d'un ensemble de fonctions asynchrones. Et en général, nous voulons absolument que certaines fonctions asynchrones s'exécutent complètement dans un certain ordre.**  
 Pour cela il faut que l'on force l'attente de la résolution de la promise retournée par une fonction asynchrone avant d'exécuter la suivante.
 Evidement pour cela on utilise `await` pour bloquer un code non bloquant:
 
