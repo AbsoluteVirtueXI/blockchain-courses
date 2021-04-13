@@ -52,7 +52,7 @@ Il existe 3 état:
 - `fulfilled`: l'exécution de la fonction est terminé avec succès. Dans ce cas la `promise` contiendra le résultat de notre fonction, on pourra donc l'extraire.
 - `rejected`: l'exécution de la fonction est terminé mais avec une erreur. Dans ce cas la `promise` contiendra l'erreur, on pourra donc l'extraire.
 
-Une fois que notre promise est dans un état `fulfulled` ou `rejected` on dit que la promise a été `resolved` (résolue).
+Une fois que notre promise est dans un état `fulfilled` ou `rejected` on dit que la promise a été `resolved` (résolue).
 
 ```js
 // my-readfile.js
@@ -83,7 +83,7 @@ La `promise` `p2` est liée à l'exécution de la fonction asynchrone `fsPromise
 
 En tant que développeur, ce qui nous intéresse c'est de savoir si cette fonction s'est exécutée complètement, et si cette fonction retourne une valeur utile, l'extraire, ou si une exception a été levée la gérer correctement.
 Pour cela on utilise les keywords `async` et `await`.  
-**Pour rappel une fonction asynchrone est complétement exécutée lorsque sa `promise` est résolue, c'est à dire qu'elle passe d'un état `pending` à `fulfilled` ou `rejected`.**
+**Pour rappel une fonction asynchrone est complètement exécutée lorsque sa `promise` est résolue, c'est à dire qu'elle passe d'un état `pending` à `fulfilled` ou `rejected`.**
 
 ## async / await
 
@@ -156,7 +156,7 @@ Après nos `await` on remarque que `p1` et `p2` sont résolues.
 `p1` contient bien le texte `Hello world!some new data\n`.  
 `p2` contient `undefined`, c'est normal car `appendFile` ne retourne rien (mais `p2` est bien résolue!!!).
 On remarque que le texte lu du fichier _hello.txt_ avec la fonction `readFile` contient déjà le fichier qui a été ajouté avec la fonction `appendFile`... Pourtant `readFile` a été appelé avant `appendFile`.  
-**On ne peut jamais prédire avec précision l'ordre d'exécution d'un ensemble de fonctions asynchrones. Et en général, particulièrement, nous voulons absolument que certaines fonctions asynchrones s'exécutent dans un certain ordre.**  
+**On ne peut jamais prédire avec précision l'ordre de résolution des promises d'un ensemble de fonctions asynchrones. Et en général, nous voulons absolument que certaines fonctions asynchrones s'exécutent dans un certain ordre.**  
 Pour cela il faut que l'on force l'attente de la résolution de la promise retournée par une fonction asynchrone avant d'exécuter la suivante.
 Evidement pour cela on utilise `await` pour bloquer un code non bloquant:
 
@@ -187,7 +187,7 @@ Nous souhaitons télécharger la page internet accessible sur wikipedia à l'url
 Nous n'utiliserons que des fonctions asynchrones et donc l'ordre d'exécution de ces fonctions est très importantes!!
 
 1. Télécharger la page https://fr.wikipedia.org/wiki/Black_hat grâce à `axios`.
-   repository officiel de `axios`: https://github.com/axios/axios
+   repository officiel de `axios`: https://github.com/axios/axios  
    `yarn add axios` pour installer le package. Se référer à la documentation officielle pour l'utiliser.
 2. Ecrire les données reçues sur notre disque avec `writeFile` dans un fichier `black_hat.html`.
 
