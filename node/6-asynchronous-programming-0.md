@@ -15,7 +15,7 @@ try {
   const txt = fs.readFileSync('big-file.txt', 'utf-8') // how much time for executing this?
   console.log(txt)
 } catch (e) {
-  console.log(e.message)
+  console.error(e.message)
 }
 console.log('End of program')
 ```
@@ -65,7 +65,7 @@ try {
   console.log(p2) // Affiche l'objet p2 qui est une promise
 } catch (e) {
   // On gère les erreurs comme dans un code synchrone
-  console.log(e.message)
+  console.error(e.message)
 }
 ```
 
@@ -108,7 +108,7 @@ try {
   console.log(p2) // Affiche l'objet p2 qui est une promise
 } catch (e) {
   // On gère les erreurs comme dans un code synchrone
-  console.log(e.message)
+  console.error(e.message)
 }
 ```
 
@@ -137,7 +137,7 @@ const myReadFile = async () => {
     console.log(p2) // Affiche l'objet p2 qui est une promise
   } catch (e) {
     // On gère les erreurs comme dans un code synchrone
-    console.log(e.message)
+    console.error(e.message)
   }
 }
 myReadFile()
@@ -170,7 +170,7 @@ const myReadFile = async () => {
     console.log(txt1)
   } catch (e) {
     // On gère les erreurs comme dans un code synchrone
-    console.log(e.message)
+    console.error(e.message)
   }
 }
 myReadFile()
@@ -200,7 +200,7 @@ const main = async () => {
     const response = await axios.get('https://fr.wikipedia.org/wiki/Black_hat')
     await fsPromises.writeFile('black_hat.html', response.data) // response.data est une string qui est la page html
   } catch (e) {
-    console.log(e.message)
+    console.error(e.message)
   }
 }
 
