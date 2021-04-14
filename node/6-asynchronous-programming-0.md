@@ -26,7 +26,7 @@ Dans le programme précédent `fs.readFileSync('big-file.txt', 'utf-8')` lira le
 Avec la programmation asynchrone nous pouvons:
 
 - Appeler des fonctions qui peuvent prendre du temps à s'exécuter sans bloquer notre programme.
-- Organiser correctement l'ordre d'exécution de ces fonctions nous ne pouvons pas déterminer quand est ce qu'une fonction asynchrone va se terminer.
+- Organiser correctement l'ordre d'exécution de ces fonctions car nous ne pouvons pas déterminer quand est ce qu'une fonction asynchrone va se terminer.
 
 Il existe 2 façons de travailler avec des fonctions asynchrones en Javascript:
 

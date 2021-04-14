@@ -1,219 +1,189 @@
-# ** Asynchronous programming 1 **
+# Asynchronous programming 1
 
-Jusqu'a présent nous n'avons écrit que des programmes **bloquants**.  
-On parle de programmation **synchrones**, en anglais **synchronous programming**.  
-Les fonctions sont executées dans l'ordre où elles apparaissent dans notre script et bloquent jusqu'a ce qu'elles aient retourné leur valeur.  
-Mais lorsque l'on souhaite intéragir avec le réseau, comme effectuer des requêtes HTTP, ou bien lorsqu'on souhaite intéragir avec le système de fichiers, comme ouvrir un fichier, nous exécutons des fonctions qui peuvent prendre du temps avant de retourner leur résultat.  
-Afin d'éviter de bloquer notre programme lors de l'exécution d'une fonction, on utilise les caractéristiques **asynchrone** de node.js, on parle alors d'**asynchronous programming**
+Toutes les fonctions qui ont accès à autre chose que la mémoire vive de l'ordinateur sont, ou devraient, être asynchrones.  
+La raison est que l'on ne sait jamais à quel moment ces fonctions seront complètement exécutées pour ensuite exploiter leur valeur de retour ou bien leur `side effect` sans bloquer notre programme.  
+Deux choses fondamentales nous intéressent lorsqu'on travaille avec des fonctions asynchrones:
 
-## **introduction au module `fs`**:
+- Exécuter des fonctions asynchrones dans un ordre particulier et attendre la complétude à chaque fois car ces fonctions dépendent les unes des autres: l'output (ou le side-effect) d'une fonction asynchrone doit être utilisé par une autre fonction asynchrone suivante. C'est surtout ce dont à besoin un dev de smart contracts et de Dapp.
+- Exécuter des fonctions asynchrones en parallèle car ces fonctions sont indépendantes les unes des autres. L'exécution complète d'une tâche n'a aucun impact ou ne dépend pas d'une autre tâche exécutée en parallèle. Dans ce cas il s'agit surtout d'une fonction asynchrone parent qui exécutera plusieurs autres fonctions asynchrones enfants. Cette fonction asynchrone parent sera considérée comme complètement exécutée lorsque toutes ses tâches enfants le seront aussi.
 
-Depuis node.js toutes les fonctions qui ont accès au système de fichiers sont importables depuis le module **fs**.  
-Documentation officielle de l'API **fs**: https://nodejs.org/api/fs.html
+## Contrôler l'ordre d'exécution des fonctions asynchrones
 
 ```js
-import fs from 'fs'
-let content = fs.readFileSync('./file.txt', 'utf-8')
-console.log(content)
-```
+// add-users.js
+const fsPromises = require('fs/promises')
 
-## **synchronous programming**
+const USERS_FILE = 'users.json'
 
-```js
-import fs from 'fs'
-
-console.log('START OF PROGRAM')
-
-// try to read file1.txt
-try {
-  // step 1: read file1.txt
-  let content1 = fs.readFileSync('./file1aze.txt', 'utf-8')
-  // step 2: write on screen content1
-  console.log('file1.txt: ', content1)
-} catch (e) {
-  console.log('in first catch')
-  console.error(e)
-} finally {
-  console.log('in first finally')
-}
-
-// try to read file2.txt
-try {
-  // step 3: read file2.txt
-  let content2 = fs.readFileSync('./file2.txt', 'utf-8')
-  // step 4: write on screen content2
-  console.log('file2.txt: ', content2)
-} catch (e) {
-  console.log('in second catch')
-  console.error(e)
-} finally {
-  console.log('in second finally')
-}
-
-console.log('END OF PROGRAM')
-```
-
-```zsh
-START OF PROGRAM
-file1.txt:  content of file1.txt
-in first finally
-file2.txt:  content of file2.txt
-in second finally
-END OF PROGRAM
-```
-
-## **asynchronous programming with callback**
-
-Les api asynchrones de forme callback, **callback-based API**, ne retournent pas de valeurs à l'appellant. On ne peut donc pas avoir accès au résultat d'une **callback-based API**.  
-Elles prennent en paramètre une **callback** qui sera executée avec le résultat, ou l'erreur de la **callback-based API**.
-
-```js
-import fs from 'fs'
-
-console.log('START OF PROGRAM')
-
-//asynchronous reading of file1.txt
-fs.readFile('./file1.txt', 'utf-8', (err, data) => {
-  if (err) console.error(err)
-  else console.log('file1.txt: ', data)
-})
-
-//asynchronous reading of file2.txt
-fs.readFile('./file2.txt', 'utf-8', (err, data) => {
-  if (err) console.error(err)
-  else console.log('file2.txt: ', data)
-})
-
-console.log('END OF PROGRAM') // not executed last!!
-```
-
-```zsh
-START OF PROGRAM
-END OF PROGRAM
-file1.txt:  content of file1.txt
-file2.txt:  content of file2.txt
-```
-
-### **callback hell**
-
-L’utilisation massive de callbacks est considérée comme une mauvaise pratique, on parle alors de **Callback hell** (l’enfer des fonctions de rappel en français).  
-Elle est également connue sous le nom de "Pyramid of doom" en raison de l’indentation qui croît à chaque appel d’une fonction asynchrone.
-
-```js
-import fs from 'fs'
-fs.stat('./file1.txt', (err, stats) => {
-  if (err) console.error(err)
-  else {
-    if (stats.isFile()) {
-      fs.readFile('./file1.txt', 'utf8', (err, txt) => {
-        if (err) console.log(err)
-        else {
-          txt = txt + '\nAppended something!'
-          fs.writeFile('./file1.txt', txt, (err) => {
-            if (err) console.log(err)
-            else console.log('Appended text!')
-          })
-        }
-      })
+const addUser = async (name, age, isDev) => {
+  try {
+    const stat = await fsPromises.stat(USERS_FILE) // STEP 1 get Stats object
+    if (stat.isFile()) {
+      let jsonString = await fsPromises.readFile(USERS_FILE, 'utf-8') // STEP 2 read file
+      const users = JSON.parse(jsonString)
+      users[name] = { age: age, isDev: isDev }
+      jsonString = JSON.stringify(users)
+      await fsPromises.writeFile(USERS_FILE, jsonString) // STEP 3 write file
+    }
+  } catch (e) {
+    // if USERS_FILE does not exist create it
+    // and call again the function addUser
+    if (e.code === 'ENOENT') {
+      const emptyJsonString = '{}'
+      await fsPromises.writeFile(USERS_FILE, emptyJsonString)
+      await addUser(name, age, isDev)
+    } else {
+      // else just re throw error to caller
+      throw e
     }
   }
-})
-```
+}
 
-## **asynchronous programming with promises**
-
-Pour rendre le code d'un programme asynchrone plus lisible on utilise les **promises**.
-
-### **async / await**
-
-```js
-import fs from 'fs/promises'
-
-console.log('START OF PROGRAM')
-
-try {
-  let stats = await fs.stat('./file1.txt')
-  if (stats.isFile()) {
-    let txt = await fs.readFile('./file1.txt', 'utf-8')
-    txt = txt + '\nAppended something!'
-    await fs.writeFile('./file1.txt', txt)
-    console.log('Appended text!')
+const main = async () => {
+  try {
+    await addUser('alice', 28, true)
+    await addUser('bob', 33, false)
+    await addUser('charlie', 23, false)
+    await addUser('dan', 45, true)
+    await addUser('eve', 51, true)
+  } catch (e) {
+    console.error(`main: ${e.message}`)
   }
-} catch (e) {
-  console.error(e)
-} finally {
-  console.log('END OF PROGRAM')
 }
+
+main()
 ```
 
-On retrouve ainsi la même structure de code qu'un programme synchrone.  
-Pour utiliser la directive `await` nous devons être dans une fonction asynchrone.  
-Dans l'exemple précedent nous sommes au `Top-level`, c'est à dire le script qui est directement executé par node. A ce niveau la directive `await` est disponible, sinon, lorsque nous sommes dans une autre fonction il faut qu'elle soit déclarée avec la directive `async`:
+Dans notre fonction `addUser` `STEP 1`, `STEP 2` et `STEP 3` doivent absolument être exécutés dans cet ordre. Sinon notre programme n'a aucun sens.
+De plus notre fonction `main` appelle successivement la fonction `addUser` avec différents arguments.
+Sans les `await` les différents appels à `addUser` effectueraient en parallèle des manipulations sur le même fichier `users.json`, entrainant des lectures/écritures partielles du fichier qui sont impossibles à prévoir.  
+Essayez de retirer les `await` dans la fonction `main` et constater l'état du fichier `users.json`.  
+Essayez d'imaginer le fil d'exécution du programme qui amène à un tel fichier.
+
+Notre programme _add-users.js_ est bloquant.  
+Nous utilisons des fonctions asynchrones mais elles sont exécutées une par une dans une ordre défini, l'une après l'autre.  
+C'est exactement ce qu'on veut, sinon notre programme n'aurait aucun sens.  
+Contrairement aux module `fs` qui nous offre la possibilité d'utiliser aussi une version synchrone des fonctions, les nombreux modules que nous utiliserons ne fournissent que des fonctions asynchrones. Il faudra donc simuler une exécution synchrone comme dans l'exemple précédent pour une exécution cohérente.
+
+## Exécuter des tâches en parallèle
+
+Selon vous est ce que ce programme à du sens ?
 
 ```js
-import fs from 'fs/promises'
+// get-html-size.js
+const axios = require('axios')
 
-const readFile1 = async () => {
-  let content = await fs.readFile('./file1.txt', 'utf-8')
-  return content
+const getHtmlSize = async (url) => {
+  try {
+    const response = await axios.get(url)
+    return response.headers['content-length']
+  } catch (e) {
+    throw e
+  }
 }
 
-const readFile2 = async () => {
-  let content = await fs.readFile('./file2.txt', 'utf-8')
-  return content
+const main = async () => {
+  try {
+    const url1 = 'https://en.wikipedia.org/wiki/Fravia'
+    const url2 = 'https://en.wikipedia.org/wiki/Old_Red_Cracker'
+
+    const size1 = await getHtmlSize(url1)
+    console.log(`size of page ${url1}: ${size1 / 1000}KB`)
+
+    const size2 = await getHtmlSize(url2)
+    console.log(`size of page ${url2}: ${size2 / 1000}KB`)
+  } catch (e) {
+    console.error(e.message)
+  }
 }
 
-console.log('START OF PROGRAM')
-let content1 = await readFile1()
-console.log(content1)
-let content2 = await readFile2()
-console.log(content2)
-console.log('END OF PROGRAM')
+main()
 ```
 
-### **then/catch**:
-
-Une autre syntaxe peut être utilisée pour exploiter les promises:
+Actuellement le programme exécute `getHtmlSize(url1)`, bloque jusqu'a ce que la promise soit résolue, en cas de succès `size1` contiendra la taille de la page et ensuite un `console.log` l'affichera.  
+Ensuite `getHtmlSize(url2)` est exécutée, bloque jusqu'a ce que la promise soit résolue, en cas de succès `size2` contiendra la taille de la seconde page et ensuite un `console.log` l'affichera.  
+Les 2 calls sont indépendants, il faudrait dans ce cas les exécuter en même temps pour gagner du temps d'exécution:
 
 ```js
-import fs from 'fs/promises'
+// get-html-size.js
+const axios = require('axios')
 
-console.log('START OF PROGRAM')
+const getHtmlSize = async (url) => {
+  try {
+    const response = await axios.get(url)
+    return response.headers['content-length']
+  } catch (e) {
+    throw e
+  }
+}
 
-fs.stat('./file1.txt')
-  .then((stats) => {
-    if (stats.isFile()) {
-      return fs.readFile('./file1.txt', 'utf-8')
-    }
-  })
-  .then((txt) => {
-    txt = txt + '\nAppended something!'
-    return fs.writeFile('./file1.txt', txt)
-  })
-  .then(() => {
-    console.log('Done')
-  })
-  .catch((err) => {
-    console.log('Error from catch:', err)
-  })
-console.log('END OF PROGRAM') // NOT EXECUTED LAST!!
+const main = async () => {
+  try {
+    const url1 = 'https://en.wikipedia.org/wiki/Fravia'
+    const url2 = 'https://en.wikipedia.org/wiki/Old_Red_Cracker'
+
+    const p1 = getHtmlSize(url1)
+    const p2 = getHtmlSize(url2)
+
+    const [size1, size2] = await Promise.all([p1, p2]) // Attente de la résolution des 2 promises !!
+
+    console.log(`size of page ${url1}: ${size1 / 1000}KB`)
+    console.log(`size of page ${url2}: ${size2 / 1000}KB`)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+main()
 ```
 
-L'avantage de cette syntaxe c'est que nous pouvons 2 tâches en parallèle sans trop d'effort.
+Dans l'exemple précédent nous n'attendons plus la résolution de la promise de `getHtmlSize(url1)`pour appeler `getHtmlSize(url2)`.  
+Les 2 tâches sont appelées à la suite et s'exécutent en parallèle.  
+Mais nous avons besoin de la valeur de retour de ces 2 appels de fonctions pour faire les affichages sur la console. Nous devons donc attendre que les 2 promises se complètent avant d'effectuer les affichages.  
+On utilise pour cela `Promise.all`.  
+[Promise.all sur MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+Cette fonction prend comme paramètre un tableau de promises et retourne une unique promise qui contiendra un tableau de tous les résultats si elle est complétée avec succès.  
+Si l'une des promises est `rejected` alors l'unique promise retournée par `Promise.all` sera aussi `rejected`.
+`Promise.all` est à utiliser si l'ensemble des fonctions asynchrones peuvent être exécuter en parallèle et qu'il faut absolument que toutes les promises soient résolues avec succès!  
+Si la résolution de **toutes** les promises avec succès n'est pas nécessaires et que des erreurs sont tolérables il faudra alors plutôt utiliser `Promise.allSettled`.
 
 ```js
-import fs from 'fs/promises'
+// get-html-size.js
+const axios = require('axios')
 
-const readFile1 = async () => {
-  let content = await fs.readFile('./file1.txt', 'utf-8')
-  return content
+const getHtmlSize = async (url) => {
+  try {
+    const response = await axios.get(url)
+    return response.headers['content-length']
+  } catch (e) {
+    throw e
+  }
 }
 
-const readFile2 = async () => {
-  let content = await fs.readFile('./file2.txt', 'utf-8')
-  return content
+const main = async () => {
+  const url1 = 'https://en.wikipedia.org/kiki/water_on_mars' // BAD URL
+  const url2 = 'https://en.wikipedia.org/wiki/Old_Red_Cracker'
+
+  const p1 = getHtmlSize(url1)
+  const p2 = getHtmlSize(url2)
+
+  const [result1, result2] = await Promise.allSettled([p1, p2])
+
+  if (result1.status === 'fulfilled') {
+    console.log(`size of page ${url1}: ${result1.value / 1000}KB`)
+  } else {
+    console.error(`${url1}: ${result1.reason}`)
+  }
+  if (result2.status === 'fulfilled') {
+    console.log(`size of page ${url2}: ${result2.value / 1000}KB`)
+  } else {
+    console.error(`${url2}: ${result2.reason}`)
+  }
 }
 
-readFile1().then(console.log)
-readFile2().then(console.log)
+main()
 ```
+
+[Promise.allSettled sur MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled).
+
+Si il n'y a que la première promise résolue qui nous intéresse nous pouvons utiliser [Promise.race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race).
