@@ -130,7 +130,7 @@ const main = async () => {
     console.log(`size of page ${url1}: ${size1 / 1000}KB`)
     console.log(`size of page ${url2}: ${size2 / 1000}KB`)
   } catch (e) {
-    console.error(e)
+    console.error(e.message)
   }
 }
 
@@ -187,3 +187,37 @@ main()
 [Promise.allSettled sur MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled).
 
 Si il n'y a que la première promise résolue qui nous intéresse nous pouvons utiliser [Promise.race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race).
+
+## illustration des promises avec des timers
+
+Pour cela nous allons utiliser la fonction `setTimeout` pour simuler des opérations qui prennent du temps à s'exécuter.
+
+```js
+console.log('START OF PROGRAM')
+// Affiche 'tac' après 5 secondes
+setTimeout(() => {
+  console.log('tac')
+}, 5000)
+// Affiche 'tic' après 2 secondes
+setTimeout(() => {
+  console.log('tic')
+}, 2000)
+```
+
+Créons une fonction asynchrone qui retourne une **promise**.  
+Elle prend comme paramètre un `id` qui nous permettra d'identifier la tâche exécutée, un `timeout` qui correspondra au temps d'exécution de la tâche et un `boolean` pour créer une promise qui sera `fulfilled` si `true` ou `rejected` si `false`:
+
+```js
+const asyncTask = (id, timeout, willFulFilled) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (willFulFilled === true) {
+        console.log(`Log: task${id} done after ${timeout} seconds`)
+        resolve(`result from task${id}`)
+      } else {
+        reject(new Error(`faillure from task${id}`))
+      }
+    }, timeout * 1000)
+  })
+}
+```
