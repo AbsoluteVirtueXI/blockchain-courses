@@ -191,6 +191,7 @@ Si il n'y a que la première promise résolue qui nous intéresse nous pouvons u
 ## illustration des promises avec des timers
 
 Pour cela nous allons utiliser la fonction `setTimeout` pour simuler des opérations qui prennent du temps à s'exécuter.
+La fonction `setTimeout` fonctionne comme ci dessous:
 
 ```js
 console.log('START OF PROGRAM')
@@ -204,6 +205,14 @@ setTimeout(() => {
 }, 2000)
 ```
 
+output:
+
+```zsh
+START OF PROGRAM    # print at the beginning of the program
+tic                 # print after 2 seconds
+tac                 # print after 5 seconds
+```
+
 Créons une fonction asynchrone qui retourne une **promise**.  
 Elle prend comme paramètre un `id` qui nous permettra d'identifier la tâche exécutée, un `timeout` qui correspondra au temps d'exécution de la tâche et un `boolean` pour créer une promise qui sera `fulfilled` si `true` ou `rejected` si `false`:
 
@@ -212,7 +221,9 @@ const asyncTask = (id, timeout, willFulFilled) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (willFulFilled === true) {
+        // ce console.log simule un side effect
         console.log(`Log: task${id} done after ${timeout} seconds`)
+        // la valeur de retour est contenu dans le resolve
         resolve(`result from task${id}`)
       } else {
         reject(new Error(`faillure from task${id}`))
@@ -221,3 +232,89 @@ const asyncTask = (id, timeout, willFulFilled) => {
   })
 }
 ```
+
+Exécutons quelques tâches asynchrones:
+
+```js
+const main = async () => {
+  asyncTask(1, 10, true)
+  asyncTask(2, 5, true)
+  asyncTask(3, 0.5, true)
+  asyncTask(4, 1, true)
+}
+main()
+```
+
+output:
+
+```zsh
+Log: task3 done after 0.5 seconds
+Log: task4 done after 1 seconds
+Log: task2 done after 5 seconds
+Log: task1 done after 10 seconds
+```
+
+On remarque que les tâches s'exécutent bien de manière asynchrone, celle qui ont un timeout plus court se finissent avant celle qui ont un timeout plus long.
+
+Le but de cette fonction `asyncTask` est de vous permettre de tester des exécutions de tâches asynchrones sans passer par de véritable fonctions de packages qui utilisent de véritables ressources comme le système de fichier ou le réseau.
+
+Si l'on souhaite utiliser la syntaxe avec `await` un **très mauvais** programme serait:
+
+```js
+const main = async () => {
+  try {
+    let res1 = await asyncTask(1, 10, true)
+    console.log(res1)
+    let res2 = await asyncTask(2, 5, true)
+    console.log(res2)
+    let res3 = await asyncTask(3, 0.5, true)
+    console.log(res3)
+    let res4 = await asyncTask(4, 1, true)
+    console.log(res4)
+  } catch (e) {
+    console.error(e.message)
+  }
+}
+main()
+```
+
+output:
+
+```zsh
+Log: task1 done after 10 seconds
+result from task1
+Log: task2 done after 5 seconds
+result from task2
+Log: task3 done after 0.5 seconds
+result from task3
+Log: task4 done after 1 seconds
+result from task4
+```
+
+Malgré que nos fonctions soient asynchrones et retournent des promises, elles sont exécutées comme si elles étaient synchrones. A moins que c'est exactement ce qu'on l'on souhaite il faudrait les lancer de manière concurrentes avec:
+
+```js
+const main = async () => {
+  try {
+    let data = await Promise.all([
+      asyncTask(1, 10, true),
+      asyncTask(2, 5, true),
+      asyncTask(3, 0.5, true),
+      asyncTask(4, 1, true),
+    ])
+    console.log(`results: ${data}`) // data is an array
+  } catch (e) {
+    console.error(e.message)
+  }
+}
+
+main()
+```
+
+Pratiquez et comprenez l'enchainement et l'exécution de vos tâches asynchrones en utilisant la fonction `asyncTask` et toutes les fonctionnalités sur `promises` que l'on a vu:
+
+- simulation d'un programme synchrone
+- tâches concurrentes/parallèles
+- avec ou sans `await` (mix d'avec et sans)
+- `Promise.all`, `Promise.allSettled`, `Promise.race`, `Promise.any`
+- gestion des promises qui sont `rejected` avec des `catch`/`throw`, il faut passer `false` au 3eme paramètre de la fonction `asyncTask` pour que la promise retournée se complète avec le status `rejected`.
