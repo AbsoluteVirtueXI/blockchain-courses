@@ -318,3 +318,51 @@ Pratiquez et comprenez l'enchainement et l'exécution de vos tâches asynchrones
 - avec ou sans `await` (mix d'avec et sans)
 - `Promise.all`, `Promise.allSettled`, `Promise.race`, `Promise.any`
 - gestion des promises qui sont `rejected` avec des `catch`/`throw`, il faut passer `false` au 3eme paramètre de la fonction `asyncTask` pour que la promise retournée se complète avec le status `rejected`.
+
+## Exemples:
+
+Exécuter et compléter une tâche asynchrone puis exécuter et compléter 3 autres tâches exécutées en parallèle:
+
+```js
+const main = async () => {
+  try {
+    let res3 = await asyncTask(3, 2, true) // 3rd
+    console.log(res3)
+    const results = await Promise.all([
+      asyncTask(4, 3, true),
+      asyncTask(1, 1, true),
+      asyncTask(2, 0.5, true),
+    ])
+    for (const res of results) {
+      console.log(res)
+    }
+  } catch (e) {
+    console.log(`main: ${e.message}`)
+  }
+}
+
+main()
+```
+
+Exécuter et compléter 3 tâches asynchrones en parallèle puis exécuter et compléter 1 autre tâche:
+
+```js
+const main = async () => {
+  try {
+    const results = await Promise.all([
+      asyncTask(3, 2, true),
+      asyncTask(1, 1, true),
+      asyncTask(2, 0.5, true),
+    ])
+    for (const result of results) {
+      console.log(result)
+    }
+    const res4 = await asyncTask(4, 0.001, true)
+    console.log(res4)
+  } catch (e) {
+    console.error(e.message)
+  }
+}
+
+main()
+```
