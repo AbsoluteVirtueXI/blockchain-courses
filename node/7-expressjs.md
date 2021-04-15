@@ -16,22 +16,20 @@ Pour résumé lorsque l'on souhaite créer une application persistante qui commu
 ## **installation**
 
 ```zsh
-% npx djinit first-express-app
-% cd first-express-app
-% yarn add express
+yarn add express
 ```
 
 ## **1er programme**
 
 ```js
 // import de express
-import express from 'express'
+const express = require('express')
 
 // definition de notre app
 const app = express()
 
 // le port d'écoute de notre serveur
-const PORT = 3000
+const PORT = 3333
 
 // définition d'une route '/', la route par défaut.
 // lorsqu'un client effectuera une requête sur ce endpoint
@@ -64,7 +62,7 @@ Dans notre code une route est définie de cette manière:
 - HANDLER est la fonction exécutée lorsque notre route match avec la requête
 
 ```js
-import express from 'express'
+const express = require('express')
 const app = express()
 
 const IP_LOOPBACK = 'localhost'
@@ -160,7 +158,7 @@ We can handle requests with parameters
 
 ```js
 // import de express
-import express from 'express'
+const express = require('express')
 
 // definition de notre app
 const app = express()
@@ -214,8 +212,8 @@ les route handlers sont exécutés dans l'ordre dans lequel ils sont déclarés,
 
 ```js
 // import de express
-import express from 'express'
-import fs from 'fs/promises'
+const express = require('express')
+const fsPromises = require('fs/promises')
 
 const LOG_FILE = 'access-log.txt'
 
@@ -226,7 +224,7 @@ const logger = async (req) => {
     const log = `${date.toUTCString()} ${req.method} "${
       req.originalUrl
     }" from ${req.ip} ${req.headers['user-agent']}\n`
-    await fs.appendFile(LOG_FILE, log, 'utf-8')
+    await fsPromises.appendFile(LOG_FILE, log, 'utf-8')
   } catch (e) {
     console.error(`Error: can't write in ${LOG_FILE}`)
   }
@@ -335,7 +333,7 @@ On monte un `router` avec la méthode `use()`
 _wiki.js_:
 
 ```js
-import express from 'express'
+const express = require('express')
 export const wiki = express.Router()
 wiki.get('/', (req, res) => {
   res.send('Welcome to the wiki')
@@ -349,8 +347,8 @@ _app.js_:
 
 ```js
 // import de express
-import express from 'express'
-import { wiki } from './wiki.js'
+const express = require('express')
+const { wiki } = require('./wiki')
 
 const app = express()
 const IP = '192.168.0.11'
@@ -388,7 +386,7 @@ const logger = async (req, res, next) => {
     const log = `${date.toUTCString()} ${req.method} "${
       req.originalUrl
     }" from ${req.ip} ${req.headers['user-agent']}\n`
-    await fs.appendFile(LOG_FILE, log, 'utf-8')
+    await fsPromises.appendFile(LOG_FILE, log, 'utf-8')
   } catch (e) {
     console.error(`Error: can't write in ${LOG_FILE}`)
   } finally {
@@ -413,8 +411,8 @@ exemple complet:
 
 ```js
 // import de express
-import express from 'express'
-import fs from 'fs/promises'
+const express = require('express')
+const fsPromises = require('fs/promises')
 
 const LOG_FILE = 'access-log.txt'
 
@@ -429,7 +427,7 @@ const timer = (req, res, next) => {
 const logger = async (req, res, next) => {
   try {
     const log = `${req.requestDate} ${req.method} "${req.originalUrl}" from ${req.ip} ${req.headers['user-agent']}\n`
-    await fs.appendFile(LOG_FILE, log, 'utf-8')
+    await fsPromises.appendFile(LOG_FILE, log, 'utf-8')
   } catch (e) {
     console.error(`Error: can't write in ${LOG_FILE}`)
   } finally {
