@@ -63,6 +63,7 @@ générera un fichier `info.json` sous ce format:
 ```json
 {
   "url": "https://en.wikipedia.org/wiki/Fravia",
+  "contentLength": 91942,
   "title": "Fravia - Wikipedia",
   "nbUrls": 341,
   "nbImgs": 4
