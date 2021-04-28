@@ -2,7 +2,7 @@
 
 Vous devrez push les réponses aux questions suivantes dans un fichier `Markdown` qui sera accessible sur votre repository github
 
-Vous devrez fournir le lien vers ce fichier dans le formulaire de rendus d'exercices suivant: https://forms.gle/hodtGoSpJuqireE89
+Vous devrez fournir le lien vers ce fichier dans le formulaire de rendus d'exercices suivant: https://forms.gle/Ks8DYYR1LqQ6UD8S7
 
 - Lire le livre blanc: https://bitcoin.org/bitcoin.pdf, cherchez une version française si vous avez du mal avec l'anglais. (Mais dans ce cas vous risquez d'avoir du mal avec la Blockchain tout court).
 
