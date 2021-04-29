@@ -109,8 +109,8 @@ All test networks provide faucets platform for getting testnet Ethers.
 ## web3
 
 While using MetaMask as a browser extension, the `web3` environment is injected into the browser. This way the browser can perform blockchain operation on Dapp through the MetaMask extension.  
-MetaMask injects a global API into websites visited by its users at `window.ethereum`. This API allows websites to request users' Ethereum accounts, read data from blockchains the user is connected to, and suggest that the user sign messages and transactions. The presence of the provider object indicates an Ethereum user. MetaMask dev recommend using **detect-provider** package to detect our provider, on any platform or browser.
-**detect-provider**: https://www.npmjs.com/package/@metamask/detect-provider
+MetaMask injects a global API into websites visited by its users at `window.ethereum`. This API allows websites to request users' Ethereum accounts, read data from blockchains the user is connected to, and suggest that the user sign messages and transactions. The presence of the provider object indicates an Ethereum user. MetaMask devs recommend using **detect-provider** package to detect our provider, on any platform or browser.  
+**detect-provider**: https://www.npmjs.com/package/@metamask/detect-provider  
 You can check in your browser console that `window.ethereum` and `window.web3` objects exist.  
 Soon the `window.web3` will be removed following the MetaMask api documentation:
 https://docs.metamask.io/guide/ethereum-provider.html#window-web3-removal  
