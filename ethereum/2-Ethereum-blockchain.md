@@ -16,6 +16,7 @@ Technically Ethereum and Bitcoin follow the same scheme in their implementation,
 The Ethereum Virtual Machine (`EVM`) is a powerful, sandboxed virtual stack embedded within each full Ethereum node, responsible for executing contract bytecode. Contracts are typically written in higher level languages, like Solidity, then compiled to `EVM` bytecode.  
 This means that the machine code is completely isolated from the network, filesystem or any processes of the host computer. Every node in the Ethereum network runs an `EVM` instance which allows them to agree on executing the same instructions. The `EVM` is Turing complete, which refers to a system capable of performing any logical step of a computational function.
 For every instruction implemented on the `EVM`, a system that keeps track of execution cost, assigns to the instruction an associated cost in Gas units. When a user wants to initiate an execution, they reserve some Ether, which they are willing to pay for this gas cost.  
+List of Gas used per pcode: https://docs.google.com/spreadsheets/d/1n6mRqkBz3iWcOlRem_mO09GtSKEKrAsfO7Frgx18pNU/edit#gid=0  
 List of the EVM opcodes: https://ethervm.io/
 
 ## Smart contracts
@@ -207,14 +208,14 @@ _SimpleStorage.sol_:
 pragma solidity ^0.8.0;
 
 contract SimpleStorage {
-    uint256 storedData;
+    uint256 private _storedData;
 
     function set(uint256 x) public {
-        storedData = x;
+        _storedData = x;
     }
 
-    function get() public view returns (uint256) {
-        return storedData;
+    function storedData() public view returns (uint256) {
+        return _storedData;
     }
 }
 ```
