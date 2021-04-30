@@ -105,7 +105,7 @@ All test networks provide faucets platform for getting testnet Ethers.
 - Ropsten: https://faucet.ropsten.be/
 - Kovan: https://faucet.kovan.network/
 - Rinkeby: https://faucet.rinkeby.io/
-- Goerli: https://goerli-faucet.slock.it/
+- Goerli: https://goerli-faucet.slock.it/ ou https://faucet.goerli.mudit.blog/
 
 ## web3
 
