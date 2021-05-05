@@ -186,7 +186,8 @@ _Hello.sol_:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;                      // version du compilateur
+
+pragma solidity ^0.8.0;     // version du compilateur
 contract HelloWorld {                        // Definition de notre contrat
      string public hello = "Hello world!";  // unne variable public de type string
 }
