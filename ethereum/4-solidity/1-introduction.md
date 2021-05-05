@@ -9,6 +9,8 @@ Actuellement la dernière version de Solidity est `0.8.4`.
 
 ## Solidity: A language designed for the Ethereum Virtual Machine
 
+Solidity est un petit langage, qui n'a été prévu que pour écrire des smart contracts, il a été spécifiquement désigné pour cela, ce n'est pas un **General-purpose programming languages**
+
 ### A Statically typed language
 
 Solidity est un langage orienté objet de haut niveau à typage fort.
