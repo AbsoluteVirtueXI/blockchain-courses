@@ -101,27 +101,32 @@ _Counter.sol_:
 pragma solidity ^0.8.0;
 
 contract Counter {
-  address private _owner;
+  mapping(address => bool) _owners;
   uint256 private _counter;
   uint256 private _step;
 
   constructor(uint256 step_) {
-    _owner = msg.sender;
+    _owners[msg.sender] = true;
     _step = step_;
   }
 
+  function addOwner(address account) public {
+      require(_owners[msg.sender] == true, "Counter: Only an owner can add owner");
+      _owners[account] = true;
+  }
+
   function increment() public {
-      require(msg.sender == _owner, "Counter: Only owner can increment counter");
+      require(_owners[msg.sender] == true, "Counter: Only owners can increment counter");
       _counter += _step;
   }
 
   function reset() public {
-      require(msg.sender == _owner, "Counter: Only owner can increment counter");
+      require(_owners[msg.sender] == true, "Counter: Only owners can reset counter");
       _counter = 0;
   }
 
-  function owner() public view returns (address) {
-      return _owner;
+  function isOwner(address account) public view returns (bool) {
+      return _owners[account];
   }
 
   function counter() public view returns (uint256) {
@@ -136,14 +141,16 @@ contract Counter {
 ```
 
 `address` est un type qui correspond à une adresse sur Ethereum. Cette adresse peut être un account, ou celle d'un smart contract.  
-`msg.sender` est une [global variables](https://docs.soliditylang.org/en/latest/cheatsheet.html#global-variables). `msg.sender` correspond à l'adresse Ethereum qui fait appel à notre fonction, adresse d'un account ou smart ou d'un smart contract. `msg.sender` est du type `address`.
-le `constructor` prend un paramètre `step_` qui sera passé au moment du déploiement et qui initialisera la variable d'état `_step`. De plus le `constructor` initialisera également la variable `_owner` avec l'adresse qui aura effectué la transaction de création du smart contract.
-`require` nous permet de `revert` la transaction, l'annuler, et d'envoyer un message si une condition est fausse.  
+`msg.sender` est une [global variables](https://docs.soliditylang.org/en/latest/cheatsheet.html#global-variables). `msg.sender` correspond à l'adresse Ethereum qui fait appel à notre fonction, adresse d'un account ou smart ou d'un smart contract. `msg.sender` est du type `address`.  
+le `constructor` prend un paramètre `step_` qui sera passé au moment du déploiement et qui initialisera la variable d'état `_step`.  
+De plus le `constructor` initialisera également le `mapping` `_owners` en associant l'adresse qui aura effectué la transaction de création du smart contract à `true`.  
+Un `mapping` est une structure de donnée qui associe une clef à une valeur, dans l'exemple précédent une `address` sera associée à un `bool`. Si une `address` est associée à `true` alors l'adresse sera considéré comme un owner et pourra appeler les fonctions `addOwner`, `increment` et `reset` sans `revert` la transaction.  
+`require` nous permet de `revert` la transaction, l'annuler, et d'envoyer un message si la condition, 1er argument du `require`, est évaluée à `false`.  
 L'équivalent de
 
 ```solidity
 function increment() public {
-    require(msg.sender == _owner, "Counter: Only owner can increment counter");
+    require(_owners[msg.sender] == true, "Counter: Only owners can increment counter");
     _counter += _step;
 }
 ```
@@ -152,7 +159,7 @@ serait
 
 ```solidity
 function increment() public {
-    if(msg.sender != _owner) {
+    if(_owners[msg.sender] == false) {
         revert("Counter: Only owner can increment counter");
     }
     _counter += _step;
