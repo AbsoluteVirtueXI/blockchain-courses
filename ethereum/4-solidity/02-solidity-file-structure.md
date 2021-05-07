@@ -162,3 +162,16 @@ Un contract peut contenir les déclarations suivantes:
 - des `function`
 - des `modifier`
 - des `event`
+
+## Order of layout in a Solidity file
+
+Comme précisé dans le [style guide](https://docs.soliditylang.org/en/latest/style-guide.html#order-of-layout) l'ordre des déclarations suit une convention.
+Une convention sur l'ordre des déclarations aide les lecteurs à identifier les composants de nos fichiers plus facilement.
+Il faudra déclarer dans l'ordre suivant les différents composants de notre fichiers Solidity:
+
+1. SPDX Licence Identifier
+2. Pragma statements
+3. Import statements
+4. Interfaces
+5. Libraries
+6. Contracts
