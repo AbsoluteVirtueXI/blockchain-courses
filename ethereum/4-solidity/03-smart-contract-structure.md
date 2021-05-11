@@ -375,7 +375,7 @@ modifier onlyGoodPercentage(uint256 percentage) {
     _;
 }
 
-function setPercentage(uint256 percentage) public onlyOwner onlyGoodPercentage(percentage){
+function setPercentage(uint256 percentage) public onlyOwner onlyGoodPercentage(percentage) {
     // do something
 }
 ```
