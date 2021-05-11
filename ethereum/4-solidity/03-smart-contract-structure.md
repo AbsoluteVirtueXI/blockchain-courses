@@ -182,9 +182,9 @@ Une `library` permet de rajouter des fonctionnalités à un type.
 using Address for address;
 ```
 
-Désormais toutes les variables de type `address` pourront utiliser les fonctionnalités de la librairie `Address` importée depuis _Address.sol_.
+Désormais toutes les variables de type `address payable` pourront utiliser les fonctionnalités de la librairie `Address` importée depuis _Address.sol_.
 
-Ensuite nous pouvons utiliser la méthode `sendValue`, méthode accessible à toutes les `address payable` de notre smart contract. Si une `address` n'est pas `payable` il faudra la convertir pour profiter de cette nouvelle fonctionnalités:
+Ensuite nous pourrons utiliser la méthode `sendValue`, méthode accessible à toutes les `address payable` de notre smart contract. Si une `address` n'est pas `payable` il faudra la convertir pour profiter de cette nouvelle fonctionnalités:
 
 ```solidity
 payable(msg.sender).sendValue(amount);
@@ -283,7 +283,7 @@ Une variable peut être initialisée lors de sa déclaration, dans le constructe
 ## Event
 
 Les events permettent d'écrire dans le journal de l'EVM.  
-Ils sont utiles pour des applications off-chain qui souhaitent être notifiés d'événements qui se produisent dans notre smart contract ou dans la Blockchain en général.  
+Ils sont utiles pour des applications off-chain qui souhaitent être notifiées d'événements qui se produisent dans notre smart contract ou dans la Blockchain en général.  
 Les fonctions qui modifient les variables d'états ne peuvent pas communiquer avec des applications off-chain grâce à leurs valeurs de retour, pour cela elles doivent utiliser des `event`.  
 Emettre des `event` permettra aussi à des applications de parcourir le journal pour des événements particuliers et consulter ainsi l'historique de tous les événements d'un type particulier émit par un smart contract.  
 Un filtre sur des événements peut être appliqués sur des arguments de l'`event` qui sont déclarés comme `indexed`.
@@ -295,7 +295,7 @@ event Deposited(address indexed sender, uint256 amount);
 ```
 
 `Desposited` est un event qui prend comme paramètre une `address` et un `uint256`.  
-le paramètre `sender` est `indexed`, on pourra donc depuis notre frontend écouter l'`event` `Deposited` pour une addresse particulière. Une recherche de tous les `event` `Deposited` passés pourra également être effectuée en filtrant sur l'adresse qui aura déposé des fonds.
+le paramètre `sender` est `indexed`, on pourra donc depuis notre frontend écouter l'`event` `Deposited` pour une adresse particulière. Une recherche de tous les `event` `Deposited` passés pourra également être effectuée en filtrant sur l'adresse qui aura déposé des fonds.
 
 Ensuite depuis l'une de nos fonctions il faudra émettre cet `event` avec `emit` en passant les arguments à l'`event`:
 
@@ -317,17 +317,76 @@ La convention sur les `event`:
 
 ## modifier
 
+Les `function modifiers` servent à modifier le comportement d'une fonction.  
+En pratique les `modifier` servent à exécuter ou non le corps d'une fonction selon l'évaluation d'un `require`.  
+Déclaration d'un `modifier` qui exécutera le corps d'une fonction si et seulement si le `msg.sender` est égal à l'adresse qui serait stockée dans la variable d'état `_owner`:
+
+```solidity
+modifier onlyOwner() {
+    require(msg.sender == _owner, "Ownable: Only owner can call this function");
+    _;
+}
+```
+
+Déclaration d'un `modifier` qui exécutera le corps d'une fonction si et seulement le `msg.value` est supérieur à 10 ether lors de l'appel de la fonction qui utilisera ce modifier:
+
+```solidity
+modifier moreThan10Ether() {
+    require(msg.value > 10 ether, "Contract: Not enough ether");
+    _;
+}
+```
+
+le `_;` permet de continuer le flot d'exécution et de passer à l'exécution du `modifier` suivant ou d'exécuter le corps de la fonction si il n'y a plus de `modifier`s
+
+Avant l'exécution du corps d'une fonction les `modifier`s sont exécutés dans l'ordre comme ils apparaissent dans la déclaration de la fonction.
+
+```solidity
+modifier firstModifier() {
+    // some require here
+    // _;
+}
+
+modifier secondModifier() {
+    // some require here
+    // _;
+}
+
+modifier thirdModifier() {
+    // some require here
+    // _;
+}
+
+function doSomething() public payable firstModifier secondModifier thirdModifier {
+    // do something
+}
+```
+
+Les `modifier`s ont accès aux variables globales comme `msg.sender` et `msg.value`, mais ne peuvent avoir accès implicitement aux arguments passés à la fonction qu'ils "modifient". Si un `modifier` à besoin d'avoir accès aux paramètres de la fonction qu'il modifie il faudra dans ce cas passer les arguments de la fonctions en paramètres du modifier.
+
+```solidity
+modifier onlyOwner() {
+    require(msg.sender == _owner, "Ownable: Only owner can call this function");
+    _;
+}
+
+modifier onlyGoodPercentage(uint256 percentage) {
+    require( percentage >= 0 && percentage <= 100, "Contract: Not a valid percentage");
+    _;
+}
+
+function setPercentage(uint256 percentage) public onlyOwner onlyGoodPercentage(percentage){
+    // do something
+}
+```
+
+Les modifiers déclarés dans des contract parents peuvent être utilisés par des smart contract enfants qui héritent de ce smart contract parent.
+C'est pour cela que dans notre smart contract `SmartWallet` nous pouvons utiliser le modifier `onlyOwner` déclaré dans le contract `Ownable`.
+
 ## function
 
-### function declaration
-
-### constructor
-
-### visibility
-
-### access modifiers
-
-### payable modifier
+Dans un smart contract tout le code exécutable est écrit dans des fonctions.
+Les interactions que nous effectuerons avec notre smart contract ne se fera que via ces fonctions.
 
 ### function declarations order
 
@@ -342,3 +401,21 @@ Comme précisé dans le [style guide](https://docs.soliditylang.org/en/latest/st
 7. private
 
 Au sein des groupes de fonctions qui sont `external`, `public`, `internal` et `private` il faudra placer les fonctions qui ont un modifier `view` et `pure` en dernières.
+
+### constructor
+
+Le constructor est la 1ere fonction
+
+### receive and fallback
+
+### function declaration
+
+### visibility
+
+### access modifiers
+
+### payable modifier
+
+### function modifiers
+
+Voir chapitre `modifer`
