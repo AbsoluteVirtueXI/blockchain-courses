@@ -32,6 +32,8 @@ La fonction `check` sera `pure`.
 Ecrivez un contrat `PayableCalculator`.  
 Ce smart contract nous permettra d'obtenir le résultat des opérations arithmétiques communes: add, sub, mul, div, modulo.  
 Néanmoins ces fonctions sont payantes, il faudra payer `1 finney` pour exécuter ces fonctions.
+Il faudra aussi ajouter un fonction `withdraw` qu'un owner pourra appeler pour récupérer tous les ethers du smart contract. (Utiliser la fonction `sendValue` de la librairie `Address` comme vu dans le cours pour transférer de l'ether du smart contract vers l'adresse de l'owner).
+L'owner sera défini dans le constructor du smart contract _PayableCalculator_.
 
 ### _PayableCalculator.sol_
 
