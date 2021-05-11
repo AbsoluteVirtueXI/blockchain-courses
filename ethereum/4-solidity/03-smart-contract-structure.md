@@ -59,13 +59,13 @@ pragma solidity ^0.8.0;
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol";
 import "./Ownable.sol";
 
-
 contract SmartWallet is Ownable {
     // library usage
     using Address for address payable;
 
     // State variables
     mapping(address => uint256) private _balances;
+    mapping(address => bool) private _vipMembers;
     uint256 private _tax;
     uint256 private _profit;
     uint256 private _totalProfit;
@@ -74,6 +74,7 @@ contract SmartWallet is Ownable {
     event Deposited(address indexed sender, uint256 amount);
     event Withdrew(address indexed recipient, uint256);
     event Transfered(address indexed sender, address indexed recipient, uint256 amount);
+    event VipSet(address indexed account, bool status);
 
     // constructor
     constructor(address owner_, uint256 tax_) Ownable(owner_) {
@@ -90,9 +91,7 @@ contract SmartWallet is Ownable {
         _deposit(msg.sender, msg.value);
     }
 
-    fallback() external {
-
-    }
+    fallback() external {}
 
     function deposit() external payable {
         _deposit(msg.sender, msg.value);
@@ -129,10 +128,14 @@ contract SmartWallet is Ownable {
         _tax = tax_;
     }
 
+    function setVip(address account) public onlyOwner {
+        _vipMembers[account] = !_vipMembers[account];
+        emit VipSet(account, _vipMembers[account]);
+    }
+
     function balanceOf(address account) public view returns (uint256) {
         return _balances[account];
     }
-
 
     function total() public view returns (uint256) {
         return address(this).balance;
@@ -150,6 +153,10 @@ contract SmartWallet is Ownable {
         return _totalProfit;
     }
 
+    function isVipMember(address account) public view returns (bool) {
+        return _vipMembers[account];
+    }
+
     function _deposit(address sender, uint256 amount) private {
         _balances[sender] += amount;
         emit Deposited(sender, amount);
@@ -158,7 +165,12 @@ contract SmartWallet is Ownable {
     function _withdraw(address recipient, uint256 amount) private {
         require(_balances[recipient] > 0, "SmartWallet: can not withdraw 0 ether");
         require(_balances[recipient] >= amount, "SmartWallet: Not enough Ether");
-        uint256 fees = _calculateFees(amount, _tax);
+        // version de john avec ternaire
+        // uint256 fees = _vipMembers[recipient] ? 0 : _calculateFees(amount, _tax);
+        uint256 fees = 0;
+        if(_vipMembers[recipient] != true) {
+            fees = _calculateFees(amount, _tax);
+        }
         uint256 newAmount = amount - fees;
         _balances[recipient] -= amount;
         _profit += fees;
@@ -166,6 +178,7 @@ contract SmartWallet is Ownable {
         payable(msg.sender).sendValue(newAmount);
         emit Withdrew(msg.sender, newAmount);
     }
+
 
     function _calculateFees(uint256 amount, uint256 tax_) private pure returns (uint256) {
         return amount * tax_ / 100;
