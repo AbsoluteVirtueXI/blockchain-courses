@@ -1,4 +1,4 @@
-# Solidity ile structure
+# Solidity file structure
 
 Par convention, l'extension d'un fichier Solidity est `.sol`.  
 Un fichier Solidity se compose d'un certain nombres d'éléments.
