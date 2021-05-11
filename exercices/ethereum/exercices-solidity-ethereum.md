@@ -161,7 +161,7 @@ contract SmartWallet is Ownable {
     // Exercice 1
     // Implementer cette fonction pour qu'elle nous retourne ce que spender peut
     // encore dépenser en tant owner_.
-    function allowance(address owner_, address spender) public view returns (uint256 remaining) {
+    function allowance(address owner_, address spender) public view returns (uint256) {
 
     }
 
