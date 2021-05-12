@@ -65,6 +65,7 @@ contract SmartWallet is Ownable {
 
     // State variables
     mapping(address => uint256) private _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
     mapping(address => bool) private _vipMembers;
     uint256 private _tax;
     uint256 private _profit;
@@ -75,6 +76,7 @@ contract SmartWallet is Ownable {
     event Withdrew(address indexed recipient, uint256);
     event Transfered(address indexed sender, address indexed recipient, uint256 amount);
     event VipSet(address indexed account, bool status);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
 
     // constructor
     constructor(address owner_, uint256 tax_) Ownable(owner_) {
@@ -91,7 +93,9 @@ contract SmartWallet is Ownable {
         _deposit(msg.sender, msg.value);
     }
 
-    fallback() external {}
+    fallback() external {
+
+    }
 
     function deposit() external payable {
         _deposit(msg.sender, msg.value);
@@ -103,18 +107,33 @@ contract SmartWallet is Ownable {
         _withdraw(msg.sender, amount);
     }
 
-    function withdrawAmount(uint256 amount) public {
+    function withdraw(uint256 amount) public {
         _withdraw(msg.sender, amount);
     }
 
+    function approve(address spender, uint256 amount) public {
+        require(spender != address(0), "SmartWallet: approve to the zero address");
+        _allowances[msg.sender][spender] = amount;
+        emit Approval(msg.sender, spender, amount);
+    }
+
     function transfer(address recipient, uint256 amount) public {
-        require(_balances[msg.sender] > 0, "SmartWallet: can not transfer 0 ether");
         require(_balances[msg.sender] >= amount, "SmartWallet: Not enough Ether to transfer");
         require(recipient != address(0), "SmartWallet: transfer to the zero address");
         _balances[msg.sender] -= amount;
         _balances[recipient] += amount;
         emit Transfered(msg.sender, recipient, amount);
     }
+
+    function transferFrom(address sender, address recipient, uint256 amount) public {
+        require(_allowances[sender][msg.sender] >= amount, "SmartWallet: transfer amount exceeds allowance");
+        require(_balances[sender] >= amount, "SmartWallet: Not enough Ether to transfer");
+        require(recipient != address(0), "SmartWallet: transfer to the zero address");
+        _allowances[sender][msg.sender] -= amount;
+        _balances[sender] -= amount;
+        _balances[recipient] += amount;
+    }
+
 
     function withdrawProfit() public onlyOwner {
         require(_profit > 0, "SmartWallet: can not withdraw 0 ether");
@@ -133,8 +152,13 @@ contract SmartWallet is Ownable {
         emit VipSet(account, _vipMembers[account]);
     }
 
+
     function balanceOf(address account) public view returns (uint256) {
         return _balances[account];
+    }
+
+    function allowance(address owner_, address spender) public view returns (uint256) {
+        return _allowances[owner_][spender];
     }
 
     function total() public view returns (uint256) {
