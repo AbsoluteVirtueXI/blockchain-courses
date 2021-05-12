@@ -417,18 +417,104 @@ Au sein des groupes de fonctions qui sont `external`, `public`, `internal` et `p
 
 ### constructor
 
-Le constructor est la 1ere fonction
+Le constructor est la fonction qui sera exécutée au moment du déploiement de notre smart contract.
+Le constructor sert à initialisé les variables d'état de notre smart contract.
+Si une fonction ne possède pas de constructor alors un constructor vide est automatiquement créé.
+Si un constructor possède des paramètres, il faudra passer les bons arguments à notre constructor
+Si notre smart contract hérite d'un parent qui possède un constructor il faudra initialiser le contract parent en appelant son constructor lors du déploiement de notre smart contract enfant.
+
+```solidiy
+constructor(address owner_, uint256 tax_) Ownable(owner_) {
+    require(tax_ >= 0 && tax_ <= 100, "SmartWallet: Invalid percentage");
+    _tax = tax_;
+}
+```
 
 ### receive and fallback
 
+#### receive Ether function
+
+Un smart contract peut recevoir directement de l'ether, comme on en enverrait à une autre adresse depuis notre wallet metamask.  
+Pour que notre smart contract puisse accepter de l'Ether par un `transfer` il faut implémenter la fonction `receive`.
+
+```solidity
+receive() external payable {
+    _deposit(msg.sender, msg.value);
+}
+```
+
+Au moment de la réception de l'ether la fonction `receive` s'exécute.
+Dans le pire des scénarios la fonction `receive` ne pourra utiliser que 2300 unités de gas pour s'exécuter.
+2300 unités de gas c'est juste assez pour emetre un `event`.
+Le pire des scénarios peut se produire lorsqu'un smart contract essaye d'envoyer directement de l'ether à un autre smart contract via la fonction `transfer`.
+
+```solidity
+// Call depuis un autre smart contract avec transfer provequera un `Out of gas` error
+payable(adressOfSmartWallet).transfer(1 ether)
+```
+
+Il ne peut exister qu'une seule fonction `receive` par contract et elle doit obligatoirement être `external`.  
+Pour plus d'information: https://docs.soliditylang.org/en/latest/contracts.html?highlight=receive#receive-ether-function
+
+#### fallback function
+
+La `fallback` est une fonction qui sera exécutée si notre contract est appelé avec une fonction qui n'existe pas. Elle servait initialement à la réception d'ether avant que la fonction `receive` fasse son apparation.  
+Il ne peut exister qu'une seule fonction `fallback` par contract et elle doit obligatoirement être `external`
+Pour plus d'information: https://docs.soliditylang.org/en/latest/contracts.html?highlight=receive#fallback-function
+
 ### function declaration
+
+La grammaire d'une déclaration de fonction:  
+https://docs.soliditylang.org/en/latest/grammar.html#a4.SolidityParser.functionDefinition
+
+Une fonction est composée:
+
+1. d'un nom son `identifier`
+2. d'une liste de paramètres
+3. un paramètre de visibilité: `external`, `public`, `internal`, `private`
+4. de paramètre de `state-mutability`: `pure`, `view`, `payable` ou aucun
+5. des `modifer`s
+6. du type de retour de cette fonction, si elle retourne une valeur
+7. le corps de la fonction entre accolades
+
+Préférez cette ordre là au moment de la déclaration de votre fonction.
 
 ### visibility
 
-### access modifiers
+Une fonction peut être
+`external`: seulement accessible depuis l'extérieur  
+`public`: la visibilité la plus permissive, accessible depuis l'extérieur et depuis notre smart contract
+`internal`: accessible depuis notre smart contract et les smart contract qui hériteront de notre smart contract
+`private`: la visibilité la plus restrictive, accessible seulement depuis notre smart contract, et même pas les smart contract qui hériteront de notre smart contract.
 
-### payable modifier
+### state-mutability specifiers
+
+Une fonction déclarée comme `pure` ne pourra ni lire ni écrire les variables d'états de notre smart contract et les variables globales comme `msg.sender` et `msg.value`. Elle ne pourra dépendre que de ses paramètres pour s'exécuter.
+
+Une fonction déclarée comme `view` ne pourra pas écrire/modifier les variables d'états de notre smart contract mais pourra les les lire. Une fonction `view` peut également lire les variables globales comme `msg.sender` et `msg.value`.
+
+Si `pure` ou `view` ne sont pas spécifiés alors notre fonction peut lire et écrire dans le `storage` de notre smart contract.  
+Si `payable` est spécifié alors on se retrouve avec une fonction qui peut lire et écrire dans le `storage` et qui peut aussi accepter de l'ether.
 
 ### function modifiers
 
 Voir chapitre `modifer`
+
+### Global variables
+
+Depuis une fonction nous pouvons avoir accès à des variables et fonctions globales.  
+Ces propriétés peuvent nous renseigner sur la transaction en cours.
+Ces fonctions et variables peuvent être directement utilisées dans nos fonctions.
+Par exemple `msg.sender` est une variable qui contient l'adresse de l'account (ou du smart contract) qui effectue le call de la fonction et `msg.value` est la quantité en wei passé à la fonction lors de son appel (via le champ `value`).  
+Pour plus d'information:  
+https://docs.soliditylang.org/en/latest/units-and-global-variables.html?highlight=global%20variables#special-variables-and-functions et https://docs.soliditylang.org/en/latest/cheatsheet.html?highlight=global%20variables#global-variables
+
+### function overloading
+
+Des fonctions peuvent avoir le même nom si elles ont des signatures différentes.
+La signature d'une fonction est composée par
+
+- ses paramètres: leur nombres, leur types
+- la valeur de retour: leur nombre, leur types
+
+Pour en savoir plus: https://docs.soliditylang.org/en/latest/contracts.html?highlight=overloading#function-overloading
