@@ -25,7 +25,7 @@ Si le pot owner arrive à rester l'owner de ce pot pendant un certain nombre de 
 ## Edge cases
 
 Il y a 2 cas particuliers, le déploiement et une fin de tour.
-Au déploiement l'owner du smart contract doit aussi envoyer une certaine somme pour que le jeu puisse commencer et que le pot contienne déjà un enjeu en ether (Oui un `constrcutor` peut être payable).  
+Au déploiement l'owner du smart contract doit aussi envoyer une certaine somme pour que le jeu puisse commencer et que le pot contienne déjà un enjeu en ether (Oui un `constructor` peut être payable).  
 Si un joueur reste l'owner du pot durant le nombre de blocs nécessaires pour gagner et qu'un nouveau joueur essaye d'acquérir ce pot alors un nouveau tour de jeu est lancé.  
 Lancer un nouveau tour de jeu consiste à:
 
