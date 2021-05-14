@@ -20,6 +20,8 @@ Si le pot owner arrive à rester l'owner de ce pot pendant un certain nombre de 
 10% sont envoyés à l'owner du smart contract.  
 10% sont laissés dans le pot comme `seed` du prochain tour.
 
+**Tous les ethers de trop envoyés au smart contract devront être restitués au sender.**
+
 ## Edge cases
 
 Il y a 2 cas particuliers, le déploiement et une fin de tour.
