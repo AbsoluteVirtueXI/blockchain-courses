@@ -14,7 +14,7 @@ Bitcoin, la première blockchain, est `A Peer-to-Peer Electronic Cash System`.
 `peer-to-peer`: pair à pair, dans un réseau distribué, donc sans autorité intermédiaire de contrôle ou de remédiation.
 
 De nombreuses idées et technologies doivent être implémentées pour arriver à construire ce système sans failles.
-`Satoshi Nakamoto`, le pseudonyme utilisé par le prétendu auteur des spécifications pour Bitcoin dans le (white paper)[https://bitcoin.org/bitcoin.pdf], décrit un ensemble de concepts qui existent déjà, mais qui sont ingénieusement assemblés pour construire ce nouveau système en créant le concept de Blockchain.
+`Satoshi Nakamoto`, le pseudonyme utilisé par le prétendu auteur des spécifications pour Bitcoin dans le [white paper](https://bitcoin.org/bitcoin.pdf), décrit un ensemble de concepts qui existent déjà, mais qui sont ingénieusement assemblés pour construire ce nouveau système en créant le concept de Blockchain.
 
 ## Open-source, free software and communauty
 
