@@ -43,11 +43,11 @@ La seule possibilité de faire cela convenablement serait de créer un système 
 ### The Receipt is the Transaction
 
 Dans la comptabilité à triple entrée de `Ian Grigg` en 2005, inspiré des travaux de `Yuji Ijiri`, un mécanisme de signature numérique de reçus est ajouté à la classique comptabilité à double entrée.  
-Lorsque Alice souhaite effectuer un transfert à Bob, elle signe un reçu contenant le destinataire et la somme à envoyer à Bob:
+Lorsque Alice souhaite effectuer un transfert à Bob, elle signe un reçu contenant le destinataire et la somme à envoyer à Bob:  
 ![interim receipt](../res/interim_receipt.png)
 
-Ce reçu est envoyé à l'institution qui gère ses fonds (sa banque) qui valide dans son registre comptable à double entrée si Alice possède bien les fonds qu'elle souhaite envoyer à Bob, effectue le transfert et émet un reçu signé à Alice et Bob et garde également une copie de ce reçu:
-![signed receipt](../res/signed_receipt.png)
+Ce reçu est envoyé à l'institution qui gère ses fonds (sa banque) qui valide dans son registre comptable à double entrée si Alice possède bien les fonds qu'elle souhaite envoyer à Bob, effectue le transfert et émet un reçu signé à Alice et Bob et garde également une copie de ce reçu:  
+![signed receipt](../res/signed_receipt.png)  
 Ivan est la banque.
 Ce reçu signé contient obligatoirement l'autorisation d'Alice qu'elle a signé auparavant pour valider cette transaction.
 Alice, Bob et la banque (Ivan) partage la même information.  
