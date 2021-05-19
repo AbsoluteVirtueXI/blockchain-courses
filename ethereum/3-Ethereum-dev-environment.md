@@ -282,7 +282,7 @@ Type ".help" for more information.
 Hello, Hardhat!
 ```
 
-En général pour préférerons utiliser des scripts pour d'interfacer avec notre smart contract déployé plutôt que de le faire manuellement avec la `Hardhat console`.
+En général pour préférerons utiliser des scripts pour s'interfacer avec notre smart contract déployé plutôt que de le faire manuellement avec la `Hardhat console`.
 
 ### Architecture of an Hardhat project
 
