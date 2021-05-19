@@ -176,7 +176,7 @@ module.exports = {
 }
 ```
 
-Il faudra aussi modifier la version de `pragma` du fichier _Greeter.sol_ pour quelle match la version de notre compilateur:
+Il faudra aussi modifier la version de `pragma` du fichier _Greeter.sol_ pour qu'elle match la version de notre compilateur:
 
 ```solidity
 pragma solidity ^0.8.0;
