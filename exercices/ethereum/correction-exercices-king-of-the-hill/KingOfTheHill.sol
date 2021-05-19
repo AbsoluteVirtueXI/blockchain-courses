@@ -18,6 +18,10 @@ contract KingOfTheHill is Ownable {
     uint256 private immutable _gainPercentage;
     uint256 private immutable _seedPercentage;
 
+    
+    // Events ???
+    
+
     constructor(address owner_, uint256 nbBlocks_, uint256 rewardPercentage_, uint256 gainPercentage_) Ownable(owner_) payable {
         require(msg.value > 0, "KingOfTheHill: pot need a seed");
         require(nbBlocks_ > 0, "KingOfTheHill: nb blocks to win cannot be zero");
@@ -63,24 +67,18 @@ contract KingOfTheHill is Ownable {
         payable(msg.sender).sendValue(amount);
     }
     
-    //Only usefull for debugging on remix
-    function currentBlock() public view returns (uint256) {
-        return block.number;
-    }
-
-    
     function isRoundRunning() public view returns (bool) {
         return  _startBlock + _nbBlocks > block.number && _potOwner != address(0) ? true : false;
     }
-
     
     function winningBlock() public view returns (uint256) {
         return isRoundRunning() ? _startBlock + _nbBlocks : 0;
     }
     
+    // TODO check off by one error
     function remainingBlock() public view returns (uint256) {
-        return isRoundRunning() ? _startBlock + _nbBlocks - block.number : 0;
-    }
+        return isRoundRunning() ? _startBlock + _nbBlocks - block.number: 0;
+    }  
     
     function priceOfPot() public view returns (uint256) {
         if(isRoundRunning() || _potOwner == address(0)) {
@@ -120,9 +118,5 @@ contract KingOfTheHill is Ownable {
     
     function seedPercentage() public view returns (uint256) {
         return _seedPercentage;
-    }
-    
-    function smartContractBalance() public view returns(uint256) {
-        return address(this).balance;
     }
 }
