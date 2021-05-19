@@ -71,14 +71,14 @@ Néanmoins `HardHat` possède un [plugin](https://hardhat.org/plugins/nomiclabs-
 
 https://hardhat.org/getting-started/#installation
 
-Harhat devra être installé localement pour chacun de vos projets.
-Harhat est une suite d'outils Node.js, il faudra donc installer Hardhat via le package manager Node.js, donc dans un dossier qui a été initialisé avec `yarn init`.
+Hardhat devra être installé localement pour chacun de vos projets.
+Hardhat est une suite d'outils Node.js, il faudra donc installer Hardhat via le package manager Node.js, donc dans un dossier qui a été initialisé avec `yarn init`.
 
 ```zsh
 mkdir first-hardhat-project
 cd first-hardhat-project
 yarn init -y
-yarn add harhat --dev
+yarn add hardhat --dev
 ```
 
 Ouvrir avec VSCode.
