@@ -125,16 +125,4 @@ contract KingOfTheHill is Ownable {
     function smartContractBalance() public view returns(uint256) {
         return address(this).balance;
     }
-    
-    function _buyPot() private  {
-        require(msg.sender != _potOwner, "KingOfTheHill: sender already owns pot");
-        require(msg.value >= _pot * 2, "KingOfTheHill: not enough ether for buying pot");
-        _potOwner = msg.sender;
-        _startBlock = block.number;
-        uint256 change = msg.value - _pot * 2;
-        _pot += _pot * 2;
-        if(change > 0) {
-            payable(msg.sender).sendValue(change);
-        }
-    }
 }
