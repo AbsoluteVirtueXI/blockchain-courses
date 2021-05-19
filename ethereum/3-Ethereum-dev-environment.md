@@ -194,7 +194,6 @@ Learn more at https://hardhat.org/reference/solidity-support"
 Downloading compiler 0.8.4
 Compiling 2 files with 0.8.4
 Compilation finished successfully
-akersof@MacBook-Pro-de-Sofiane first-hardhat-proje
 ```
 
 Si compilation de nos smart contracts se passe sans erreurs 2 nouveaux répertoires sont générés:
