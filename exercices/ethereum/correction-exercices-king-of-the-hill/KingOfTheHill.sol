@@ -10,14 +10,13 @@ contract KingOfTheHill is Ownable {
     
     mapping(address => uint256) private _rewards;
     address private _potOwner;
+    uint256 private _startBlock;
     uint256 private _pot;
     uint256 private _gain;
     uint256 private immutable _nbBlocks;
-    uint256 private _startBlock;
     uint256 private immutable _rewardPercentage;
     uint256 private immutable _gainPercentage;
     uint256 private immutable _seedPercentage;
-    // TODO add constant percentage
 
     constructor(address owner_, uint256 nbBlocks_, uint256 rewardPercentage_, uint256 gainPercentage_) Ownable(owner_) payable {
         require(msg.value > 0, "KingOfTheHill: pot need a seed");
@@ -30,17 +29,24 @@ contract KingOfTheHill is Ownable {
         _seedPercentage = rewardPercentage_ > gainPercentage_ ? rewardPercentage_ - gainPercentage_ : gainPercentage_ - rewardPercentage_;
     }
     
-    modifier whenRoundRunning() {
-        require(isRoundRunning(), "KingOfTheHill: no running round actually");
-        _;
-    }
-    
     function buyPot() external payable {
-        // if a round is actually is actually running player will try to buy pot
-        if(!isRoundRunning()) {
-            _setupNewRound();
+        if(!isRoundRunning() && _potOwner != address(0)) {
+            uint256 reward = _pot * _rewardPercentage / 100;
+            uint256 gain_ = _pot * _gainPercentage / 100;
+            _pot -= reward + gain_;
+            _rewards[_potOwner] += reward;
+            _gain += gain_;
+            _potOwner = address(0);
         }
-        _buyPot();
+        require(msg.sender != _potOwner, "KingOfTheHill: sender already owns pot");
+        require(msg.value >= _pot * 2, "KingOfTheHill: not enough ether for buying pot");
+        _potOwner = msg.sender;
+        _startBlock = block.number;
+        uint256 change = msg.value - _pot * 2;
+        _pot += _pot * 2;
+        if(change > 0) {
+            payable(msg.sender).sendValue(change);
+        }
     }
     
     function withdrawReward() public {
@@ -129,17 +135,6 @@ contract KingOfTheHill is Ownable {
         _pot += _pot * 2;
         if(change > 0) {
             payable(msg.sender).sendValue(change);
-        }
-    }
-    
-    function _setupNewRound() private {
-        if(_potOwner != address(0)) {
-            uint256 reward = _pot * _rewardPercentage / 100;
-            uint256 gain_ = _pot * _gainPercentage / 100;
-            _pot -= reward + gain_;
-            _rewards[_potOwner] += reward;
-            _gain += gain_;
-            _potOwner = address(0);
         }
     }
 }
