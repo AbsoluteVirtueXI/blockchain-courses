@@ -196,7 +196,7 @@ Compiling 2 files with 0.8.4
 Compilation finished successfully
 ```
 
-Si compilation de nos smart contracts se passe sans erreurs 2 nouveaux répertoires sont générés:
+Si la compilation de nos smart contracts se passe sans erreurs 2 nouveaux répertoires sont générés:
 
 - _cache/_: répertoire interne à Hardhat. Il contient des informations relatives à notre projet.
 - _artifacts/_: Ce repertoire contient les `artifacts` de nos smart contracts. Ce sont des fichiers `JSON` contenant des metadonnées et surtout l'ABI et le bytecode de nos smart contract compilés. Les artificats de chacun de nos smart contracts sont disponibles dans _artifacts/contracts/_.
