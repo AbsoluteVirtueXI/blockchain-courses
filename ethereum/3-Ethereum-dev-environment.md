@@ -225,7 +225,7 @@ Si la compilation de nos smart contracts se passe sans erreurs 2 nouveaux réper
 
 ### Running `test` task
 
-https://hardhat.org/getting-started/#testing-your-contract
+https://hardhat.org/getting-started/#testing-your-contracts
 
 Tous nos scripts de tests se trouvent dans le répertoire _test/_.  
 Généralement un smart contract doit posséder un fichier de script de tests.  
