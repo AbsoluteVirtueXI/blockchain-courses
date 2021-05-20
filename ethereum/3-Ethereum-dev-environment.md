@@ -176,10 +176,32 @@ module.exports = {
 }
 ```
 
-Il faudra aussi modifier la version de `pragma` du fichier _Greeter.sol_ pour qu'elle match la version de notre compilateur:
+Il faudra aussi modifier la version de `pragma` du fichier _Greeter.sol_ pour qu'elle match la version de notre compilateur. Au passage profitons en pour réecrire le smart contract `Greeter` avec les bonnes conventions recommandées:
 
 ```solidity
+//SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
+
+import "hardhat/console.sol";
+
+
+contract Greeter {
+  string private _greeting;
+
+  constructor(string memory greeting_) {
+    console.log("Deploying a Greeter with greeting:", greeting_);
+    _greeting = greeting_;
+  }
+
+  function setGreeting(string memory greeting_) public {
+    console.log("Changing greeting from '%s' to '%s'", _greeting, greeting_);
+    _greeting = greeting_;
+  }
+
+  function greeting() public view returns (string memory) {
+    return _greeting;
+  }
+}
 ```
 
 Ensuite `clean` le cache et tous les `artificats` générés par la dernière compilation et recompiler:
@@ -215,6 +237,29 @@ Pour que notre code Javascript de test, mais pas que, sache communiquer avec la 
 Afin de lancer nos tests sur nos smart contracts il faut absolument que ces derniers soient compilés avant car les scripts de tests ont besoin des `artificats` des contrats qu'ils doivent tester. Si ce n'est pas le cas le comportement par défaut de la `task` `test` est de compiler les smart contracts avant d'exécuter les scripts de test.  
 Avec le setup par défaut de notre projet Hardhat un script de test _test/sample-test.js_ est fourni pour tester le smart contract `Greeter` du fichier _contracts/Greeter.sol_
 Afin de suivre de meilleure convention renommer le fichier _test/sample-test.js_ en _test/Greeter-test.js_.
+Modifier le fichier _test/Greeter-test.js_ pour qu'il teste correctement notre smart contract `Greeter` modifié précédemment:
+
+```js
+const { expect } = require('chai')
+
+describe('Greeter', function () {
+  it("Should have 'Hello, world!' at deployement", async function () {
+    const Greeter = await ethers.getContractFactory('Greeter')
+    const greeter = await Greeter.deploy('Hello, world!')
+    await greeter.deployed()
+    expect(await greeter.greeting()).to.equal('Hello, world!')
+  })
+
+  it("Should return the new greeting once it's changed", async function () {
+    const Greeter = await ethers.getContractFactory('Greeter')
+    const greeter = await Greeter.deploy('Hello, world!')
+    await greeter.deployed()
+    await greeter.setGreeting('Hola, mundo!')
+    expect(await greeter.greeting()).to.equal('Hola, mundo!')
+  })
+})
+```
+
 Pour exécuter la `task` `test` on utilise le client Hardhat en ligne de commande:
 
 ```zsh
@@ -223,14 +268,16 @@ npx hardhat test
 
   Greeter
 Deploying a Greeter with greeting: Hello, world!
+    ✓ Should have 'Hello, world!' at deployement (1083ms)
+Deploying a Greeter with greeting: Hello, world!
 Changing greeting from 'Hello, world!' to 'Hola, mundo!'
-    ✓ Should return the new greeting once it's changed (1027ms)
+    ✓ Should return the new greeting once it's changed (94ms)
 
 
-  1 passing (1s)
+  2 passing (1s)
 ```
 
-Le script `Greeter-test.js` ne contient qu'un seul test `Should return the new greeting once it's changed` qui est passé avec succès.  
+Le script `Greeter-test.js` contient 2 tests `Should have 'Hello, world!' at deployement` et `Should return the new greeting once it's changed` qui sont passés avec succès.  
 Les tests de nos smart contract sont exécutés sur une instance du `Hardhat network` non persistante.
 
 ### Running `run` task for deploying smart contracts.
@@ -274,11 +321,15 @@ Pour envoyer une transaction à notre smart contract `Greeter` déployé sur le 
 npx hardhat console --network localhost
 Welcome to Node.js v15.1.0.
 Type ".help" for more information.
-> const Greet = await ethers.getContractFactory("Greeter")
-> const greet = await Greet.attach("0x5FbDB2315678afecb367f032d93F642f64180aa3")
-> const message = await greet.greet()
+> const Greeter = await ethers.getContractFactory("Greeter")
+> const greeter = await Greeter.attach("0x5FbDB2315678afecb367f032d93F642f64180aa3")
+> const message = await greeter.greeting()
 > console.log(message)
 Hello, Hardhat!
+> await greeter.setGreeting("Hola, mundo!")
+> const newMessage = await greeter.greeting()
+> console.log(newMessage)
+Hola, mundo!
 ```
 
 En général pour préférerons utiliser des scripts pour s'interfacer avec notre smart contract déployé plutôt que de le faire manuellement avec la `Hardhat console`.
