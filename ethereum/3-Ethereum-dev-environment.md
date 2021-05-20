@@ -236,7 +236,7 @@ Pour que notre code Javascript de test, mais pas que, sache communiquer avec la 
 
 Afin de lancer nos tests sur nos smart contracts il faut absolument que ces derniers soient compilés avant car les scripts de tests ont besoin des `artificats` des contrats qu'ils doivent tester. Si ce n'est pas le cas le comportement par défaut de la `task` `test` est de compiler les smart contracts avant d'exécuter les scripts de test.  
 Avec le setup par défaut de notre projet Hardhat un script de test _test/sample-test.js_ est fourni pour tester le smart contract `Greeter` du fichier _contracts/Greeter.sol_
-Afin de suivre de meilleure convention renommer le fichier _test/sample-test.js_ en _test/Greeter-test.js_.
+Afin de suivre de meilleure convention renommer le fichier _test/sample-test.js_ en _test/Greeter-test.js_.  
 Modifier le fichier _test/Greeter-test.js_ pour qu'il teste correctement notre smart contract `Greeter` modifié précédemment:
 
 ```js
