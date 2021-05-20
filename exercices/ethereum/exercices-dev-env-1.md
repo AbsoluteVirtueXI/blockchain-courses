@@ -17,7 +17,7 @@ yarn add @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ether
 
 Ce projet devra contenir un fichier Solidity `Calculator.sol` qui contiendra un smart contract `Calculator`.  
 Ce smart contract `Calculator` nous retournera le résultat des opérations arithmétiques communes.  
-Les fonctions pour obtenir ces résultats devront toutes être `public view`.
+Les fonctions pour obtenir ces résultats devront toutes être `pure view`.
 
 ### Calculator-test.js
 
