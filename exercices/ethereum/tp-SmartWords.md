@@ -25,5 +25,5 @@ Plusieures questions à ce poser, comme quels sont les structures de données à
 Comment accèder aux données, quels sont les getters que sont nécéssaires.  
 adresse de l'utilisateur mappée au hash du texte ou bien le hash du texte mappé à l'adresse de l'utilisateur ? ou bien les deux?
 
-L'exercice est ouvert, il y a plusieurs solution. Avec vos connaissances vous pouvez au moins réussir les 2 première parties, Front web + smart contract ERC721, sachant que l'ojectif lorsqu'on s'attaque à un projet comme ca, c'est de réfléchir en amont, puis retirer toutes les fonctionnalités non essentielles pour faire fonctionner votre application avec ce qu'il y a de plus simple mais pertinent.  
+L'exercice est ouvert, il y a plusieurs solutions. Avec vos connaissances vous pouvez au moins réussir les 2 première parties, Front web + smart contract ERC721, sachant que l'objectif lorsqu'on s'attaque à un projet comme ca, c'est de réfléchir en amont, puis retirer toutes les fonctionnalités non essentielles pour faire fonctionner votre application avec ce qu'il y a de plus simple mais pertinent.  
 Une démonstration d'un texte traité suivit automatiquement d'un NFT délivré à l'utilisateur est la core feature de ce projet.
