@@ -3,7 +3,7 @@
 L'objectif est de permettre à un utilisateur d'horodater du contenu textuel, et de certifier sa propriété par un NFT.  
 Pour bien comprendre ce que vous devez faire, pas de secret il faut se mettre à la place d'un utilisateur, pour déterminer les fonctionnalités essentielles.
 
-L'application sera composé d'une interface web qui sera l'interface entre l'utilisateur et notre (ou nos) smart contract.
+L'application sera composée d'une interface web qui sera l'interface entre l'utilisateur et notre (ou nos) smart contract.
 L'utilisateur pourra écrire du texte, ou le copier coller, et un hash keccack256 sera généré.
 Pour que ce hash soit réellement unique pour un même texte, il faudra traiter le texte coté front. On peut imaginer le traitement suivant:
 
