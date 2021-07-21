@@ -8,7 +8,7 @@ Ce fichier contiendra toutes les commandes et les outputs de ces commandes class
 Créer une base de donnée "db_1" qui contient une table "users" qui correspond à la database que nous avons créé dans le cours précédent sur express:
 
 ```js
-const db_user = {
+const users = {
   alice: '123',
   bob: '456',
   charlie: '789',
@@ -39,6 +39,7 @@ Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces
 
 Modifiez toutes les lignes existantes pour que la "bio" de chacun affiche, "Hello, i am PRENOM_DU_USER".  
 Il faudra remplacer `PRENOM_DU_USER` par le véritable login de l'utilisateur.  
+Il faudra pour cela utiliser la fonction `FORMAT`.  
 Vous devrez fournir les commandes SQL entrées ainsi que tous les outputs de ces commandes.
 
 # 6
