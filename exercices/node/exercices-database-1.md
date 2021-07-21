@@ -1,8 +1,5 @@
 # Exercices database partie 1
 
-Le rendu de ces exercices se fera dans un repository accessible depuis github qui contiendra un unique fichier _README.md_.
-Ce fichier contiendra toutes les commandes et les outputs de ces commandes classées par exercices, comme demandé dans les énoncés.
-
 # 1
 
 Créer une base de donnée "db_1" qui contient une table "users" qui correspond à la database que nous avons créé dans le cours précédent sur express:
