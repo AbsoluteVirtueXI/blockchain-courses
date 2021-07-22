@@ -1,28 +1,20 @@
 # Exercices database partie 2
 
-Le rendu de ces exercices se fera dans un repository accessible depuis github qui contiendra un unique fichier _README.md_.
-Ce fichier contiendra toutes les commandes et les outputs(si demandés dans l'énoncé) de ces commandes classées par exercices, comme demandé dans les énoncés.
-
-**LE FICHIER README.md devra être lisible, un chapitre par exercice, les commandes SQL devront être mises en valeur dans un bloc de code, ainsi que les outputs.**
-
-**Ne mettez les outputs des commandes que si ils sont demandés dans l'énoncé**
-
 ## 1
 
-Télécharger la base de donnée: https://sp.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip  
+Télécharger la base de donnée: https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
 Dézipper le fichier _dvdrental.zip_ et installer la base de donnée _dvdrental.tar_ avec les commandes suivantes:
 
 ```zsh
-% psql -d postgres -U db_user
+createdb -U db_user dvdrental
+pg_restore -d dvdrental -U db_user --clean --create dvdrental.tar
 ```
 
-```sql
-postgres=> CREATE DATABASE dvdrental;
-postgres=> \quit
-```
+Il se peut que vous ayez des warnings ou des erreurs, mais c'est pas grave.
+
+Vous pouvez ensuite vous connecter à la bade de donnée dvdrental:
 
 ```zsh
-% pg_restore -U db_user -d dvdrental ./dvdrental.tar
 % psql -d dvdrental -U db_user
 ```
 
@@ -32,8 +24,7 @@ Vous pouvez récupérer un modele visuel de cette base de donnée sur:
 https://www.postgresqltutorial.com/postgresql-sample-database/  
 C'est très utile si vous voulez comprendre que représente cette base de données.
 
-la commande `\dt+ NOM_DE_LA_TABLE` vous donne la liste des tables.  
-la commande `\dt+ NOM_DE_LA_TABLE` vous donne le nom des colonnes de d'une table.
+la commande `\dt` vous donne la liste des tables.  
 la commande `\d NOM_DE_LA_TABLE` vous affiche le nom des colonnes ainsi que les types associés à chaque colonnes.
 
 ## 2
